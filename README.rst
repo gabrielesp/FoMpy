@@ -102,8 +102,6 @@ Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 .. Go to https://github.com/ and download the project. Go to the parent folder and run::
  
 ..	make
- 
-.. and::
 	
 .. make install
 
