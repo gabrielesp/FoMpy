@@ -346,7 +346,7 @@ def JCJB(fds, path, path_subdirs, path_filenames, interval, exclude):
 
 	return fds
 #--------------------------------------------------------------------------------------------------------------
-def MC(fds, path,filename_user, path_subdirs, path_filenames, interval, exclude, skiprows, comments):
+def MC(fds, path, path_subdirs, path_filenames, interval, exclude):
 	"""Function that imports the simulated data from a MC set of files and
 	stores it into a FoMpy Dataset.
 

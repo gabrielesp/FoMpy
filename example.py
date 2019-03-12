@@ -11,30 +11,32 @@ import fompy
 # ------------------------------------------------------------------------------------------#
 # EXCLUDING CURVES FROM THE IMPORT
 
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
 # fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB, exclude=[5,6])
-# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB, interval=[0,8])
+# fds.print_parameters()
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB, interval=[0,4])
+# fds.print_parameters()
 
 # ------------------------------------------------------------------------------------------#
 # DATA CONDITIONING
 
 # path_file_JCJB = './data/sim_FinFET_vd_high/'
 # fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
-# fompy.filter(fds, theta_crit = 1.52)
-
 # norm_value = 35.8/10**9
 # fompy.normalize(fds, norm_value)
+# print(fds.dataset)
+
+# fompy.filter(fds, theta_crit = 0.5, show_theta=True)
 
 # ------------------------------------------------------------------------------------------#
 # DIFFERENT EXTRACTION PARSERS 
 
-# fds = fompy.dataset(path_file,'data*',  parser=fompy.default)
-# fds1.print_parameters()
-# print(fds1.dataset)
-
+# path_file_mc = './data/mc_data/'
 # fds1 = fompy.dataset(path_file_mc, parser=fompy.MC)
 # fds1.print_parameters()
 # print(fds1.dataset)
 
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
 # fds2 = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
 # fds2.print_parameters()
 # print(fds2.dataset)
@@ -57,93 +59,93 @@ import fompy
 # path_file_JCJB = './data/sim_FinFET_vd_high/'
 # fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
 # vth_array = fompy.extract(fds, fom = 'vth')
+# print(vth_array)
+# fompy.plot(fds, fom = 'vth', save_plot='./vth_plots/sd/')
+# fompy.plot(fds, fom = 'vth')
 
 # path_file_var = './data/simulations/'
 # fds_var = fompy.dataset(path_file_var, parser=fompy.JCJB)
 # vth_array = fompy.extract(fds_var, fom = 'vth')
 
-
 # import numpy as np
-# print(np.std(vth_array))
-# print(np.mean(vth_array))
+# print('STDEV:',np.std(vth_array))
+# print('MEAN:',np.mean(vth_array))
 
-
-# vth_array_cc = fompy.extract(fds_hdb, fom = 'vth', method = 'CC', cc_criteria=1.5e-6)
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# vth_array_cc = fompy.extract(fds, fom = 'vth', method = 'CC', cc_criteria=1.5e-6)
 # print(vth_array_cc)
-
-# vth_array_td = fompy.extract(fds_hdb, fom = 'vth', method = 'TD')
-# print(vth_array_td)
-
-# vth_array_le = fompy.extract(fds_hdb, fom = 'vth', method = 'LE')
-# print(vth_array_le)
-
-
 # fompy.plot(fds, fom = 'vth',method = 'CC',cc_criteria = 1.5e-6, save_plot='./vth_plots/')
 
-# fompy.plot(fds_hdb, fom = 'vth', save_plot='./vth_plots/sd/')
-# fompy.plot(fds_hdb, fom = 'vth')
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# vth_array_td = fompy.extract(fds, fom = 'vth', method = 'TD')
+# print(vth_array_td)
+# fompy.plot(fds, fom = 'vth',method = 'TD', save_plot='./vth_plots/td/')
 
-# fompy.plot(fds_hdb, fom = 'vth',method = 'CC',cc_criteria = 1.5e-6, save_plot='./vth_plots/cc/')
-
-# fompy.plot(fds_hdb, fom = 'vth',method = 'TD', save_plot='./vth_plots/td/')
-
-# fompy.plot(fds_hdb, fom = 'vth',method = 'LE')
-
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# vth_array_le = fompy.extract(fds, fom = 'vth', method = 'LE')
+# print(vth_array_le)
+# fompy.plot(fds, fom = 'vth',method = 'LE')
 
 # ------------------------------------------------------------------------------------------#
 # IOFF EXTRACTION & PLOT FULL LIST OF ARGUMENTS
 
-# ioff_array = fompy.extract(fds_hdb, fom = 'ioff', vg_ext = 0.2, save_results='./results' )
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# ioff_array = fompy.extract(fds, fom = 'ioff', vg_ext = 0.2)
+# print(ioff_array)
+# fompy.savetotxt('./results_ioff.txt', 'ioff', ioff_array)
 
-# ioff_array = fompy.extract(fds_hdb, fom = 'ioff', vg_ext = 0.2)
+
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# ioff_array = fompy.extract(fds, fom = 'ioff', vg_ext = 0.2)
 # print(ioff_array)
 
 # fompy.plot(fds, fom = 'ioff', vg_ext = 0.2, save_plot='./ioff_plots/')
-# fompy.plot(fds_hdb, fom = 'ioff', vg_ext = 0.2)
 
 
 # ------------------------------------------------------------------------------------------#
 # ION EXTRACTION & PLOT FULL LIST OF ARGUMENTS
 
-# ion_array_vg_defined = fompy.extract(fds_hdb, fom = 'ion',vg_ext = 0.7)
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# ion_array_vg_defined = fompy.extract(fds, fom = 'ion',vg_ext = 0.7)
 # print(ion_array_vg_defined)
 
-# ion_array_default_SD = fompy.extract(fds_hdb, fom = 'ion')
+# ion_array_default_SD = fompy.extract(fds, fom = 'ion')
 # print(ion_array_default_SD)
 
-# ion_array_LE = fompy.extract(fds_hdb, fom = 'ion',method = 'LE')
+# ion_array_LE = fompy.extract(fds, fom = 'ion',method = 'LE')
 # print(ion_array_LE)
 
-# ion_array_TD = fompy.extract(fds_hdb, fom = 'ion',method = 'TD')
+# ion_array_TD = fompy.extract(fds, fom = 'ion',method = 'TD')
 # print(ion_array_TD)
 
-# fompy.plot(fds, fom = 'ioff', vg_ext = 0.2, save_plot='./ioff_plots/')
-# fompy.plot(fds_hdb, fom = 'ion', vg_ext = 0.5)
-# fompy.plot(fds_hdb, fom = 'ion')
-# fompy.plot(fds_hdb, fom = 'ion', method='TD')
+# fompy.plot(fds, fom = 'ion', vg_ext = 0.5)
+# fompy.plot(fds, fom = 'ion')
+# fompy.plot(fds, fom = 'ion', method='TD')
 
-# fds_var = fompy.dataset(path_var, parser=fompy.JCJB)
+# ------------------------------------------------------------------------------------------#
+# SS EXTRACTION & PLOT FULL LIST OF ARGUMENTS
 
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
 
-# ss_array = fompy.extract(fds1 = fds_var, fom = 'ss')
-# print(np.mean(ss_array))
-# print(np.std(ss_array))
+# ss_array = fompy.extract(fds, fom = 'ss')
+# print(ss_array)
 
+# ss_array = fompy.extract(fds, fom = 'ss', vg_start = 0.05)
+# print(ss_array)
 
-# ss_array = fompy.extract(fds1 = fds_var, fom = 'ss', vg_start = 0.05)
-# print(np.mean(ss_array))
-# print(np.std(ss_array))
+# ss_array = fompy.extract(fds, fom = 'ss', vg_start = 0.05, vg_end = 0.2)
+# print(ss_array)
 
-# ss_array = fompy.extract(fds1 = fds_var, fom = 'ss', vg_start = 0.05, vg_end = 0.2)
-# print(np.mean(ss_array))
-# print(np.std(ss_array))
+# ss_array = fompy.extract(fds, fom = 'ss', vg_end = 0.2)
+# print(ss_array)
 
-# ss_array = fompy.extract(fds1 = fds_var, fom = 'ss', vg_end = 0.2)
-# print(np.mean(ss_array))
-# print(np.std(ss_array))
-
-
-# fompy.plot(fds_var, fom = 'ss')
 
 # ------------------------------------------------------------------------------------------#
 # DIBL EXTRACTION & PLOT FULL LIST OF ARGUMENTS
@@ -186,12 +188,12 @@ import fompy
 # fds_var = fompy.dataset(path_file_var, parser=fompy.JCJB)
 # vth_array = fompy.extract(fds_var, fom = 'vth')
 
-# fompy.plot(fds_var, type='hist', parameter=vth_array, bins=5)
-# fompy.plot(fds_var, type='qq', parameter=vth_array)
+# fompy.plot(fds_var, plot_type='hist', parameter=vth_array, bins=5)
+# fompy.plot(fds_var, plot_type='qq', parameter=vth_array)
 
 # path_file_var = './data/simulations/'
 # fds_var = fompy.dataset(path_file_var, parser=fompy.JCJB)
-# fompy.plot(fds_var, type='varplot')
+# fompy.plot(fds_var, plot_type='varplot')
 
 
 # path_file_JCJB = './data/sim_FinFET_vd_high/'
@@ -206,4 +208,4 @@ import fompy
 # fompy.normalize(fds_hdb, norm_value)
 # fompy.normalize(fds_ldb, norm_value)
 
-# fompy.plot(fds_hdb,fds_ldb, type='calib')
+# fompy.plot(fds_hdb,fds_ldb, plot_type='calib')

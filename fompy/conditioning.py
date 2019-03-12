@@ -259,18 +259,24 @@ class filter_tool(_filterStrategy):
 	
 	"""
 
-	def polar_filter(self,fds,theta_crit):
+	def polar_filter(self,fds,theta_crit, show_theta = False):
 		for i in range(len(fds.dataset)):
-			theta = angle_wrt_0(fds.dataset[i][:,0],np.log10(fds.dataset[i][:,1])) #The angle wrt 0 is calculated
-			step = np.gradient(angle_wrt_0(fds.dataset[i][:,0],np.log10(fds.dataset[i][:,1]))) #The difference between the angles is calculated
-			j = 0
-			step_lst = list(step)
-			indexes = []
-			for index, elem in list(enumerate(step_lst)):
-				if elem > theta_crit: #If the angle increment is above threshold the index is stored in 'indexes'
-					indexes.append(index-j)
-					step_lst.pop(index-j)
-					j = j+1
+			try:
+				theta = angle_wrt_0(fds.dataset[i][:,0],np.log10(fds.dataset[i][:,1])) #The angle wrt 0 is calculated
+				step = np.gradient(angle_wrt_0(fds.dataset[i][:,0],np.log10(fds.dataset[i][:,1]))) #The difference between the angles is calculated
+				
+				j = 0
+				step_lst = list(np.abs(step))
+				if(show_theta is True):
+					print(step_lst)
+				indexes = []
+				for index, elem in list(enumerate(step_lst)):
+					if elem > theta_crit: #If the angle increment is above threshold the index is stored in 'indexes'
+						indexes.append(index-j)
+						step_lst.pop(index-j)
+						j = j+1
+			except (TypeError, ValueError):
+				pass
 
 			for item in indexes: #And then deleted
 				fds.dataset[i] = np.delete(fds.dataset[i],item, axis=0)
@@ -299,7 +305,10 @@ def angle_wrt_0(x, y):
 	if(len(x) is not len(y)):
 		raise('The sizes of x and y must be the same')
 	if(len(x) is 1):
-		theta = np.arctan(y/x)*180/np.pi
+		if(x == 0):
+			theta = 90
+		else:
+			theta = np.arctan(y/x)*180/np.pi
 	else:
 		theta = []
 		for i in range(len(x)):

@@ -51,13 +51,13 @@ import os
 setup(
     name='fompy',
     #cmdclass={'install_data': custom_install},    
-    version='0.2.0',
+    version='0.2.3',
     description='FoMPy is an effective tool that extracts the main figures of merit (FoM) of a semiconductors IV curve',
     author='Gabriel Espineira',    
     author_email='gabrielespineiradeus@gmail.com',
     license='MIT',
     url='https://gitlab.citius.usc.es/gabriel.espineira/FoMPy',
-    setup_requires=['setuptools','numpy'],
+    setup_requires=['setuptools','pytest','numpy'],
     install_requires=['scipy','probscale', 'matplotlib'],
     packages=['fompy'],
     classifiers=[

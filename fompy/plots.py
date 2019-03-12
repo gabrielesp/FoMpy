@@ -296,8 +296,6 @@ class plotter(plotStrategy):
 		return
 
 	def calib(self,fds1,fds2, save_plot = None):
-
-
 		
 		for i in range(len(fds1.dataset)):
 			try:
@@ -315,7 +313,7 @@ class plotter(plotStrategy):
 				ax1.legend()
 				plt.tight_layout()
 			except(TypeError, ValueError):
-				pass	
+				plt.close()	
 			if(save_plot == None):
 				plt.show()
 			else:
@@ -604,7 +602,7 @@ class plotter(plotStrategy):
 			ax1.plot(curve_low[:,0], curve_low[:,1], '-.', color='r')
 			ax1.plot(curve_high[:,0], curve_high[:,1], '-.', color='b')
 			ax1.axvline(x=vth_low, color='r', label ='Vt low')
-			ax1.axhline(y=np.log10(corriente_low), color='k')
+			ax1.axhline(y=corriente_low, color='k')
 			ax1.axvline(x=vth_high, color='b', label ='Vt high')
 			ax1.set_xlabel(r'$\mathrm{V_{G}} $',labelpad=20)
 			ax1.set_ylabel(r'$\mathrm{I_{D}} $',labelpad=20)

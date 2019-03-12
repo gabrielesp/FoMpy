@@ -90,7 +90,6 @@ def extract(fds1, fds2 = None, fom = None, method = None, cc_criteria = None, vg
 		1-d array containing the extracted FoMs.
 
 	""" 
-	method = fds1.ext_method
 	if(str(fom) == 'vth'):
 		temp_vth = vth_ext()
 		if (method is not 'LE'):
@@ -182,7 +181,7 @@ def extract(fds1, fds2 = None, fom = None, method = None, cc_criteria = None, vg
 	else:
 		raise Exception('The figure of merit hasn\'t been defined!')
 #----------------------------------------------------------------------------------------------------------------
-def plot(fds1, fds2 = None, type = None, fom = None, parameter=None,  method = None,bins = None, cc_criteria = None, vg_ext = None, vg_start = None, vg_end = None, save_plot = None):
+def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  method = None,bins = None, cc_criteria = None, vg_ext = None, vg_start = None, vg_end = None, save_plot = None):
 	"""
 	Wrapper function that plots the most common figures in semiconductor simulations.
 
@@ -220,18 +219,18 @@ def plot(fds1, fds2 = None, type = None, fom = None, parameter=None,  method = N
 
 	""" 
 	plot = plotter()
-	if(str(type) is 'iv'):
+	if(str(plot_type) is 'iv'):
 		plot.iv(fds1, save_plot=save_plot)
-	elif(str(type) is 'hist'):
+	elif(str(plot_type) is 'hist'):
 		plot.hist(parameter=parameter,bins=bins, save_plot=save_plot)			
-	elif(str(type) is 'qq'):
+	elif(str(plot_type) is 'qq'):
 		plot.qq(parameter=parameter, save_plot=save_plot)	
-	elif(str(type) is 'varplot'):
+	elif(str(plot_type) is 'varplot'):
 		plot.varplot(fds1, save_plot=save_plot)	
-	elif(str(type) == 'calib'):
+	elif(str(plot_type) == 'calib'):
 		plot = plotter()
 		plot.calib(fds1,fds2, save_plot=save_plot)	
-	elif(type is None):
+	elif(plot_type is None):
 		if(str(fom) == 'vth'):
 			temp_vth = vth_ext()
 			if (method is not 'LE'):
@@ -283,23 +282,18 @@ def savetotxt(path,fom,parameter):
 
 	""" 	
 	if(str(fom) == 'vth'):
-		# checkPath(path)
 		temp_vth = vth_ext()
 		temp_vth.save_results_to_file(path, parameter)
 	elif(str(fom) == 'ioff'):
-		checkPath(path)			
 		temp_ioff = ioff_ext()
 		temp_ioff.save_results_to_file(path, parameter)
 	elif(str(fom) == 'ion'):
-		checkPath(path)			
 		temp_ion = ion_ext()
 		temp_ion.save_results_to_file(path, parameter)
 	elif(str(fom) == 'ss'):
-		checkPath(path)			
 		temp_ss = ss_ext()
 		temp_ss.save_results_to_file(path, parameter)
 	elif(str(fom) == 'dibl'):
-		checkPath(path)			
 		temp_dibl = dibl_ext()
 		temp_dibl.save_results_to_file(path, parameter)
 #----------------------------------------------------------------------------------------------------------------
@@ -319,7 +313,7 @@ def normalize(fds, norm):
 	temp_norm = normalizer()
 	temp_norm.normalize(fds, norm)
 #----------------------------------------------------------------------------------------------------------------
-def filter(fds, theta_crit):
+def filter(fds, theta_crit, show_theta = False):
 	"""
 	Wrapper class for filtering noisy data from a semiconductor's IV curve.
 
@@ -334,7 +328,7 @@ def filter(fds, theta_crit):
 	"""
 
 	temp_filter = filter_tool()
-	fds.dataset = temp_filter.polar_filter(fds, theta_crit=theta_crit)
+	fds.dataset = temp_filter.polar_filter(fds, theta_crit=theta_crit, show_theta=show_theta)
 #----------------------------------------------------------------------------------------------------------------		
 def version():
 	"""
