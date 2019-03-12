@@ -4,11 +4,9 @@ FoMpy: A figure of merit extraction tool for semiconductor device simulations
 .. What is this?
 .. +++++++++++++
 
-* A `FoMpy <https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/>`__ tutorial introduction.
+* This is a `FoMpy <https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/>`__ tutorial introduction, where you will learn how to use the basic capabilities of the FoMpy library.
 .. * By `Gabriel Espiñeira <https://github.com/>`__.
 .. * February 20, 2019.
-
-You will learn how to use the basic capabilities of the FoMpy library.
 
 1. Introduction
 ---------------
@@ -56,7 +54,7 @@ Note that as of this moment you're inside a virtual enviroment (Notice (.venv) $
 .. and then::
 	
 .. 	python -m pip3 install -r requirements.txt
-Via pip (recommended)
+**Via pip**
 
 Run the following command in a terminal::
 
@@ -74,7 +72,7 @@ To check the version available of a package on your system type in a terminal::
 
 and the version that is currently installed of numpy on your system will be printed.
 
-**Note: Most of the packages will be installed automatically during the FoMpy library instalation. If you experience some issue, you can try to install them yourself, just by typing in a terminal**::
+**Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install them yourself, just by typing in a terminal**::
 	
 	pip3 install setuptools
 	pip3 install pytest
@@ -82,6 +80,8 @@ and the version that is currently installed of numpy on your system will be prin
 	pip3 install scipy
 	pip3 install probscale
 	pip3 install matplotlib
+
+**depending on the file that is missing.**
 
 .. Run in a terminal again::
 
