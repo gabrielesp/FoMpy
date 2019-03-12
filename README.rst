@@ -32,13 +32,7 @@ After loading the data into a FoMpy Dataset, using the various tools implemented
 
 The source code of FoMpy can be downloaded from https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/ and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, ...). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
 
-setuptools>=21.0.0 
-
-numpy>=1.10.0
-
-scipy>=0.8.0
-
-matplotlib>=3.0.2
+``setuptools>=21.0.0``,``numpy>=1.10.0``,``scipy>=0.8.0`` and ``matplotlib>=3.0.2``
 
 First you need to have installed pip on your system. Open up a terminal and type::
 
