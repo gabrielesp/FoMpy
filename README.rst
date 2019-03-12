@@ -75,6 +75,7 @@ Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 	pip3 install scipy
 	pip3 install probscale
 	pip3 install matplotlib
+	sudo apt-get install python3-tk
 
 **depending on the file that is missing.**
 
