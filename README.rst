@@ -66,11 +66,6 @@ and check the library is installed by importing it from a **python3 terminal**::
 
 Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 
-To check the version available of a package on your system type in a terminal::
-
-	python3 -c "import numpy; print(numpy.version.version)"
-
-and the version that is currently installed of numpy on your system will be printed.
 
 **Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install them yourself, just by typing in a terminal**::
 	
