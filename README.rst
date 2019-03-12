@@ -4,7 +4,7 @@ FoMpy: A figure of merit extraction tool for semiconductor device simulations
 .. What is this?
 .. +++++++++++++
 
-* This is a `FoMpy <https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/>`__ tutorial introduction, where you will learn how to use the basic capabilities of the FoMpy library.
+* This is a `FoMpy <https://github.com/gabrielesp/FoMpy/>`__ tutorial introduction, where you will learn how to use the basic capabilities of the FoMpy library.
 .. * By `Gabriel Espiñeira <https://github.com/>`__.
 .. * February 20, 2019.
 
@@ -28,7 +28,7 @@ After loading the data into a FoMpy Dataset, using the various tools implemented
 2. Installation
 ---------------
 
-The source code of FoMpy can be downloaded from https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/ and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, ...). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
+The source code of FoMpy can be downloaded from https://github.com/gabrielesp/FoMpy and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, ...). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
 
 ``setuptools>=21.0.0, numpy>=1.10.0, scipy>=0.8.0 and matplotlib>=3.0.2``
 
