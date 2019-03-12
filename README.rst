@@ -4,7 +4,7 @@ FoMpy: A figure of merit extraction tool for semiconductor device simulations
 .. What is this?
 .. +++++++++++++
 
-* This is a `FoMpy <https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/>`__ tutorial introduction, where you will learn how to use the basic capabilities of the FoMpy library.
+* This is a `FoMpy <https://github.com/gabrielesp/FoMpy>`__ tutorial introduction, where you will learn how to use the basic capabilities of the FoMpy library.
 .. * By `Gabriel Espiñeira <https://github.com/>`__.
 .. * February 20, 2019.
 
@@ -28,11 +28,11 @@ After loading the data into a FoMpy Dataset, using the various tools implemented
 2. Installation
 ---------------
 
-The source code of FoMpy can be downloaded from https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/ and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, ...). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
+The source code of FoMpy can be downloaded from https://github.com/gabrielesp/FoMpy and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, ...). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
 
 ``setuptools>=21.0.0, numpy>=1.10.0, scipy>=0.8.0 and matplotlib>=3.0.2``
 
-First you need to have installed pip on your system. Open up a terminal and type::
+First you need to have installed pip3 on your system. Open up a terminal and type::
 
 	sudo apt update
 
@@ -51,6 +51,8 @@ The use of virtual enviroments is highly encouraged. In order to use them run th
 
 Note that as of this moment you're inside a virtual enviroment (Notice (.venv) $ in the terminal) with a limited version of python and therefore you will have to install all the packages you need (including the ones mentioned above because they are installed in the system, not the virtual enviroment).
 
+The next step is to install FoMpy on your virtual enviroment.
+
 .. and then::
 	
 .. 	python -m pip3 install -r requirements.txt
@@ -67,7 +69,7 @@ and check the library is installed by importing it from a **python3 terminal**::
 Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 
 
-**Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install them yourself, just by typing in a terminal**::
+**Note: Most of the packages FoMpy needs to function properly will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install them yourself, just by typing in a terminal**::
 	
 	pip3 install setuptools
 	pip3 install pytest
@@ -75,8 +77,9 @@ Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 	pip3 install scipy
 	pip3 install probscale
 	pip3 install matplotlib
+	sudo apt-get install python3-tk
 
-**depending on the file that is missing.**
+**depending on the module that is missing.**
 
 .. Run in a terminal again::
 
@@ -107,13 +110,12 @@ Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 3. Quickstart 
 -------------
 
-In this section the user can learn the most basic yet powerful commands implemented in the FoMpy library. In order to do so either start by reading the basic commands or 
-download and try the exampled provided in the repository explained at the end of this page.
+In this section the user can learn the most basic yet powerful commands implemented in the FoMpy library. In order to do so either start by reading the basic commands or download and try the example provided in the repository, explained at the end of this page.
 
 Basic commands
 +++++++++++++++++
 
-A bunch of useful FoMpy commands are now provided. Supported tools include fompy.extract, fompy.plot or fompy.savetotxt. Here are some quick examples of the core capabilities of FoMpy:
+A bunch of useful FoMpy commands are now presented. Supported tools include fompy.extract, fompy.plot or fompy.savetotxt. Here are some quick examples of the core capabilities of FoMpy:
 
 In order to load a FoMpy Dataset run inside a **python3 terminal**::
 

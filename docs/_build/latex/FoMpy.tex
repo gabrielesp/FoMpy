@@ -83,380 +83,7 @@ In the figure below the used can see the basic workflow behind the FoMpy library
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen,height=400\sphinxpxdimen]{{simplified_diagram}.jpg}
 \caption{Diagram showing the basic methodology of the FoMpy library. After loading the data into a FoMpy Dataset, using the various tools implemented in the library, the user is able to process and extract important parameters from a given dataset.}\label{\detokenize{index:id1}}\end{figure}
 
-
-\section{Getting FoMpy}
-\label{\detokenize{index:getting-fompy}}
-The source code of FoMpy can be downloaded from \sphinxurl{https://gitlab.citius.usc.es/gabriel.espineira/FoMPy/} and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, …). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
-
-setuptools\textgreater{}=21.0.0
-
-numpy\textgreater{}=1.10.0
-
-scipy\textgreater{}=0.8.0
-
-matplotlib\textgreater{}=3.0.2
-
-First you need to have installed pip on your system. Open up a terminal and type:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sudo} \PYG{n}{apt} \PYG{n}{update}
-
-\PYG{n}{sudo} \PYG{n}{apt} \PYG{n}{install} \PYG{n}{python3}\PYG{o}{\PYGZhy{}}\PYG{n}{pip}
-\end{sphinxVerbatim}
-
-Once the installation is complete, verify the installation by checking the pip version:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{pip3} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{version}
-\end{sphinxVerbatim}
-
-The use of virtual enviroments is highly encouraged. In order to use them run the following commands in a terminal:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sudo} \PYG{n}{apt} \PYG{n}{install} \PYG{n}{python3}\PYG{o}{\PYGZhy{}}\PYG{n}{venv}
-\PYG{n}{python3} \PYG{o}{\PYGZhy{}}\PYG{n}{m} \PYG{n}{venv} \PYG{o}{.}\PYG{n}{venv}
-\PYG{n}{source} \PYG{o}{.}\PYG{n}{venv}\PYG{o}{/}\PYG{n+nb}{bin}\PYG{o}{/}\PYG{n}{activate}
-\end{sphinxVerbatim}
-
-Note that as of this moment you’re inside a virtual enviroment (Notice (.venv) \$ in the terminal) with a limited version of python and therefore you will have to install all the packages you need (including the ones mentioned above because they are installed in the system, not the virtual enviroment).
-
-To check the version available of a package on your system type in a terminal:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{python3} \PYG{o}{\PYGZhy{}}\PYG{n}{c} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{import numpy; print(numpy.version.version)}\PYG{l+s+s2}{\PYGZdq{}}
-\end{sphinxVerbatim}
-
-and the version that is currently installed of numpy on your system will be printed.
-
-Via pip (recommended)
-
-Run the following command in a terminal:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{pip3} \PYG{n}{install} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{extra}\PYG{o}{\PYGZhy{}}\PYG{n}{index}\PYG{o}{\PYGZhy{}}\PYG{n}{url} \PYG{n}{https}\PYG{p}{:}\PYG{o}{/}\PYG{o}{/}\PYG{n}{test}\PYG{o}{.}\PYG{n}{pypi}\PYG{o}{.}\PYG{n}{org}\PYG{o}{/}\PYG{n}{simple}\PYG{o}{/} \PYG{n}{fompy}
-\end{sphinxVerbatim}
-
-and check the library is installed by importing it from a \sphinxstylestrong{python3 terminal}:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{fompy}
-\end{sphinxVerbatim}
-
-Unless an error comes up, FoMpy is now installed on your virtual enviroment.
-
-
-\section{Quick Start}
-\label{\detokenize{index:quick-start}}
-In this section the user can learn the most basic yet powerful commands implemented in the FoMpy library. In order to do so either start by reading the basic commands or
-download and try the exampled provided in the repository explained at the end of this page.
-
-
-\subsection{Basic commands}
-\label{\detokenize{index:basic-commands}}
-A bunch of useful FoMpy commands are now provided. Supported tools include fompy.extract, fompy.plot or fompy.savetotxt. Here are some quick examples of the core capabilities of FoMpy:
-
-In order to load a FoMpy Dataset run inside a \sphinxstylestrong{python3 terminal}:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{fompy}
-\end{sphinxVerbatim}
-
-FoMpy implements an importing tools that allows the user to extract the data from various sources
-(from a file, an array stored in memory, a Sentaurus output file, etc). Inside the folder ‘./data/’ the user has to store all simulations in individual folders (i.e. ‘./data/sim\_1/current\_file\_1.txt’, ‘./data/sim\_2/current\_file\_2.txt’, etc):
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{path\PYGZus{}data} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}data}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Note that the defined path has to point to the parent directory of the folders containing our single curve files.
-
-After running this, a Fompy Dataset is created and the IV curves are stored inside it.
-They can be accessed by calling the dataset attribute:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{fds}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Now that the Fompy Dataset has been implemented several other parameters can be defined like the
-number of simulations (fds.n\_sims) or a value for normalizing the curves (fds.norm)., the default extraction
-method (fds.ext\_method), the drain bias for the ensemble of curves (fds.drain\_bias), the drain bias value
-(fds.drain\_bias\_value) and the default interpolation method (fds.interpolation). All these parameters can be defined/updated
-like the following example (Note that some of them will be defined automatically, like the number of simulations,
-once the IV curves are loaded):
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{fds}\PYG{o}{.}\PYG{n}{drain\PYGZus{}bias\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mf}{0.66}
-\end{sphinxVerbatim}
-
-Also a predefined function can be called in order to print the current value of the attributes of the selected Fompy Dataset:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{fds}\PYG{o}{.}\PYG{n}{print\PYGZus{}parameters}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-The most important capability of Fompy is that it allows the user to extract the most common figures of merit (LATEX FOM)
-of a semiconductor’s IV curve using different methodologies. In order to extract these FoM the user has to call the
-function extract. The following example extracts the threshold voltage values (LATEX VTH) of the curves in the Fompy Dataset:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{vth\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-and write the results to a file:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{savetotxt}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./results\PYGZus{}vth.txt}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vth\PYGZus{}array}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Note that since no extraction method has been defined the library uses the second derivative method (‘SD’) as a default.
-This can be changed to oterh commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions
-on how to choose this in the full documentation).
-
-FoMpy also has built-in several plotting capabilities to be able to check the extraction results. A simple plot
-of the threshold voltage with the ‘SD’ method and the second derivative of the curve goes as follows:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./vth\PYGZus{}plots/sd/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Note that the plots have been saved to the path ‘./vth\_plots/sd/’, keeping the indexing of the curves as stored in the Fompy Dataset.
-
-
-\chapter{Importing your data}
-\label{\detokenize{index:importing-your-data}}
-
-\section{From a file}
-\label{\detokenize{index:from-a-file}}
-In order to load a FoMpy Dataset the user needs to import fompy and specifically dataset tool to load the values from a file:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path}\PYG{p}{,} \PYG{n}{parser}\PYG{p}{,} \PYG{n}{save\PYGZus{}to\PYGZus{}file}\PYG{p}{,} \PYG{n}{interval} \PYG{p}{,} \PYG{n}{exclude}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-where the arguments of the function are:
-\begin{itemize}
-\item {} 
-str path: path to the parent directory containing the folders where the IV curves are.
-
-\item {} 
-fn parser: function defining the format of the curves.
-
-\item {} 
-str save\_to\_file: path where the user wants to save the FoMpy Dataset.
-
-\item {} 
-{[}int, int{]} interval: list containing the start and end index of the curves to import.
-
-\item {} 
-int exclude: Index of a curve that the user wishes to exclude from the Fompy Dataset.
-
-\end{itemize}
-
-By default only the path and the parser have to be defined. Additional functionalities are implemented, like saving all the IV curves to a single file with a header
-indicating the curve id. Morevover the user is able to define an interval of curves to load into the dataset, discarding the rest or define single curves from the dataset.
-
-If additional parameters of the dataset want to be defined, i.e. a normalization value for all the curves or a default extraction method, the user can simple access these dataset attributes doing \sphinxcode{\sphinxupquote{fds.norm = 100}}.
-
-An example of how to load the curves to a FoMpy Dataset can be seen below:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{fompy}
-
-\PYG{n}{path\PYGZus{}file} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}high/}\PYG{l+s+s1}{\PYGZsq{}}
-
-\PYG{n}{path\PYGZus{}to\PYGZus{}save}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./sim\PYGZus{}data.dat}\PYG{l+s+s1}{\PYGZsq{}}
-
-\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}to\PYGZus{}file}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{JCJB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}to\PYGZus{}file} \PYG{o}{=} \PYG{n}{path\PYGZus{}to\PYGZus{}save}\PYG{p}{)}
-
-\PYG{n}{fds}\PYG{o}{.}\PYG{n}{norm} \PYG{o}{=} \PYG{l+m+mf}{35.8}
-\PYG{n}{fds}\PYG{o}{.}\PYG{n}{ext\PYGZus{}method} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{SD}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{n}{fds}\PYG{o}{.}\PYG{n}{drain\PYGZus{}bias} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{high}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{n}{fds}\PYG{o}{.}\PYG{n}{print\PYGZus{}parameters}\PYG{p}{(}\PYG{p}{)}
-
-\PYG{o}{\PYGZgt{}\PYGZgt{}}   \PYG{n}{Number} \PYG{n}{of} \PYG{n}{simulations}\PYG{p}{:}  \PYG{l+m+mi}{5}
-\PYG{o}{\PYGZgt{}\PYGZgt{}}   \PYG{n}{Normalization} \PYG{n}{value}\PYG{p}{:}  \PYG{l+m+mf}{35.8}
-\PYG{o}{\PYGZgt{}\PYGZgt{}}   \PYG{n}{Extraction} \PYG{n}{method}\PYG{p}{:}  \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{SD}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{o}{\PYGZgt{}\PYGZgt{}}   \PYG{n}{Drain} \PYG{n}{Bias} \PYG{n}{label}\PYG{p}{:}  \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{high}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{o}{\PYGZgt{}\PYGZgt{}}   \PYG{n}{Drain} \PYG{n}{Bias} \PYG{n}{value}\PYG{p}{:}  \PYG{p}{[}\PYG{l+m+mf}{0.7}\PYG{p}{]}
-\end{sphinxVerbatim}
-
-
-\chapter{Extracting the FoM}
-\label{\detokenize{index:extracting-the-fom}}
-
-\section{Threshold voltage (Vth)}
-\label{\detokenize{index:threshold-voltage-vth}}
-Generally, when performing variability studies, the parameters that characterize the \$mathrm\{V\_\{T\}\}\$ statistical distribution (e.g. standard deviation, mean value) are used as the main criteria to assess the impact of a variability source on the device’s performance in the sub-threshold region cite\{TEDNATFINER\}. However, a question that may arise is how independent the statistical results are from the selected \$mathrm\{V\_\{T\}\}\$ extraction method. For this reason, in this work we present a complete comparison of four commonly used extraction techniques (SD, CC, LE and TD), with the aim of establishing the impact that \$mathrm\{V\_\{T\}\}\$ extraction methods have on statistical variability studies. FoMpy has included four popular extraction methodologies found in the literature, a straightforward constant current, a geometrical linear extrapolation and two transconductance-based methods like the second and third derivatives.
-
-The second derivative method, also called transconductance change method, is one of the most popular used methods. It evaluates \(\mathrm{V_{TH}}\)  at the \(\mathrm{V_{G}}\)  value where the derivative of the transconductance (\(g_{m}=dI_{D}/dV_{G}\)) is maximum. In Figure ?, the IV curve for the device is plotted along with the \(\mathrm{V_{TH}}\) extracted value where the red dotted line crosses the x-axis and the second derivative curve with the blue dashed line. A drawback of this method is its sensitivity to noise and error, as it acts as a high pass filter on the measured data. One way of solving it, is to apply additional smoothing techniques or numerical fitting.
-
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=400\sphinxpxdimen,height=300\sphinxpxdimen]{{second_derivative}.jpg}
-\caption{Second derivative (SD) method implementation (blue dashed line). The red dotted line indicates the position of \(\mathrm{V_{TH}}\).}\label{\detokenize{index:id2}}\end{figure}
-
-Traditionally the constant current method has been the preferred technique used to obtain the threshold voltage value in variability studies  cite\{ORTIZ\} cite\{TEDNATFINER\} cite\{IEDM\_vt\_normal\_CC\} due to its simplicity and speed. This method determines \$mathrm\{V\_\{T\}\}\$ at a critical user-defined value of the drain current  (\$mathrm\{I\_\{Dcc\}\}\$)  where the transition point from linear to saturation regime happens cite\{Schroder\_book\}. A general criteria is to consider  \$mathrm\{I\_\{Dcc\}\}= W\_\{eff\}/L\_\{G\}times I\_\{0\}\$, being \$W\_\{eff\} = 2 times H\_\{CH\}+W\_\{CH\}\$ the effective perimeter of the Si channel cite\{w\_effective\}, and \$mathrm\{I\_\{0\}\}\$ a constant current level cite\{CC\_crit\_fins\} defined by the user depending on the studied device. A graphical depiction of this method can be seen in Fig.\textasciitilde{}ref\{fig:cc\_method\}.
-
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=400\sphinxpxdimen,height=300\sphinxpxdimen]{{cc_crit}.jpg}
-\caption{Constant current (CC) criteria applied to the FinFET device with a value of \$I\_\{Dcc\}=34.6\textasciitilde{}mathrm\{mu A/mu m\}\$ (blue dashed line).}\label{\detokenize{index:id3}}\end{figure}
-
-The linear extrapolation method is another widely used technique based on the quadratic law cite\{Schroder\_book\}. Ortiz et al. state that, using this method \$mathrm\{V\_\{T\}\}\$ is obtained as the gate voltage axis intercept of the tangent of the IV characteristics at its maximum first derivative (slope) point cite\{ORTIZ\} (see Figure ref\{fig:le\_method\}).
-
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=400\sphinxpxdimen,height=300\sphinxpxdimen]{{le}.jpg}
-\caption{Linear Extrapolation (LE) method showing the extrapolated line (blue dashed line) intersecting with the x-axis at \$V\_\{T\}\$ (red dotted line).}\label{\detokenize{index:id4}}\end{figure}
-
-The third derivative method consists on choosing the \$mathrm\{V\_\{T\}\}\$ where the third derivative of the current (\$d\textasciicircum{}\{3\}I\_\{D\}/dV\textasciicircum{}\{3\}\_\{G\}\$) has a maximum (see Figure ref\{fig:td\_method\}). This extraction method disagrees with the SD method inherently as the values extracted from the maximums and minimums of the function always fall to the sides of the ones obtained with the SD method. Beside this, successive differentiation amplifies the noise, hence increasing the inestability, making it less reliable. To reduce this induced error fitting and smoothing techniques can be applied.
-
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=400\sphinxpxdimen,height=300\sphinxpxdimen]{{third_derivative}.jpg}
-\caption{Third derivative (TD) method (blue dashed line) plot showing the extracted \$mathrm\{V\_\{T\}\}\$ at the \$mathrm\{V\_\{G\}\}\$ point where the third derivative is maximum (red dotted line).}\label{\detokenize{index:id5}}\end{figure}
-
-An example of how to extract the Vth from the curves in a FoMpy Dataset can be seen below:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{fompy}
-
-\PYG{n}{path\PYGZus{}file} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}high/}\PYG{l+s+s1}{\PYGZsq{}}
-
-\PYG{n}{path\PYGZus{}to\PYGZus{}save}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./sim\PYGZus{}data.dat}\PYG{l+s+s1}{\PYGZsq{}}
-
-\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}to\PYGZus{}file}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{JCJB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}to\PYGZus{}file} \PYG{o}{=} \PYG{n}{path\PYGZus{}to\PYGZus{}save}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{}VTH EXTRACTION}
-
-\PYG{n}{vth\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{vth\PYGZus{}array}\PYG{p}{)}
-
-\PYG{n}{vth\PYGZus{}array\PYGZus{}cc} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{method} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{CC}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{cc\PYGZus{}criteria}\PYG{o}{=}\PYG{l+m+mf}{1.5e\PYGZhy{}6}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{vth\PYGZus{}array\PYGZus{}cc}\PYG{p}{)}
-
-\PYG{n}{vth\PYGZus{}array\PYGZus{}td} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{method} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TD}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{vth\PYGZus{}array\PYGZus{}td}\PYG{p}{)}
-
-\PYG{n}{vth\PYGZus{}array\PYGZus{}le} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{method} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{LE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{vth\PYGZus{}array\PYGZus{}le}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\section{Sub-threshold Slope (SS)}
-\label{\detokenize{index:sub-threshold-slope-ss}}
-An example of how to extract the SS from the curves in a FoMpy Dataset can be seen below:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}SS EXTRACTION}
-
-\PYG{n}{ss\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds1} \PYG{o}{=} \PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ss}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ss\PYGZus{}array}\PYG{p}{)}
-
-\PYG{n}{ss\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds1} \PYG{o}{=} \PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ss}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vg\PYGZus{}start} \PYG{o}{=} \PYG{l+m+mf}{0.05}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ss\PYGZus{}array}\PYG{p}{)}
-
-\PYG{n}{ss\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds1} \PYG{o}{=} \PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ss}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vg\PYGZus{}start} \PYG{o}{=} \PYG{l+m+mf}{0.05}\PYG{p}{,} \PYG{n}{vg\PYGZus{}end} \PYG{o}{=} \PYG{l+m+mf}{0.2}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ss\PYGZus{}array}\PYG{p}{)}
-
-\PYG{n}{ss\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds1} \PYG{o}{=} \PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ss}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vg\PYGZus{}end} \PYG{o}{=} \PYG{l+m+mf}{0.2}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ss\PYGZus{}array}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\section{On-Off Current (Ion-Ioff)}
-\label{\detokenize{index:on-off-current-ion-ioff}}
-An example of how to extract the Ion and Ioff from the curves in a FoMpy Dataset can be seen below:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}IOFF EXTRACTION}
-
-\PYG{n}{ioff\PYGZus{}array\PYGZus{}0} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ioff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ioff\PYGZus{}array\PYGZus{}0}\PYG{p}{)}
-\PYG{n}{ioff\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ioff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vg\PYGZus{}ext} \PYG{o}{=} \PYG{l+m+mf}{0.2}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ioff\PYGZus{}array}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{}ION EXTRACTION}
-
-\PYG{n}{ion\PYGZus{}array\PYGZus{}vg\PYGZus{}defined} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{vg\PYGZus{}ext} \PYG{o}{=} \PYG{l+m+mf}{0.7}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ion\PYGZus{}array\PYGZus{}vg\PYGZus{}defined}\PYG{p}{)}
-
-\PYG{n}{ion\PYGZus{}array\PYGZus{}default\PYGZus{}SD} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ion\PYGZus{}array\PYGZus{}default\PYGZus{}SD}\PYG{p}{)}
-
-\PYG{n}{ion\PYGZus{}array\PYGZus{}LE} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{method} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{LE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ion\PYGZus{}array\PYGZus{}LE}\PYG{p}{)}
-
-\PYG{n}{ion\PYGZus{}array\PYGZus{}TD} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{method} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TD}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ion\PYGZus{}array\PYGZus{}TD}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\section{DIBL}
-\label{\detokenize{index:dibl}}
-An example of how to extract the DIBL from the curves in a FoMpy Dataset can be seen below:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}DIBL EXTRACTION}
-\PYG{n}{fds\PYGZus{}hdb} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}high}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{JCJB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{fds\PYGZus{}ldb} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}low}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{JCJB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{fds\PYGZus{}hdb}\PYG{o}{.}\PYG{n}{\PYGZus{}drain\PYGZus{}bias\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mf}{0.7}
-\PYG{n}{fds\PYGZus{}ldb}\PYG{o}{.}\PYG{n}{\PYGZus{}drain\PYGZus{}bias\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mf}{0.05}
-
-\PYG{n}{dibl\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,} \PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dibl}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{dibl\PYGZus{}array}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\chapter{Plotting figures}
-\label{\detokenize{index:plotting-figures}}
-An example of how to plot the different FoM from the curves in a FoMpy Dataset can be seen below:
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./vth\PYGZus{}plots/sd/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{method} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{LE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ioff}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vg\PYGZus{}ext} \PYG{o}{=} \PYG{l+m+mf}{0.2}\PYG{p}{)}
-
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vg\PYGZus{}ext} \PYG{o}{=} \PYG{l+m+mf}{0.5}\PYG{p}{)}
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{method}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{TD}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ss}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{p}{(}\PYG{n}{TODO} \PYG{n}{vg\PYGZus{}ext}\PYG{p}{)}
-
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,} \PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dibl}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
+Next, a full list of all the components of the FoMpy library will be presented.
 
 
 \chapter{Modules}
@@ -1051,7 +678,7 @@ FoMpy Dataset
 \index{MC() (in module fompy.fds)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fds.MC}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{MC}}}{\emph{fds}, \emph{path}, \emph{filename\_user}, \emph{path\_subdirs}, \emph{path\_filenames}, \emph{interval}, \emph{exclude}, \emph{skiprows}, \emph{comments}}{}
+\phantomsection\label{\detokenize{index:fompy.fds.MC}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{MC}}}{\emph{fds}, \emph{path}, \emph{path\_subdirs}, \emph{path\_filenames}, \emph{interval}, \emph{exclude}}{}
 Function that imports the simulated data from a MC set of files and
 stores it into a FoMpy Dataset.
 \begin{quote}\begin{description}
@@ -1812,24 +1439,30 @@ Additionally, other types of plots can be generated. The list of available plots
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{fompy}
-\PYG{n}{path\PYGZus{}file\PYGZus{}high} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}high/}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}JCJB}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
-\PYG{n}{vth\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{path\PYGZus{}file\PYGZus{}var} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/simulations/}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{n}{fds\PYGZus{}var} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}var}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
+\PYG{n}{vth\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hist}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{,} \PYG{n}{bins}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hist}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{,} \PYG{n}{bins}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{qq}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{)}
 
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{qq}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{)}
-
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{varplot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{path\PYGZus{}file\PYGZus{}var} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/simulations/}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{n}{fds\PYGZus{}var} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}var}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{varplot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
 \PYG{n}{path\PYGZus{}file\PYGZus{}JCJB} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}high/}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{path\PYGZus{}file\PYGZus{}low} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}low/}\PYG{l+s+s1}{\PYGZsq{}}
 
-\PYG{n}{fds\PYGZus{}hdb} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}JCJB}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{JCJB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{fds\PYGZus{}ldb} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}low}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{JCJB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{fds\PYGZus{}hdb} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}JCJB}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
+\PYG{n}{fds\PYGZus{}hdb}\PYG{o}{.}\PYG{n}{print\PYGZus{}parameters}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{fds\PYGZus{}ldb} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}low}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
+\PYG{n}{fds\PYGZus{}ldb}\PYG{o}{.}\PYG{n}{print\PYGZus{}parameters}\PYG{p}{(}\PYG{p}{)}
 
-\PYG{p}{(}\PYG{n}{TODO}\PYG{p}{)} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{calib}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,} \PYG{n}{fds\PYGZus{}ldb}\PYG{p}{)}
+\PYG{n}{norm\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mf}{35.8}\PYG{o}{/}\PYG{l+m+mi}{10}\PYG{o}{*}\PYG{o}{*}\PYG{l+m+mi}{9}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{normalize}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,} \PYG{n}{norm\PYGZus{}value}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{normalize}\PYG{p}{(}\PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n}{norm\PYGZus{}value}\PYG{p}{)}
+
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,}\PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{calib}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 \index{plotStrategy (class in fompy.plots)}
 
@@ -2033,7 +1666,7 @@ and end(index of the last simulation to load into the FompyDataset)
 Class containing the most important parameters of a semiconductor IV curve
 
 \item[{Return type}] \leavevmode
-{\hyperref[\detokenize{index:fompy.fds.FompyDataset}]{\sphinxcrossref{FompyDataset}}}
+FompyDataset
 
 \end{description}\end{quote}
 
@@ -2092,7 +1725,7 @@ array\_like
 \index{filter() (in module fompy.wrappers)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.wrappers.filter}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{filter}}}{\emph{fds}, \emph{theta\_crit}}{}
+\phantomsection\label{\detokenize{index:fompy.wrappers.filter}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{filter}}}{\emph{fds}, \emph{theta\_crit}, \emph{show\_theta=False}}{}
 Wrapper class for filtering noisy data from a semiconductor’s IV curve.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -2131,7 +1764,7 @@ Wrapper function that normalizes the currents a semiconductor’s IV curve.
 \index{plot() (in module fompy.wrappers)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.wrappers.plot}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{plot}}}{\emph{fds1}, \emph{fds2=None}, \emph{type=None}, \emph{fom=None}, \emph{parameter=None}, \emph{method=None}, \emph{bins=None}, \emph{cc\_criteria=None}, \emph{vg\_ext=None}, \emph{vg\_start=None}, \emph{vg\_end=None}, \emph{save\_plot=None}}{}
+\phantomsection\label{\detokenize{index:fompy.wrappers.plot}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{plot}}}{\emph{fds1}, \emph{fds2=None}, \emph{plot\_type=None}, \emph{fom=None}, \emph{parameter=None}, \emph{method=None}, \emph{bins=None}, \emph{cc\_criteria=None}, \emph{vg\_ext=None}, \emph{vg\_start=None}, \emph{vg\_end=None}, \emph{save\_plot=None}}{}
 Wrapper function that plots the most common figures in semiconductor simulations.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -2215,17 +1848,6 @@ Wrapper function that saves to a text file the extracted FoMs.
 
 
 
-\renewcommand{\indexname}{Python Module Index}
-\begin{sphinxtheindex}
-\let\bigletter\sphinxstyleindexlettergroup
-\bigletter{f}
-\item\relax\sphinxstyleindexentry{fompy.aux}\sphinxstyleindexpageref{index:\detokenize{module-fompy.aux}}
-\item\relax\sphinxstyleindexentry{fompy.conditioning}\sphinxstyleindexpageref{index:\detokenize{module-fompy.conditioning}}
-\item\relax\sphinxstyleindexentry{fompy.fds}\sphinxstyleindexpageref{index:\detokenize{module-fompy.fds}}
-\item\relax\sphinxstyleindexentry{fompy.fom}\sphinxstyleindexpageref{index:\detokenize{module-fompy.fom}}
-\item\relax\sphinxstyleindexentry{fompy.plots}\sphinxstyleindexpageref{index:\detokenize{module-fompy.plots}}
-\item\relax\sphinxstyleindexentry{fompy.wrappers}\sphinxstyleindexpageref{index:\detokenize{module-fompy.wrappers}}
-\end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}
 \printindex
