@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome to FoMpy’s documentation! &#8212; FoMpy 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-fompy-s-documentation">
+<h1>Welcome to FoMpy’s documentation!<a class="headerlink" href="#welcome-to-fompy-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>FoMPy is an effective tool that extracts the main figures of merit (FoM) of a semiconductor’s IV curve and provides useful statistical parameters for variability studies. It includes several methods to extract the threshold voltage.</p>
+<div class="section" id="installing-fompy">
+<h3>Installing FoMpy<a class="headerlink" href="#installing-fompy" title="Permalink to this headline">¶</a></h3>
+<p>The source code of FoMpy can be downloaded from <a class="reference external" href="https://github.com/">https://github.com/</a> and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, …). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries is lited below:</p>
+<p>After these packages have been installed your system is ready to setup FoMpy. In order to do so run the following command in a terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">fompy</span>
+</pre></div>
+</div>
+<p>and check the version running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fompy</span><span class="o">.</span><span class="n">_version</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="importing-your-data">
+<h2>Importing your data<a class="headerlink" href="#importing-your-data" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id1">
+<h2>Importing your data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="conditioning-your-data">
+<h2>Conditioning your data<a class="headerlink" href="#conditioning-your-data" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="extracting-the-fom">
+<h2>Extracting the FoM<a class="headerlink" href="#extracting-the-fom" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="threshold-voltage-extraction-methods">
+<h3>Threshold voltage extraction methods<a class="headerlink" href="#threshold-voltage-extraction-methods" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="plotting-figures">
+<h2>Plotting figures<a class="headerlink" href="#plotting-figures" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="test-examples">
+<h2>Test examples<a class="headerlink" href="#test-examples" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-fompy.wrappers">
+<span id="modules"></span><h2>Modules<a class="headerlink" href="#module-fompy.wrappers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="wrappers-py">
+<h3>wrappers.py<a class="headerlink" href="#wrappers-py" title="Permalink to this headline">¶</a></h3>
+<p>A fompy module that provides an easy-to-use interface for the library</p>
+<dl class="function">
+<dt id="fompy.wrappers.dataset">
+<code class="descclassname">fompy.wrappers.</code><code class="descname">dataset</code><span class="sig-paren">(</span><em>globstr</em>, <em>parser=None</em>, <em>save_to_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fompy/wrappers.html#dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fompy.wrappers.dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that creates a FoMpy dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>globstr</strong> (<em>str</em>) – Path to the file containing the IV curves</li>
+<li><strong>parser</strong> (<em>str</em>) – Format to read the file</li>
+<li><strong>parser</strong> – Path of the file to store all the FoMpy dataset</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fds</strong> – Class containing the most important parameters of a semiconductor IV curve</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">FompyDataset</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">FoMpy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, gespineira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

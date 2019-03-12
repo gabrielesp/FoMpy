@@ -1,0 +1,22 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Getting Started}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Getting FoMpy}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Quick Start}{2}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Basic commands}{3}{subsection.1.2.1}
+\contentsline {chapter}{\numberline {2}Importing your data}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}From a file}{4}{section.2.1}
+\contentsline {chapter}{\numberline {3}Extracting the FoM}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Threshold voltage (Vth)}{5}{section.3.1}
+\contentsline {section}{\numberline {3.2}Sub-threshold Slope (SS)}{8}{section.3.2}
+\contentsline {section}{\numberline {3.3}On-Off Current (Ion-Ioff)}{8}{section.3.3}
+\contentsline {section}{\numberline {3.4}DIBL}{9}{section.3.4}
+\contentsline {chapter}{\numberline {4}Plotting figures}{10}{chapter.4}
+\contentsline {chapter}{\numberline {5}Modules}{11}{chapter.5}
+\contentsline {section}{\numberline {5.1}aux.py}{11}{section.5.1}
+\contentsline {section}{\numberline {5.2}conditioning.py}{12}{section.5.2}
+\contentsline {section}{\numberline {5.3}fds.py}{14}{section.5.3}
+\contentsline {section}{\numberline {5.4}fom.py}{18}{section.5.4}
+\contentsline {section}{\numberline {5.5}plots.py}{23}{section.5.5}
+\contentsline {section}{\numberline {5.6}wrappers.py}{26}{section.5.6}
+\contentsline {chapter}{Python Module Index}{29}{section*.77}
+\contentsline {chapter}{Index}{30}{section*.78}
