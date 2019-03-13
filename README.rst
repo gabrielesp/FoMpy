@@ -243,11 +243,12 @@ and write the results to a file::
 	fompy.savetotxt('./results_vth.txt', 'vth', vth_array)
 
 Note that since no extraction method has been defined the library uses the second derivative method ('SD') as a default. 
-This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies can be found in [#f1]_ [#f2]_
+This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies can be found in [#]_ [#]_
 
-[#f1] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simula-
+.. [#] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simula-
 tions” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
-[#f2] G. Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
+
+.. [#] G. Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
 
 **6.Plotting the results**
 
