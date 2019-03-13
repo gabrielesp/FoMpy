@@ -346,7 +346,7 @@ class ioff_ext(_extractor):
 	def save_results_to_file(self,path, parameter):
 		"""
 		save_results_to_file(path, parameter)
-			Class method that saves the extracted :math:`V_{TH}` values.
+			Class method that saves the extracted :math:`I_{OFF}` values.
 
 		Parameters
 		----------
@@ -370,7 +370,7 @@ class ioff_ext(_extractor):
 	def plot(self, fds1, parameter = None,vg_ext = None, curves = None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
-			Class method that plots the extracted :math:`V_{TH}` values.
+			Class method that plots the extracted :math:`I_{OFF}` values.
 
 		Parameters
 		----------
@@ -459,7 +459,7 @@ class ion_ext(_extractor):
 	def save_results_to_file(self,path, parameter):
 		"""
 		save_results_to_file(path, parameter)
-			Class method that saves the extracted :math:`V_{TH}` values.
+			Class method that saves the extracted :math:`I_{ON}` values.
 
 		Parameters
 		----------
@@ -483,7 +483,7 @@ class ion_ext(_extractor):
 	def plot(self, fds1 , parameter = None, curves = None, parameter_vth = None, vg_ext = None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
-			Class method that plots the extracted :math:`V_{TH}` values.
+			Class method that plots the extracted :math:`I_{ON}` values.
 
 		Parameters
 		----------
@@ -595,7 +595,7 @@ class ss_ext(_extractor):
 	def save_results_to_file(self,path, parameter):
 		"""
 		save_results_to_file(path, parameter)
-			Class method that saves the extracted :math:`V_{TH}` values.
+			Class method that saves the extracted :math:`SS` values.
 
 		Parameters
 		----------
@@ -619,7 +619,7 @@ class ss_ext(_extractor):
 	def plot(self, fds1, parameter = None, curves = None, parameter_ss = None, vg_start = None, vg_end = None, vt_sd_medio = None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
-			Class method that plots the extracted :math:`V_{TH}` values.
+			Class method that plots the extracted :math:`SS` values.
 
 		Parameters
 		----------
@@ -657,7 +657,7 @@ class dibl_ext(_extractor):
 		Methods
 		-------
 		extraction(fds1,fds2,method = None)
-			Class method that extracts :math:`SS` of a semiconductor's IV curve.
+			Class method that extracts the :math:`DIBL` of two given semiconductor's IV curves.
 
 		Parameters
 		----------
@@ -740,7 +740,7 @@ class dibl_ext(_extractor):
 	def save_results_to_file(self,path, parameter):
 		"""
 		save_results_to_file(path, parameter)
-			Class method that saves the extracted :math:`V_{TH}` values.
+			Class method that saves the extracted :math:`DIBL` values.
 
 		Parameters
 		----------
@@ -764,7 +764,7 @@ class dibl_ext(_extractor):
 	def plot(self,fds1 , curve_high = None,curve_low = None, parameter_vt_high = None, parameter_vt_low = None,corriente_low = None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
-			Class method that plots the extracted :math:`V_{TH}` values.
+			Class method that plots the extracted :math:`DIBL` values.
 
 		Parameters
 		----------
