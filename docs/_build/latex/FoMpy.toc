@@ -5,6 +5,6 @@
 \contentsline {section}{\numberline {2.2}conditioning.py}{3}{section.2.2}
 \contentsline {section}{\numberline {2.3}fds.py}{5}{section.2.3}
 \contentsline {section}{\numberline {2.4}fom.py}{9}{section.2.4}
-\contentsline {section}{\numberline {2.5}plots.py}{14}{section.2.5}
-\contentsline {section}{\numberline {2.6}wrappers.py}{17}{section.2.6}
-\contentsline {chapter}{Index}{20}{section*.77}
+\contentsline {section}{\numberline {2.5}plots.py}{13}{section.2.5}
+\contentsline {section}{\numberline {2.6}wrappers.py}{16}{section.2.6}
+\contentsline {chapter}{Index}{19}{section*.74}

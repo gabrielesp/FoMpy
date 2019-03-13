@@ -4,7 +4,6 @@
   \bigletter A
   \item akima\_interpol() (fompy.conditioning.interpolator method), \hyperpage{4}
   \item angle\_wrt\_0() (in module fompy.conditioning), \hyperpage{3}
-  \item ATLAS() (in module fompy.fds), \hyperpage{6}
 
   \indexspace
   \bigletter C
@@ -12,40 +11,38 @@
 
   \indexspace
   \bigletter D
-  \item daoArray (class in fompy.fds), \hyperpage{8}
   \item daoFile (class in fompy.fds), \hyperpage{8}
   \item dataDAO (class in fompy.fds), \hyperpage{8}
   \item dataset (fompy.fds.FompyDataset attribute), \hyperpage{6}
-  \item dataset() (in module fompy.wrappers), \hyperpage{17}
-  \item default() (in module fompy.fds), \hyperpage{8}
-  \item dibl\_ext (class in fompy.fom), \hyperpage{10}
+  \item dataset() (in module fompy.wrappers), \hyperpage{16}
+  \item dibl\_ext (class in fompy.fom), \hyperpage{9}
   \item drain\_bias\_label (fompy.fds.FompyDataset attribute), \hyperpage{6}
-  \item drain\_bias\_value (fompy.fds.FompyDataset attribute), \hyperpage{7}
+  \item drain\_bias\_value (fompy.fds.FompyDataset attribute), \hyperpage{6}
 
   \indexspace
   \bigletter E
-  \item exclude\_indexes() (in module fompy.fds), \hyperpage{9}
+  \item exclude\_indexes() (in module fompy.fds), \hyperpage{8}
   \item ext\_method (fompy.fds.FompyDataset attribute), \hyperpage{6}
-  \item extract() (in module fompy.wrappers), \hyperpage{17}
-  \item extraction() (fompy.fom.dibl\_ext method), \hyperpage{10}
-  \item extraction() (fompy.fom.ioff\_ext method), \hyperpage{11}
-  \item extraction() (fompy.fom.ion\_ext method), \hyperpage{12}
+  \item extract() (in module fompy.wrappers), \hyperpage{16}
+  \item extraction() (fompy.fom.dibl\_ext method), \hyperpage{9}
+  \item extraction() (fompy.fom.ioff\_ext method), \hyperpage{10}
+  \item extraction() (fompy.fom.ion\_ext method), \hyperpage{11}
   \item extraction() (fompy.fom.ss\_ext method), \hyperpage{12}
-  \item extraction() (fompy.fom.vth\_ext method), \hyperpage{13}
+  \item extraction() (fompy.fom.vth\_ext method), \hyperpage{12, 13}
 
   \indexspace
   \bigletter F
   \item filter (fompy.fds.FompyDataset attribute), \hyperpage{7}
-  \item filter() (in module fompy.wrappers), \hyperpage{18}
+  \item filter() (in module fompy.wrappers), \hyperpage{17}
   \item filter\_tool (class in fompy.conditioning), \hyperpage{4}
   \item find\_closest() (in module fompy.aux), \hyperpage{2}
-  \item fomplot() (fompy.plots.plotter method), \hyperpage{15}
+  \item fomplot() (fompy.plots.plotter method), \hyperpage{14}
   \item fompy.aux (module), \hyperpage{2}
   \item fompy.conditioning (module), \hyperpage{3}
   \item fompy.fds (module), \hyperpage{5}
   \item fompy.fom (module), \hyperpage{9}
-  \item fompy.plots (module), \hyperpage{14}
-  \item fompy.wrappers (module), \hyperpage{17}
+  \item fompy.plots (module), \hyperpage{13}
+  \item fompy.wrappers (module), \hyperpage{16}
   \item FompyDataset (class in fompy.fds), \hyperpage{6}
 
   \indexspace
@@ -54,16 +51,16 @@
 
   \indexspace
   \bigletter H
-  \item hist() (fompy.plots.plotter method), \hyperpage{16}
+  \item hist() (fompy.plots.plotter method), \hyperpage{15}
 
   \indexspace
   \bigletter I
-  \item interpol() (in module fompy.fom), \hyperpage{11}
+  \item interpol() (in module fompy.fom), \hyperpage{10}
   \item interpolation (fompy.fds.FompyDataset attribute), \hyperpage{7}
   \item interpolator (class in fompy.conditioning), \hyperpage{4}
-  \item ioff\_ext (class in fompy.fom), \hyperpage{11}
-  \item ion\_ext (class in fompy.fom), \hyperpage{12}
-  \item iv() (fompy.plots.plotter method), \hyperpage{16}
+  \item ioff\_ext (class in fompy.fom), \hyperpage{10}
+  \item ion\_ext (class in fompy.fom), \hyperpage{11}
+  \item iv() (fompy.plots.plotter method), \hyperpage{15}
 
   \indexspace
   \bigletter J
@@ -83,7 +80,7 @@
   \item n\_sims (fompy.fds.FompyDataset attribute), \hyperpage{6}
   \item norm (fompy.fds.FompyDataset attribute), \hyperpage{6}
   \item normalize() (fompy.conditioning.normalizer method), \hyperpage{5}
-  \item normalize() (in module fompy.wrappers), \hyperpage{18}
+  \item normalize() (in module fompy.wrappers), \hyperpage{17}
   \item normalizer (class in fompy.conditioning), \hyperpage{5}
 
   \indexspace
@@ -92,35 +89,35 @@
   \item pchip\_interpol() (fompy.conditioning.interpolator method), \hyperpage{5}
   \item plot() (fompy.fom.dibl\_ext method), \hyperpage{10}
   \item plot() (fompy.fom.ioff\_ext method), \hyperpage{11}
-  \item plot() (fompy.fom.ion\_ext method), \hyperpage{12}
-  \item plot() (fompy.fom.ss\_ext method), \hyperpage{13}
-  \item plot() (fompy.fom.vth\_ext method), \hyperpage{14}
-  \item plot() (in module fompy.wrappers), \hyperpage{18}
-  \item plotStrategy (class in fompy.plots), \hyperpage{15}
-  \item plotter (class in fompy.plots), \hyperpage{15}
+  \item plot() (fompy.fom.ion\_ext method), \hyperpage{11}
+  \item plot() (fompy.fom.ss\_ext method), \hyperpage{12}
+  \item plot() (fompy.fom.vth\_ext method), \hyperpage{13}
+  \item plot() (in module fompy.wrappers), \hyperpage{17}
+  \item plotStrategy (class in fompy.plots), \hyperpage{14}
+  \item plotter (class in fompy.plots), \hyperpage{14}
   \item polar\_filter() (fompy.conditioning.filter\_tool method), \hyperpage{4}
   \item print\_parameters() (fompy.fds.FompyDataset method), \hyperpage{7}
 
   \indexspace
   \bigletter Q
-  \item qq() (fompy.plots.plotter method), \hyperpage{16}
+  \item qq() (fompy.plots.plotter method), \hyperpage{15}
 
   \indexspace
   \bigletter S
   \item sanity\_array (fompy.fds.FompyDataset attribute), \hyperpage{6}
-  \item save\_results\_to\_file() (fompy.fom.dibl\_ext method), \hyperpage{11}
+  \item save\_results\_to\_file() (fompy.fom.dibl\_ext method), \hyperpage{10}
   \item save\_results\_to\_file() (fompy.fom.ioff\_ext method), \hyperpage{11}
-  \item save\_results\_to\_file() (fompy.fom.ion\_ext method), \hyperpage{12}
-  \item save\_results\_to\_file() (fompy.fom.ss\_ext method), \hyperpage{13}
-  \item save\_results\_to\_file() (fompy.fom.vth\_ext method), \hyperpage{14}
-  \item savetotxt() (in module fompy.wrappers), \hyperpage{19}
+  \item save\_results\_to\_file() (fompy.fom.ion\_ext method), \hyperpage{11}
+  \item save\_results\_to\_file() (fompy.fom.ss\_ext method), \hyperpage{12}
+  \item save\_results\_to\_file() (fompy.fom.vth\_ext method), \hyperpage{13}
+  \item savetotxt() (in module fompy.wrappers), \hyperpage{18}
   \item spline\_interpol() (fompy.conditioning.interpolator method), \hyperpage{4}
   \item ss\_ext (class in fompy.fom), \hyperpage{12}
 
   \indexspace
   \bigletter V
   \item varplot() (fompy.plots.plotter method), \hyperpage{16}
-  \item version() (in module fompy.wrappers), \hyperpage{19}
-  \item vth\_ext (class in fompy.fom), \hyperpage{13}
+  \item version() (in module fompy.wrappers), \hyperpage{18}
+  \item vth\_ext (class in fompy.fom), \hyperpage{12}
 
 \end{sphinxtheindex}

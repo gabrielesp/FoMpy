@@ -3,10 +3,29 @@ import fompy
 # ------------------------------------------------------------------------------------------#
 # BASIC COMMANDS 
 
-# path_file_JCJB = './data/sim_FinFET_vd_high/'
-# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
-# fds.print_parameters()
+#path_file_JCJB = './data/sim_FinFET_vd_high/'
+#fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+#fds.print_parameters()
+#print(fds.dataset)
 
+#import os
+#import numpy as np
+
+#path = './data/default'
+#path_subdirs = []
+#path_filenames = []
+#for dirname, dirnames, filenames in os.walk(path):
+#	for subdirname in dirnames:
+#		path_subdirs.append(os.path.join(dirname, subdirname))
+#	for filename in filenames:
+#		path_filenames.append(os.path.join(dirname, filename))
+
+#fds = fompy.FompyDataset()
+#for i in path_filenames:
+#    voltages, currents = np.loadtxt(i, delimiter='\t',  unpack=True, skiprows=1, comments='#')
+#    arr = np.column_stack((voltages, currents))
+#    fds.dataset.append(arr)
+#print(fds.dataset)
 
 # ------------------------------------------------------------------------------------------#
 # EXCLUDING CURVES FROM THE IMPORT

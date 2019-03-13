@@ -53,7 +53,7 @@
 
 
 \title{FoMpy Documentation}
-\date{Mar 12, 2019}
+\date{Mar 13, 2019}
 \release{0.2.0}
 \author{Gabriel Espiñeira}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -478,8 +478,6 @@ Moreover, another types of parsers can be selected:
 
 \PYG{n}{path\PYGZus{}file\PYGZus{}mc} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/mc\PYGZus{}data/}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}mc}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{MC}\PYG{p}{)}
-
-\PYG{p}{(}\PYG{n}{TODO}\PYG{p}{)}\PYG{n}{ADD} \PYG{n}{ATLAS}
 \end{sphinxVerbatim}
 
 If the user wishes to remove several IV curves included in the parent folder, two options called
@@ -492,14 +490,6 @@ If the user wishes to remove several IV curves included in the parent folder, tw
 \PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}JCJB}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{,} \PYG{n}{exclude}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{p}{)}
 \PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}JCJB}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{,} \PYG{n}{interval}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{]}\PYG{p}{)}
 \end{sphinxVerbatim}
-\index{ATLAS() (in module fompy.fds)}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fds.ATLAS}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{ATLAS}}}{\emph{fds}}{}
-(TODO)
-
-\end{fulllineitems}
-
 \index{FompyDataset (class in fompy.fds)}
 
 \begin{fulllineitems}
@@ -721,14 +711,6 @@ FoMpy Dataset
 
 \end{fulllineitems}
 
-\index{daoArray (class in fompy.fds)}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fds.daoArray}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{daoArray}}}{\emph{**kwargs}}{}
-(TODO)
-
-\end{fulllineitems}
-
 \index{daoFile (class in fompy.fds)}
 
 \begin{fulllineitems}
@@ -767,7 +749,7 @@ Class method that extracts \(V_{TH}\) of a semiconductor’s IV curve.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{parser}} (\sphinxstyleliteralemphasis{\sphinxupquote{function}}) \textendash{} Function that implements how the data is imported to a Fompy Dataset. The list of available functions includes:
-(TODO)’default’, ‘JCJB’, ‘MC’ and ‘ATLAS’.
+‘JCJB’ and ‘MC’.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{interval}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} List of two int values: start(index of the first simulation to load into the Fompy Dataset)
@@ -797,54 +779,6 @@ and end(index of the last simulation to load into the FompyDataset)
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{index:fompy.fds.dataDAO}}\pysigline{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{dataDAO}}}
 Data Acces Object Interface used to import the simulated IV curves to a FompyDataset.
-
-\end{fulllineitems}
-
-\index{default() (in module fompy.fds)}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fds.default}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{default}}}{\emph{fds}, \emph{path}, \emph{path\_subdirs}, \emph{path\_filenames}, \emph{interval}, \emph{exclude}, \emph{skiprows}, \emph{comments}}{}
-(TODO)Function that imports the simulated data from a given file and
-stores it into a FoMpy Dataset. The format of this file is asummed to have comments
-starting with ‘\#’, without a header and two columns, one for the voltage and one for the currents, separated
-by ‘    ‘ delimiters.
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{fds}} (\sphinxstyleliteralemphasis{\sphinxupquote{FoMpy Dataset}}) \textendash{} Structure of data containing the most important parameters of a semiconductor’s IV curve.
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Parent path where the simulations are stored
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{path\_subdirs}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} List of alphabetically sorted subdirectories found inside the parent directory.
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{path\_filenames}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} List of alphabetically sorted files found inside the parent directory.
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{interval}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} List of two int values: start(index of the first simulation to load into the Fompy Dataset)
-and end(index of the last simulation to load into the FompyDataset)
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{exclude}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Index values of simulations to exclude.
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{skiprows}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} Number of rows to skip at the begining of a file. 0 rows are skipped by default.
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{comments}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} All the lines starting with this character are considered comments.
-‘\#’ is used by default.
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-\sphinxstylestrong{fds} \textendash{} Structure of data containing the FoMpy Dataset.
-
-\item[{Return type}] \leavevmode
-FoMpy Dataset
-
-\end{description}\end{quote}
 
 \end{fulllineitems}
 

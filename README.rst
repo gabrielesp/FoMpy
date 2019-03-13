@@ -121,12 +121,84 @@ In order to load a FoMpy Dataset run inside a **python3 terminal**::
 	import fompy
 
 FoMpy implements an importing tools that allows the user to extract the data from various sources
-(from a file, an array stored in memory, a Sentaurus output file, etc). Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
+(from a file, an array stored in memory, etc).
+
+(From a file)
+
+For example if the user wishes to import IV curves stored in a general way (with a header plus a voltage and current columns)::
+	
+	#VG	#ID
+	0.0	3.00E-09
+	0.1	2.18E-08
+	0.2	3.77E-07
+	0.3	2.74E-06
+	0.4	9.33E-06
+	0.5	1.87E-05
+	0.6	2.97E-05
+	0.7	3.96E-05
+	0.8	5.43E-05
+	0.9	5.98E-05
+	1.0	6.60E-05
+
+One approach to create a FoMpy Dataset is::
+
+	import os
+	import numpy as np
+
+	path = './path_to_files'
+	path_subdirs = [] #Here all the subdirectories of that path are stored
+	path_filenames = [] #Here all the file names inside that path are stored
+	for dirname, dirnames, filenames in os.walk(path):
+		for subdirname in dirnames:
+			path_subdirs.append(os.path.join(dirname, subdirname))
+		for filename in filenames:
+			path_filenames.append(os.path.join(dirname, filename))
+
+	fds = fompy.FompyDataset() #Here we load a Fompy Dataset
+	for i in path_filenames: #All the files within the path are read
+	    voltages, currents = np.loadtxt(i, delimiter='\t',  unpack=True, skiprows=1, comments='#')
+	    arr = np.column_stack((voltages, currents)) #The two columns are stores in an array
+	    fds.dataset.append(arr) #The arrays are stored into a Fompy Dataset
+	print(fds.dataset)
+
+**Note that os.walk will find all files and subdirectories in that path, not only the ones containing the IV curves.**
+	
+Additionally if the user already has the IV curves loaded in an array the process is similar to the previously explained::
+
+	import numpy as np
+
+	arr1 =np.array([[0.00e+00, 1.00e-09],
+	       [1.00e-01, 2.20e-08],
+	       [2.00e-01, 3.20e-07],
+	       [3.00e-01, 2.74e-06],
+	       [4.00e-01, 9.90e-06],
+	       [5.00e-01, 2.20e-05],
+	       [6.00e-01, 3.22e-05],
+	       [7.00e-01, 4.16e-05],
+	       [8.00e-01, 5.23e-05],
+	       [9.00e-01, 6.04e-05],
+	       [1.00e+00, 6.60e-05]])
+	       
+	arr2 =np.array([[0.00e+00, 1.00e-09],
+	       [1.00e-01, 2.15e-08],
+	       [2.00e-01, 3.18e-07],
+	       [3.00e-01, 2.72e-06],
+	       [4.00e-01, 9.85e-06],
+	       [5.00e-01, 2.12e-05],
+	       [6.00e-01, 3.16e-05],
+	       [7.00e-01, 4.10e-05],
+	       [8.00e-01, 5.46e-05],
+	       [9.00e-01, 6.15e-05],
+	       [1.00e+00, 6.57e-05]])
+
+	iv_curve = ((arr1, arr2))	
+	
+Finally, FoMpy has predefined a parser thath reads an in-house format called 'JCJB'. In order to load the dada from these files, FoMpy has a importing tool with an input parameter for the parser. Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
 
 	path_data = './data'
 	fds = fompy.dataset(path_data, parser=fompy.JCJB)
 
-Note that the defined path has to point to the parent directory of the folders containing our single curve files.
+Note that the defined path has to point to the parent directory of the folders containing the single IV curve files.
 
 After running this, a Fompy Dataset is created and the IV curves are stored inside it.
 They can be accessed by calling the dataset attribute::
