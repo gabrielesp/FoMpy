@@ -277,6 +277,6 @@ In order to test it comment and uncomment the lines that you want to run inside 
 References
 +++++++++++++++++++
 
-.. [#] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simulations” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
-.. [#] G. Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
+.. [#] G.Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simulations” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
+.. [#] G.Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
 
