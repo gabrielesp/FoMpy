@@ -274,7 +274,7 @@ In order to test it comment and uncomment the lines that you want to run inside 
 
 **Further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf**
 
-Citting FoMpy
+Citing FoMpy
 +++++++++++++++++++
 
 Please cite FoMpy in your publications if it helps your research::
