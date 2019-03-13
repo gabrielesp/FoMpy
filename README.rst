@@ -123,7 +123,7 @@ In order to load a FoMpy Dataset run inside a **python3 terminal**::
 FoMpy implements an importing tools that allows the user to extract the data from various sources
 (from a file, an array stored in memory, etc).
 
-(From a file)
+**(Import from a file)**
 
 For example if the user wishes to import IV curves stored in a general way (with a header plus a voltage and current columns)::
 	
@@ -165,6 +165,8 @@ One approach to create a FoMpy Dataset is::
 
 **Note that os.walk will find all files and subdirectories in that path, not only the ones containing the IV curves.**
 	
+**(Import from an array)**
+
 Additionally if the user already has the IV curves loaded in an array the process is similar to the previously explained::
 
 	import fompy
@@ -198,6 +200,8 @@ Additionally if the user already has the IV curves loaded in an array the proces
 	fds.dataset = ((arr1, arr2)) #Here the arrays are included in the dataset
 
 	print(fds.dataset)
+
+**(Import from an JCJB)**
 
 Finally, FoMpy has predefined a parser thath reads an in-house format called 'JCJB'. In order to load the dada from these files, FoMpy has a importing tool with an input parameter for the parser. Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
 
