@@ -3,11 +3,6 @@ import fompy
 # ------------------------------------------------------------------------------------------#
 # BASIC COMMANDS 
 
-#path_file_JCJB = './data/sim_FinFET_vd_high/'
-#fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
-#fds.print_parameters()
-#print(fds.dataset)
-
 #import os
 #import numpy as np
 
@@ -25,6 +20,21 @@ import fompy
 #    voltages, currents = np.loadtxt(i, delimiter='\t',  unpack=True, skiprows=1, comments='#')
 #    arr = np.column_stack((voltages, currents))
 #    fds.dataset.append(arr)
+#print(fds.dataset)
+
+#import numpy as np
+#arr1 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.20e-08],[2.00e-01, 3.20e-07],[3.00e-01, 2.74e-06],[4.00e-01, 9.90e-06],[5.00e-01, 2.20e-05],[6.00e-01, 3.22e-05],[7.00e-01, 4.16e-05],[8.00e-01, 5.23e-05],[9.00e-01, 6.04e-05],[1.00e+00, 6.60e-05]])
+	       
+#arr2 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.15e-08],[2.00e-01, 3.18e-07],[3.00e-01, 2.72e-06],[4.00e-01, 9.85e-06],[5.00e-01, 2.12e-05],[6.00e-01, 3.16e-05],[7.00e-01, 4.10e-05],[8.00e-01, 5.46e-05],[9.00e-01, 6.15e-05],[1.00e+00, 6.57e-05]])
+
+#fds = fompy.FompyDataset() #Here we load a Fompy Dataset
+#fds.dataset = ((arr1, arr2)) #Here the arrays are included in the dataset
+
+#print(fds.dataset)
+
+#path_file_JCJB = './data/sim_FinFET_vd_high/'
+#fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+#fds.print_parameters()
 #print(fds.dataset)
 
 # ------------------------------------------------------------------------------------------#

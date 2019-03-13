@@ -142,6 +142,7 @@ For example if the user wishes to import IV curves stored in a general way (with
 
 One approach to create a FoMpy Dataset is::
 
+	import fompy
 	import os
 	import numpy as np
 
@@ -159,40 +160,45 @@ One approach to create a FoMpy Dataset is::
 	    voltages, currents = np.loadtxt(i, delimiter='\t',  unpack=True, skiprows=1, comments='#')
 	    arr = np.column_stack((voltages, currents)) #The two columns are stores in an array
 	    fds.dataset.append(arr) #The arrays are stored into a Fompy Dataset
-	print(fds.dataset)
+
+	print(fds.dataset) 
 
 **Note that os.walk will find all files and subdirectories in that path, not only the ones containing the IV curves.**
 	
 Additionally if the user already has the IV curves loaded in an array the process is similar to the previously explained::
 
+	import fompy
 	import numpy as np
 
 	arr1 =np.array([[0.00e+00, 1.00e-09],
-	       [1.00e-01, 2.20e-08],
-	       [2.00e-01, 3.20e-07],
-	       [3.00e-01, 2.74e-06],
-	       [4.00e-01, 9.90e-06],
-	       [5.00e-01, 2.20e-05],
-	       [6.00e-01, 3.22e-05],
-	       [7.00e-01, 4.16e-05],
-	       [8.00e-01, 5.23e-05],
-	       [9.00e-01, 6.04e-05],
-	       [1.00e+00, 6.60e-05]])
-	       
+		       [1.00e-01, 2.20e-08],
+		       [2.00e-01, 3.20e-07],
+		       [3.00e-01, 2.74e-06],
+		       [4.00e-01, 9.90e-06],
+		       [5.00e-01, 2.20e-05],
+		       [6.00e-01, 3.22e-05],
+		       [7.00e-01, 4.16e-05],
+		       [8.00e-01, 5.23e-05],
+		       [9.00e-01, 6.04e-05],
+		       [1.00e+00, 6.60e-05]])
+		       
 	arr2 =np.array([[0.00e+00, 1.00e-09],
-	       [1.00e-01, 2.15e-08],
-	       [2.00e-01, 3.18e-07],
-	       [3.00e-01, 2.72e-06],
-	       [4.00e-01, 9.85e-06],
-	       [5.00e-01, 2.12e-05],
-	       [6.00e-01, 3.16e-05],
-	       [7.00e-01, 4.10e-05],
-	       [8.00e-01, 5.46e-05],
-	       [9.00e-01, 6.15e-05],
-	       [1.00e+00, 6.57e-05]])
+		       [1.00e-01, 2.15e-08],
+		       [2.00e-01, 3.18e-07],
+		       [3.00e-01, 2.72e-06],
+		       [4.00e-01, 9.85e-06],
+		       [5.00e-01, 2.12e-05],
+		       [6.00e-01, 3.16e-05],
+		       [7.00e-01, 4.10e-05],
+		       [8.00e-01, 5.46e-05],
+		       [9.00e-01, 6.15e-05],
+		       [1.00e+00, 6.57e-05]])
 
-	iv_curve = ((arr1, arr2))	
-	
+	fds = fompy.FompyDataset() #Here we load a Fompy Dataset
+	fds.dataset = ((arr1, arr2)) #Here the arrays are included in the dataset
+
+	print(fds.dataset)
+
 Finally, FoMpy has predefined a parser thath reads an in-house format called 'JCJB'. In order to load the dada from these files, FoMpy has a importing tool with an input parameter for the parser. Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
 
 	path_data = './data'
