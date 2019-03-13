@@ -243,7 +243,7 @@ and write the results to a file::
 	fompy.savetotxt('./results_vth.txt', 'vth', vth_array)
 
 Note that since no extraction method has been defined the library uses the second derivative method ('SD') as a default. 
-This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies can be found in [#]_ [#]_
+This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies and case results can be found in [#]_ [#]_
 
 **6.Plotting the results**
 
