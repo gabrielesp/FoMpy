@@ -274,6 +274,23 @@ In order to test it comment and uncomment the lines that you want to run inside 
 
 **Further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf**
 
+Citting FoMpy
++++++++++++++++++++
+
+Please cite FoMpy in your publications if it helps your research::
+
+	@INPROCEEDINGS{fompy2018,
+	author={G. {Espiñeira} and N. {Seoane} and D. {Nagy} and G. {Indalecio} and A. J. {García-Loureiro}},
+	booktitle={2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS)},
+	title={FoMPy: A figure of merit extraction tool for semiconductor device simulations},
+	year={2018},
+	pages={1-4},
+	doi={10.1109/ULIS.2018.8354752},
+	ISSN={2472-9132},
+	month={March},}
+
+
+
 References
 +++++++++++++++++++
 
