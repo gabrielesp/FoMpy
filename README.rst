@@ -245,11 +245,6 @@ and write the results to a file::
 Note that since no extraction method has been defined the library uses the second derivative method ('SD') as a default. 
 This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies can be found in [#]_ [#]_
 
-.. [#] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simula-
-tions” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
-
-.. [#] G. Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
-
 **6.Plotting the results**
 
 FoMpy also has built-in several plotting capabilities to be able to check the extraction results. A simple plot
@@ -279,4 +274,9 @@ In order to test it comment and uncomment the lines that you want to run inside 
 
 **Further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf**
 
+References
++++++++++++++++++++
+
+.. [#] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simulations” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
+.. [#] G. Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
 
