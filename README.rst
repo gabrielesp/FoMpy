@@ -123,7 +123,7 @@ In order to load a FoMpy Dataset run inside a **python3 terminal**::
 FoMpy implements an importing tools that allows the user to extract the data from various sources
 (from a file, an array stored in memory, etc).
 
-**(Import from a file)**
+**1.Import from a file**
 
 For example if the user wishes to import IV curves stored in a general way (with a header plus a voltage and current columns)::
 	
@@ -165,7 +165,7 @@ One approach to create a FoMpy Dataset is::
 
 **Note that os.walk will find all files and subdirectories in that path, not only the ones containing the IV curves.**
 	
-**(Import from an array)**
+**2.Import from an array**
 
 Additionally if the user already has the IV curves loaded in an array the process is similar to the previously explained::
 
@@ -201,7 +201,7 @@ Additionally if the user already has the IV curves loaded in an array the proces
 
 	print(fds.dataset)
 
-**(Import from an JCJB)**
+**3.Import from an JCJB**
 
 Finally, FoMpy has predefined a parser thath reads an in-house format called 'JCJB'. In order to load the dada from these files, FoMpy has a importing tool with an input parameter for the parser. Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
 
@@ -214,6 +214,8 @@ After running this, a Fompy Dataset is created and the IV curves are stored insi
 They can be accessed by calling the dataset attribute::
 
 	print(fds.dataset)
+
+**4.FoMpy Dataset**
 
 Now that the Fompy Dataset has been implemented several other parameters can be defined like the
 number of simulations (fds.n_sims) or a value for normalizing the curves (fds.norm)., the default extraction
@@ -228,9 +230,11 @@ Also a predefined function can be called in order to print the current value of 
 
 	fds.print_parameters()
 
-The most important capability of Fompy is that it allows the user to extract the most common figures of merit (LATEX FOM)
+**5.Parameter extraction**
+
+The most important capability of Fompy is that it allows the user to extract the most common figures of merit (FoM)
 of a semiconductor's IV curve using different methodologies. In order to extract these FoM the user has to call the 
-function extract. The following example extracts the threshold voltage values (LATEX VTH) of the curves in the Fompy Dataset::
+function extract. The following example extracts the threshold voltage values $\mathrm{V_{TH}}$ of the curves in the Fompy Dataset::
 
 	vth_array = fompy.extract(fds, fom = 'vth')
 
@@ -239,8 +243,11 @@ and write the results to a file::
 	fompy.savetotxt('./results_vth.txt', 'vth', vth_array)
 
 Note that since no extraction method has been defined the library uses the second derivative method ('SD') as a default. 
-This can be changed to oterh commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions
-on how to choose this in the full documentation).
+This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies can be found in [#f1] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simula-
+tions” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
+[#f2] G. Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
+
+**6.Plotting the results**
 
 FoMpy also has built-in several plotting capabilities to be able to check the extraction results. A simple plot
 of the threshold voltage with the 'SD' method and the second derivative of the curve goes as follows::
