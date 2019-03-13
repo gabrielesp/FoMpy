@@ -234,7 +234,7 @@ Also a predefined function can be called in order to print the current value of 
 
 The most important capability of Fompy is that it allows the user to extract the most common figures of merit (FoM)
 of a semiconductor's IV curve using different methodologies. In order to extract these FoM the user has to call the 
-function extract. The following example extracts the threshold voltage values $\mathrm{V_{TH}}$ of the curves in the Fompy Dataset::
+function extract. The following example extracts the threshold voltage values :math:`\mathrm{V_{TH}}` of the curves in the Fompy Dataset::
 
 	vth_array = fompy.extract(fds, fom = 'vth')
 
@@ -243,7 +243,9 @@ and write the results to a file::
 	fompy.savetotxt('./results_vth.txt', 'vth', vth_array)
 
 Note that since no extraction method has been defined the library uses the second derivative method ('SD') as a default. 
-This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies can be found in [#f1] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simula-
+This can be changed to other commonly used methods like the constant current method, the third derivative or the linear extrapolation (See further instructions on how to choose this in the full documentation). The theory behind these extraction methodologies can be found in [#f1]_ [#f2]_
+
+[#f1] G. Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simula-
 tions” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
 [#f2] G. Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
 
