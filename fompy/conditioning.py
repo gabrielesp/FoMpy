@@ -244,7 +244,7 @@ class filter_tool(_filterStrategy):
 
 	Methods
 	-------
-	polar_filter(fds,theta_crit)
+	polar_filter(fds,theta_crit, show_theta = False)
 		Class method that filters data from a semiconductor's IV curve checking the increase in the angle
 		of the points with respect to the origin of an IV curve and removes all the increments that go above
 		defined a threshold.
@@ -256,7 +256,9 @@ class filter_tool(_filterStrategy):
 	theta_crit : float
 		Threshold value for the biggest allowed increase in the angle between to consecutive points
 		of an IV curve.
-	
+	show_theta : bool
+		If True it prints all the angle increments between two consecutive points so the user can
+		choose a suitable theta crit.	
 	"""
 
 	def polar_filter(self,fds,theta_crit, show_theta = False):

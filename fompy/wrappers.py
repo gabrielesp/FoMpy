@@ -324,6 +324,9 @@ def filter(fds, theta_crit, show_theta = False):
 	theta_crit : float
 		Threshold value for the biggest allowed increase in the angle between to consecutive points
 		of an IV curve.
+	show_theta : bool
+		If True it prints all the angle increments between two consecutive points so the user can
+		choose a suitable theta crit.
 	
 	"""
 
