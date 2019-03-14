@@ -51,7 +51,7 @@ import os
 setup(
     name='fompy',
     #cmdclass={'install_data': custom_install},
-    version='0.2.5',
+    version='0.2.7',
     description='FoMPy is an effective tool that extracts the main figures of merit (FoM) of a semiconductors IV curve',
     author='Gabriel Espineira',
     author_email='gabrielespineiradeus@gmail.com',
