@@ -98,7 +98,7 @@ class vth_ext(_extractor):
 					curve = np.column_stack((x_interp, y_interp))
 					if(fds1.drain_bias_label=='High'):
 						curve[:,1] = np.power( curve[:,1],0.5)
-					d1 = dt.get_diff(iv_curve_data, order = 1)
+					d1 = get_diff(curve, order = 1)
 					d2 = get_diff(curve, order = 2)
 
 					lower_bound=find_closest(d2[:,0],10*d2[2,0])

@@ -25,7 +25,7 @@ import os
 
 #class custom_install(install):
 #    def run(self):
-#        # Call parent 
+#        # Call parent
 #        install_data.run(self)
         # Execute commands
 #        os.system('wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh')
@@ -50,10 +50,10 @@ import os
 
 setup(
     name='fompy',
-    #cmdclass={'install_data': custom_install},    
-    version='0.2.4',
+    #cmdclass={'install_data': custom_install},
+    version='0.2.5',
     description='FoMPy is an effective tool that extracts the main figures of merit (FoM) of a semiconductors IV curve',
-    author='Gabriel Espineira',    
+    author='Gabriel Espineira',
     author_email='gabrielespineiradeus@gmail.com',
     license='MIT',
     url='https://gitlab.citius.usc.es/gabriel.espineira/FoMPy',
