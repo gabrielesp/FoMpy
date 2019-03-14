@@ -98,22 +98,25 @@ class vth_ext(_extractor):
 					curve = np.column_stack((x_interp, y_interp))
 					if(fds1.drain_bias_label=='High'):
 						curve[:,1] = np.power( curve[:,1],0.5)
-					# d1 = dt.get_diff(iv_curve_data, order = 1)
+					d1 = dt.get_diff(iv_curve_data, order = 1)
 					d2 = get_diff(curve, order = 2)
-					lower_bound=find_closest(d2[:,0],10*d2[1,0])
-					higher_bound=find_closest(d2[2:,0],0.8*d2[-1,0])						
+
+					lower_bound=find_closest(d2[:,0],10*d2[2,0])
+					higher_bound=find_closest(d2[2:,0],0.95*d2[-1,0])						
 					warning_interval_limit_low = int(np.round(lower_bound*1.5))
-					warning_interval_limit_high = int(np.round(higher_bound*0.8))
+					warning_interval_limit_high = int(np.round(higher_bound*0.95))
 					vt_temp = np.argmax(d2[lower_bound:higher_bound,1])
+
 					if (d2[vt_temp+lower_bound, 0] <= d2[warning_interval_limit_low, 0]):
 						print('Vt value outside of the confidence interval for simulation', i)
 					if (d2[vt_temp+lower_bound, 0] >= d2[warning_interval_limit_high, 0]):
 						print('Vt value outside of the confidence interval for simulation', i)
 					vt_SD = d2[vt_temp+lower_bound,0]
-
+					index_lower_bound=find_closest(d2[2:,0],0.05)
+					index_higher_bound=find_closest(d2[index_lower_bound:,1],0)
 					try:
-						vt_temp = np.argmax(d2[lower_bound:higher_bound+lower_bound,1])
-						vt_SD = d2[vt_temp+lower_bound,0]
+						vt_temp = np.argmax(d2[index_lower_bound:index_higher_bound+index_lower_bound,1])
+						vt_SD = d2[vt_temp+index_lower_bound,0]
 					except ValueError:
 						print('Multiple indexes in curve {}'.format(i))
 					parameter.append(float(("%0.3f"%vt_SD)))

@@ -193,7 +193,7 @@ def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  metho
 	fds2 : FoMpy Dataset
 		additional structure of data containing the most important parameters of a semiconductor's IV curve.
 		Needed for generating the plot of the calibration and the DIBL.
-	type : str
+	plot_type : str
 		Keyword indicating the type of plot to generate. The list of available plots includes:
 		'iv', 'hist', 'qq', 'varplot', 'calib' and 'fomplot'.
 	fom : str
