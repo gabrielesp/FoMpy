@@ -199,8 +199,16 @@ class interpolator(_interpolationStrategy):
 			spline = interpolate.splrep(x, y, k=5)
 			xvals = np.linspace(x[0], x[-1], n)
 			yinterp = interpolate.splev(xvals, spline, der=0)
+			
+			#l, r = [(2, 0)], [(2, 0)]  # natural spline boundary conditions
+			#spl2 = interpolate.make_interp_spline(x, y, k=3, bc_type=(l, r))
+
+			#from fompy.aux import get_diff
+			#spl = interpolate.InterpolatedUnivariateSpline(x, y, k=5)
+			#arr = np.column_stack((xvals, spl(xvals)))
+			#d2 = get_diff(arr, 2, type = 'central')
 			#import matplotlib.pyplot as plt
-			#plt.plot(xvals, yinterp)
+			#plt.plot(xvals, spl2(xvals))
 			#plt.show()
 			return (xvals, yinterp)
 		elif(d is 3):
