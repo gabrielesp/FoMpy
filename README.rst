@@ -143,27 +143,27 @@ For example if the user wishes to import IV curves stored in a general way (with
 One approach to create a FoMpy Dataset is::
 
 	import fompy
-..	import os
+.. import os
 	import numpy as np
 
 	path = './path_to_file'
-..	path_subdirs = [] #Here all the subdirectories of that path are stored
-..	path_filenames = [] #Here all the file names inside that path are stored
-..	for dirname, dirnames, filenames in os.walk(path):
-..		for subdirname in dirnames:
-..			path_subdirs.append(os.path.join(dirname, subdirname))
-..		for filename in filenames:
-..			path_filenames.append(os.path.join(dirname, filename))
+.. path_subdirs = [] #Here all the subdirectories of that path are stored
+.. path_filenames = [] #Here all the file names inside that path are stored
+.. for dirname, dirnames, filenames in os.walk(path):
+.. for subdirname in dirnames:
+.. path_subdirs.append(os.path.join(dirname, subdirname))
+.. for filename in filenames:
+.. path_filenames.append(os.path.join(dirname, filename))
 
 	fds = fompy.FompyDataset() #Here we instantiate a Fompy Dataset
-..	for i in path_filenames: #All the files within the path are read
+.. for i in path_filenames: #All the files within the path are read
 	voltages, currents = np.loadtxt(path, delimiter='\t',  unpack=True, skiprows=1, comments='#') #The data from the file is loaded
 	arr = np.column_stack((voltages, currents)) #The two columns are saved into an array
 	fds.dataset.append(arr) #The arrays are included into a Fompy Dataset
 
 	print(fds.dataset) 
 
-**Note that os.walk will find all files and subdirectories in that path, not only the ones containing the IV curves.**
+.. **Note that os.walk will find all files and subdirectories in that path, not only the ones containing the IV curves.**
 	
 **2.Import from an array**
 
