@@ -194,7 +194,16 @@ class interpolator(_interpolationStrategy):
 	"""
 	def spline_interpol(self, x = None ,y = None, n = None, d = None, s = 0):
 
-		if(d is 3) or (d is None):
+		if(d is 5) or (d is None):
+			from scipy import interpolate
+			spline = interpolate.splrep(x, y, k=5)
+			xvals = np.linspace(x[0], x[-1], n)
+			yinterp = interpolate.splev(xvals, spline, der=0)
+			#import matplotlib.pyplot as plt
+			#plt.plot(xvals, yinterp)
+			#plt.show()
+			return (xvals, yinterp)
+		elif(d is 3):
 			from scipy.interpolate import CubicSpline
 			cs_natural = CubicSpline(x, y, bc_type='natural')
 			xvals = np.linspace(x[0], x[-1], n)

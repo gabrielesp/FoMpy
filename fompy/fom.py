@@ -684,10 +684,6 @@ class dibl_ext(_extractor):
 			vth_low, curve_low, _, _= temp_vth.extraction(fds2, method, cc_criteria)	
 		length = len(fds1.dataset)
 		dibl = []
-		curve_high_arr = []
-		curve_low_arr = []
-		vth_high_arr = []
-		vth_low_arr = []
 		corriente_low_arr = []
 		for i in range(length):
 			try:
@@ -696,27 +692,19 @@ class dibl_ext(_extractor):
 
 				vth_index_low = find_closest(curve_low[i][:,0],vth_low[i])
 				corriente_low = curve_low[i][vth_index_low,1]
-				vth_index_high = find_closest(curve_high[i][:,1],corriente_low)
-				vth_high = curve_high[i][vth_index_high,0]
 
 				# print(vth_high)
 				# print(vth_low)
 				# print(fds1.drain_bias_value)
 				# print(fds2.drain_bias_value)
-
-				dibl.append((-(vth_high - vth_low[i])/(fds1.drain_bias_value-fds2.drain_bias_value)*1000))
-				vth_high_arr.append(vth_high)
-				vth_low_arr.append(vth_low)
+				
+				dibl.append((-(vth_high[i] - vth_low[i])/(fds1.drain_bias_value-fds2.drain_bias_value)*1000))
 				corriente_low_arr.append(corriente_low)
 			except (TypeError, ValueError):
 				dibl.append(np.nan)
-				curve_high_arr.append(np.nan)
-				curve_low_arr.append(np.nan)
-				vth_high_arr.append(np.nan)
-				vth_low_arr.append(np.nan)
 				corriente_low_arr.append(np.nan)
 
-		return dibl,curve_high, curve_low, vth_high_arr, vth_low_arr, corriente_low_arr
+		return dibl,curve_high, curve_low, vth_high, vth_low, corriente_low_arr
 
 #----------------------------------------------------------------------------------------------------------------	
 	def save_results_to_file(self,path, parameter):
