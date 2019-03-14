@@ -652,7 +652,7 @@ class ss_ext(_extractor):
 
 class dibl_ext(_extractor):
 
-	def extraction(self,fds1,fds2,method = None):
+	def extraction(self,fds1,fds2,method = None, cc_criteria = None):
 		"""
 		Methods
 		-------
@@ -673,68 +673,50 @@ class dibl_ext(_extractor):
 
 		"""
 
-		if(method == 'SD') or (method == None):
-			length = len(fds1.dataset)
-			dibl = []
-			curve_high_arr = []
-			curve_low_arr = []
-			vth_high_arr = []
-			vth_low_arr = []
-			corriente_low_arr = []
-			for i in range(length):
-				try:
-					if(len(fds1.dataset[i][:,0][:])<2):
-						raise(ValueError)
-					x_interp_high,y_interp_high = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy=fds1.interpolation, n = 1000,s = 0)
-					curve_high = np.column_stack((x_interp_high, y_interp_high))
-					x_interp_low,y_interp_low = interpol(fds2.dataset[i][:,0][:], fds2.dataset[i][:,1][:],strategy=fds1.interpolation, n = 1000,s = 0)
-					curve_low = np.column_stack((x_interp_low, y_interp_low))
+		temp_vth = vth_ext()
+		if(method == None):
+			method = 'SD'
+		if(method is not 'LE'):
+			vth_high, curve_high= temp_vth.extraction(fds1, method, cc_criteria)
+			vth_low, curve_low= temp_vth.extraction(fds2, method, cc_criteria)
+		else:
+			vth_high, curve_high, _, _= temp_vth.extraction(fds1, method, cc_criteria)
+			vth_low, curve_low, _, _= temp_vth.extraction(fds2, method, cc_criteria)	
+		length = len(fds1.dataset)
+		dibl = []
+		curve_high_arr = []
+		curve_low_arr = []
+		vth_high_arr = []
+		vth_low_arr = []
+		corriente_low_arr = []
+		for i in range(length):
+			try:
+				if(len(fds1.dataset[i][:,0][:])<2):
+					raise(ValueError)
 
-					d2 = get_diff(curve_low, order = 2)
-					lower_bound=find_closest(d2[:,0],10*d2[2,0])
-					higher_bound=find_closest(d2[2:,0],0.95*d2[-1,0])
-					warning_interval_limit_low = int(np.round(lower_bound*1.5))
-					warning_interval_limit_high = int(np.round(higher_bound*0.95))
-					vt_temp = np.argmax(d2[lower_bound:higher_bound,1])
-					if (d2[vt_temp+lower_bound, 0] <= d2[warning_interval_limit_low, 0]):
-						print('Vt value outside of the confidence interval for simulation', i)
-					if (d2[vt_temp+lower_bound, 0] >= d2[warning_interval_limit_high, 0]):
-						print('Vt value outside of the confidence interval for simulation', i)
-					vth_low = d2[vt_temp+lower_bound,0]
-					index_lower_bound=find_closest(d2[2:,0],0.05)
-					index_higher_bound=find_closest(d2[index_lower_bound:,1],0)
-					try:
-						vt_temp = np.argmax(d2[index_lower_bound:index_higher_bound+index_lower_bound,1])
-						vth_low = d2[vt_temp+index_lower_bound,0]
-					except ValueError:
-						print('Multiple indexes in curve {}'.format(i))
+				vth_index_low = find_closest(curve_low[i][:,0],vth_low[i])
+				corriente_low = curve_low[i][vth_index_low,1]
+				vth_index_high = find_closest(curve_high[i][:,1],corriente_low)
+				vth_high = curve_high[i][vth_index_high,0]
 
+				# print(vth_high)
+				# print(vth_low)
+				# print(fds1.drain_bias_value)
+				# print(fds2.drain_bias_value)
 
-					vth_index_low = find_closest(curve_low[:,0],vth_low)
-					corriente_low = curve_low[vth_index_low,1]
-					vth_index_high = find_closest(curve_high[:,1],corriente_low)
-					vth_high = curve_high[vth_index_high,0]
+				dibl.append((-(vth_high - vth_low[i])/(fds1.drain_bias_value-fds2.drain_bias_value)*1000))
+				vth_high_arr.append(vth_high)
+				vth_low_arr.append(vth_low)
+				corriente_low_arr.append(corriente_low)
+			except (TypeError, ValueError):
+				dibl.append(np.nan)
+				curve_high_arr.append(np.nan)
+				curve_low_arr.append(np.nan)
+				vth_high_arr.append(np.nan)
+				vth_low_arr.append(np.nan)
+				corriente_low_arr.append(np.nan)
 
-					# print(vth_high)
-					# print(vth_low)
-					# print(fds1.drain_bias_value)
-					# print(fds2.drain_bias_value)
-
-					dibl.append((-(vth_high - vth_low)/(fds1.drain_bias_value-fds2.drain_bias_value)*1000))
-					curve_high_arr.append(curve_high)
-					curve_low_arr.append(curve_low)
-					vth_high_arr.append(vth_high)
-					vth_low_arr.append(vth_low)
-					corriente_low_arr.append(corriente_low)
-				except (TypeError, ValueError):
-					dibl.append(np.nan)
-					curve_high_arr.append(np.nan)
-					curve_low_arr.append(np.nan)
-					vth_high_arr.append(np.nan)
-					vth_low_arr.append(np.nan)
-					corriente_low_arr.append(np.nan)
-
-		return dibl,curve_high_arr, curve_low_arr, vth_high_arr, vth_low_arr, corriente_low_arr
+		return dibl,curve_high, curve_low, vth_high_arr, vth_low_arr, corriente_low_arr
 
 #----------------------------------------------------------------------------------------------------------------	
 	def save_results_to_file(self,path, parameter):

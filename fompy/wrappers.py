@@ -119,7 +119,7 @@ def extract(fds1, fds2 = None, fom = None, method = None, cc_criteria = None, vg
 		return parameter_ss					
 	elif(fom == 'dibl'):
 		temp = dibl_ext()
-		parameter_dibl,curve_high, curve_low, vth_high, vth_low, corriente_low = temp.extraction(fds1,fds2, method)
+		parameter_dibl,curve_high, curve_low, vth_high, vth_low, corriente_low = temp.extraction(fds1,fds2, method, cc_criteria)
 		return parameter_dibl
 
 	elif(print_fom == True):
@@ -168,7 +168,7 @@ def extract(fds1, fds2 = None, fom = None, method = None, cc_criteria = None, vg
 
 		if((fds1 is not None) and (fds2 is not None)):
 			temp = dibl_ext()
-			parameter_dibl,curve_high, curve_low, vth_high, vth_low, corriente_low = temp.extraction(fds1,fds2, method)
+			parameter_dibl,curve_high, curve_low, vth_high, vth_low, corriente_low = temp.extraction(fds1,fds2, method, cc_criteria)
 			parameter_fds1 = (parameter_vth_1, parameter_ioff_1, parameter_ion_1, parameter_ss_1)
 			parameter_fds2 = (parameter_vth_2, parameter_ioff_2, parameter_ion_2, parameter_ss_2)
 			print('\nThe extracted values for fds1 are\nvth: {0}\nioff: {1}\nion: {2} \nss: {3}\n'.format(parameter_vth_1, parameter_ioff_1, parameter_ion_1, parameter_ss_1) )
