@@ -21,7 +21,7 @@
 \indexentry{norm (fompy.fds.FompyDataset attribute)|hyperpage}{6}
 \indexentry{ext\_method (fompy.fds.FompyDataset attribute)|hyperpage}{6}
 \indexentry{drain\_bias\_label (fompy.fds.FompyDataset attribute)|hyperpage}{6}
-\indexentry{drain\_bias\_value (fompy.fds.FompyDataset attribute)|hyperpage}{6}
+\indexentry{drain\_bias\_value (fompy.fds.FompyDataset attribute)|hyperpage}{7}
 \indexentry{interpolation (fompy.fds.FompyDataset attribute)|hyperpage}{7}
 \indexentry{filter (fompy.fds.FompyDataset attribute)|hyperpage}{7}
 \indexentry{print\_parameters() (fompy.fds.FompyDataset method)|hyperpage}{7}
@@ -49,21 +49,21 @@
 \indexentry{extraction() (fompy.fom.ion\_ext method)|hyperpage}{11}
 \indexentry{extraction() (fompy.fom.ion\_ext method)|hyperpage}{11}
 \indexentry{plot() (fompy.fom.ion\_ext method)|hyperpage}{11}
-\indexentry{save\_results\_to\_file() (fompy.fom.ion\_ext method)|hyperpage}{11}
+\indexentry{save\_results\_to\_file() (fompy.fom.ion\_ext method)|hyperpage}{12}
 \indexentry{ss\_ext (class in fompy.fom)|hyperpage}{12}
 \indexentry{extraction() (fompy.fom.ss\_ext method)|hyperpage}{12}
 \indexentry{extraction() (fompy.fom.ss\_ext method)|hyperpage}{12}
 \indexentry{plot() (fompy.fom.ss\_ext method)|hyperpage}{12}
 \indexentry{save\_results\_to\_file() (fompy.fom.ss\_ext method)|hyperpage}{12}
-\indexentry{vth\_ext (class in fompy.fom)|hyperpage}{12}
-\indexentry{extraction() (fompy.fom.vth\_ext method)|hyperpage}{12}
+\indexentry{vth\_ext (class in fompy.fom)|hyperpage}{13}
+\indexentry{extraction() (fompy.fom.vth\_ext method)|hyperpage}{13}
 \indexentry{extraction() (fompy.fom.vth\_ext method)|hyperpage}{13}
 \indexentry{plot() (fompy.fom.vth\_ext method)|hyperpage}{13}
 \indexentry{save\_results\_to\_file() (fompy.fom.vth\_ext method)|hyperpage}{13}
 \indexentry{fompy.plots (module)|hyperpage}{13}
 \indexentry{plotStrategy (class in fompy.plots)|hyperpage}{14}
-\indexentry{plotter (class in fompy.plots)|hyperpage}{14}
-\indexentry{fomplot() (fompy.plots.plotter method)|hyperpage}{14}
+\indexentry{plotter (class in fompy.plots)|hyperpage}{15}
+\indexentry{fomplot() (fompy.plots.plotter method)|hyperpage}{15}
 \indexentry{hist() (fompy.plots.plotter method)|hyperpage}{15}
 \indexentry{iv() (fompy.plots.plotter method)|hyperpage}{15}
 \indexentry{iv() (fompy.plots.plotter method)|hyperpage}{15}
@@ -71,7 +71,7 @@
 \indexentry{varplot() (fompy.plots.plotter method)|hyperpage}{16}
 \indexentry{fompy.wrappers (module)|hyperpage}{16}
 \indexentry{dataset() (in module fompy.wrappers)|hyperpage}{16}
-\indexentry{extract() (in module fompy.wrappers)|hyperpage}{16}
+\indexentry{extract() (in module fompy.wrappers)|hyperpage}{17}
 \indexentry{filter() (in module fompy.wrappers)|hyperpage}{17}
 \indexentry{normalize() (in module fompy.wrappers)|hyperpage}{17}
 \indexentry{plot() (in module fompy.wrappers)|hyperpage}{17}

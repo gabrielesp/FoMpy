@@ -17,18 +17,18 @@
   \item dataset() (in module fompy.wrappers), \hyperpage{16}
   \item dibl\_ext (class in fompy.fom), \hyperpage{9}
   \item drain\_bias\_label (fompy.fds.FompyDataset attribute), \hyperpage{6}
-  \item drain\_bias\_value (fompy.fds.FompyDataset attribute), \hyperpage{6}
+  \item drain\_bias\_value (fompy.fds.FompyDataset attribute), \hyperpage{7}
 
   \indexspace
   \bigletter E
   \item exclude\_indexes() (in module fompy.fds), \hyperpage{8}
   \item ext\_method (fompy.fds.FompyDataset attribute), \hyperpage{6}
-  \item extract() (in module fompy.wrappers), \hyperpage{16}
+  \item extract() (in module fompy.wrappers), \hyperpage{17}
   \item extraction() (fompy.fom.dibl\_ext method), \hyperpage{9}
   \item extraction() (fompy.fom.ioff\_ext method), \hyperpage{10}
   \item extraction() (fompy.fom.ion\_ext method), \hyperpage{11}
   \item extraction() (fompy.fom.ss\_ext method), \hyperpage{12}
-  \item extraction() (fompy.fom.vth\_ext method), \hyperpage{12, 13}
+  \item extraction() (fompy.fom.vth\_ext method), \hyperpage{13}
 
   \indexspace
   \bigletter F
@@ -36,7 +36,7 @@
   \item filter() (in module fompy.wrappers), \hyperpage{17}
   \item filter\_tool (class in fompy.conditioning), \hyperpage{4}
   \item find\_closest() (in module fompy.aux), \hyperpage{2}
-  \item fomplot() (fompy.plots.plotter method), \hyperpage{14}
+  \item fomplot() (fompy.plots.plotter method), \hyperpage{15}
   \item fompy.aux (module), \hyperpage{2}
   \item fompy.conditioning (module), \hyperpage{3}
   \item fompy.fds (module), \hyperpage{5}
@@ -94,7 +94,7 @@
   \item plot() (fompy.fom.vth\_ext method), \hyperpage{13}
   \item plot() (in module fompy.wrappers), \hyperpage{17}
   \item plotStrategy (class in fompy.plots), \hyperpage{14}
-  \item plotter (class in fompy.plots), \hyperpage{14}
+  \item plotter (class in fompy.plots), \hyperpage{15}
   \item polar\_filter() (fompy.conditioning.filter\_tool method), \hyperpage{4}
   \item print\_parameters() (fompy.fds.FompyDataset method), \hyperpage{7}
 
@@ -107,7 +107,7 @@
   \item sanity\_array (fompy.fds.FompyDataset attribute), \hyperpage{6}
   \item save\_results\_to\_file() (fompy.fom.dibl\_ext method), \hyperpage{10}
   \item save\_results\_to\_file() (fompy.fom.ioff\_ext method), \hyperpage{11}
-  \item save\_results\_to\_file() (fompy.fom.ion\_ext method), \hyperpage{11}
+  \item save\_results\_to\_file() (fompy.fom.ion\_ext method), \hyperpage{12}
   \item save\_results\_to\_file() (fompy.fom.ss\_ext method), \hyperpage{12}
   \item save\_results\_to\_file() (fompy.fom.vth\_ext method), \hyperpage{13}
   \item savetotxt() (in module fompy.wrappers), \hyperpage{18}
@@ -118,6 +118,6 @@
   \bigletter V
   \item varplot() (fompy.plots.plotter method), \hyperpage{16}
   \item version() (in module fompy.wrappers), \hyperpage{18}
-  \item vth\_ext (class in fompy.fom), \hyperpage{12}
+  \item vth\_ext (class in fompy.fom), \hyperpage{13}
 
 \end{sphinxtheindex}

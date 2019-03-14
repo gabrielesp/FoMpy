@@ -53,7 +53,7 @@
 
 
 \title{FoMpy Documentation}
-\date{Mar 13, 2019}
+\date{Mar 14, 2019}
 \release{0.2.0}
 \author{Gabriel Espiñeira}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -266,7 +266,7 @@ Class for filtering noisy data from a semiconductor’s IV curve.
 \index{polar\_filter() (fompy.conditioning.filter\_tool method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.conditioning.filter_tool.polar_filter}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{polar\_filter}}}{\emph{fds}, \emph{theta\_crit}}{}
+\phantomsection\label{\detokenize{index:fompy.conditioning.filter_tool.polar_filter}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{polar\_filter}}}{\emph{fds}, \emph{theta\_crit}, \emph{show\_theta = False}}{}
 Class method that filters data from a semiconductor’s IV curve checking the increase in the angle
 of the points with respect to the origin of an IV curve and removes all the increments that go above
 defined a threshold.
@@ -281,6 +281,10 @@ defined a threshold.
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{theta\_crit}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Threshold value for the biggest allowed increase in the angle between to consecutive points
 of an IV curve.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{show\_theta}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True it prints all the angle increments between two consecutive points so the user can
+choose a suitable theta crit.
 
 \end{itemize}
 
@@ -1669,6 +1673,10 @@ Wrapper class for filtering noisy data from a semiconductor’s IV curve.
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{theta\_crit}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Threshold value for the biggest allowed increase in the angle between to consecutive points
 of an IV curve.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{show\_theta}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True it prints all the angle increments between two consecutive points so the user can
+choose a suitable theta crit.
 
 \end{itemize}
 

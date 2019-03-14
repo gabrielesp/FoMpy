@@ -143,23 +143,23 @@ For example if the user wishes to import IV curves stored in a general way (with
 One approach to create a FoMpy Dataset is::
 
 	import fompy
-	import os
+..	import os
 	import numpy as np
 
-	path = './path_to_files'
-	path_subdirs = [] #Here all the subdirectories of that path are stored
-	path_filenames = [] #Here all the file names inside that path are stored
-	for dirname, dirnames, filenames in os.walk(path):
-		for subdirname in dirnames:
-			path_subdirs.append(os.path.join(dirname, subdirname))
-		for filename in filenames:
-			path_filenames.append(os.path.join(dirname, filename))
+	path = './path_to_file'
+..	path_subdirs = [] #Here all the subdirectories of that path are stored
+..	path_filenames = [] #Here all the file names inside that path are stored
+..	for dirname, dirnames, filenames in os.walk(path):
+..		for subdirname in dirnames:
+..			path_subdirs.append(os.path.join(dirname, subdirname))
+..		for filename in filenames:
+..			path_filenames.append(os.path.join(dirname, filename))
 
-	fds = fompy.FompyDataset() #Here we load a Fompy Dataset
-	for i in path_filenames: #All the files within the path are read
-	    voltages, currents = np.loadtxt(i, delimiter='\t',  unpack=True, skiprows=1, comments='#')
-	    arr = np.column_stack((voltages, currents)) #The two columns are stores in an array
-	    fds.dataset.append(arr) #The arrays are stored into a Fompy Dataset
+	fds = fompy.FompyDataset() #Here we instantiate a Fompy Dataset
+..	for i in path_filenames: #All the files within the path are read
+	voltages, currents = np.loadtxt(path, delimiter='\t',  unpack=True, skiprows=1, comments='#') #The data from the file is loaded
+	arr = np.column_stack((voltages, currents)) #The two columns are saved into an array
+	fds.dataset.append(arr) #The arrays are included into a Fompy Dataset
 
 	print(fds.dataset) 
 
@@ -196,10 +196,13 @@ Additionally if the user already has the IV curves loaded in an array the proces
 		       [9.00e-01, 6.15e-05],
 		       [1.00e+00, 6.57e-05]])
 
-	fds = fompy.FompyDataset() #Here we load a Fompy Dataset
-	fds.dataset = ((arr1, arr2)) #Here the arrays are included in the dataset
+	fds = fompy.FompyDataset() #Here we instantiate a Fompy Dataset
+	fds.dataset = ((arr1, arr2)) #The arrays are included into a Fompy Dataset
 
 	print(fds.dataset)
+
+Note that all the operations of FoMpy are dependant on how the Dataset is created, therefore try to concatenate several arrays according to the previous example.
+
 
 **3.Import from an JCJB**
 
@@ -294,6 +297,6 @@ Please cite FoMpy in your publications if it helps your research::
 References
 +++++++++++++++++++
 
-.. [#] G.Espiñeira et al. “FoMPy: A figure of merit extraction tool for semiconductor device simulations” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
-.. [#] G.Espiñeira et al. “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
+.. [#] G.Espiñeira, N.Seoane, D.Nagy, G.Indalecio and A.J.García Loureiro, “FoMPy: A figure of merit extraction tool for semiconductor device simulations” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
+.. [#] G.Espiñeira, D.Nagy, G.Indalecio, A.J.García Loureiro and N.Seoane, “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
 
