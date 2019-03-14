@@ -148,8 +148,7 @@ One approach to create a FoMpy Dataset is::
 	path = './path_to_file'
 	fds = fompy.FompyDataset() #Here we instantiate a Fompy Dataset
 	voltages, currents = np.loadtxt(path, delimiter='\t',  unpack=True, skiprows=1, comments='#') #The data from the file is loaded
-	arr = np.column_stack((voltages, currents)) #The two columns are saved into an array
-	fds.dataset.append(arr) #The arrays are included into a Fompy Dataset
+	fds.dataset = np.column_stack((voltages, currents)) #The two columns are saved into an Fompy Dataset as an array
 
 	print(fds.dataset) 
 
