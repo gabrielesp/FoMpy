@@ -596,6 +596,11 @@ class plotter(plotStrategy):
 
 		if(fom == 'dibl'):
 
+			vth_index_high = find_closest(curve_high[i][:,0],vth_high[i])
+			corriente_high = curve_low[i][vth_index_high,1]
+			vth_index_low = find_closest(curve_low[i][:,0],vth_low[i])
+			corriente_low = curve_low[i][vth_index_low,1]
+
 			plt.close()
 			fig, ax1 = plt.subplots()
 			ax1.set_yscale("log")

@@ -28,33 +28,31 @@ After loading the data into a FoMpy Dataset, using the various tools implemented
 2. Installation
 ---------------
 
-The source code of FoMpy can be downloaded from https://github.com/gabrielesp/FoMpy and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, ...). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
+The source code of FoMpy can be downloaded from https://github.com/gabrielesp/FoMpy and is purely intended to run as a library for Linux systems.Note that the following instalation steps work on Debian-derived distributions like for Ubuntu 16.04 or later (refer to your package manager and package list on other distributions). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
 
 ``setuptools>=21.0.0, numpy>=1.10.0, scipy>=0.8.0 and matplotlib>=3.0.2``
 
-First you need to have installed pip on your system. Open up a terminal and type::
+
+First you need to have installed pip3 on your system. Open up a terminal and type::
 
 	sudo apt update
 
 	sudo apt install python3-pip
 
-Once the installation is complete, verify the installation by checking the pip version::
+Once the installation of pip3 is complete, verify the installation by checking the pip version::
 
 	pip3 --version
 
 The use of virtual enviroments is highly encouraged. In order to use them run the following commands in a terminal::
 
 
-	sudo apt install python3-venv
-	python3 -m venv .venv
-	source .venv/bin/activate
+	sudo apt install python3-venv #Install virtual enviroments
+	python3 -m venv .venv #Create and name the enviroment "venv"
+	source .venv/bin/activate #Activate the venv
 
 Note that as of this moment you're inside a virtual enviroment (Notice (.venv) $ in the terminal) with a limited version of python and therefore you will have to install all the packages you need (including the ones mentioned above because they are installed in the system, not the virtual enviroment).
 
-.. and then::
-	
-.. 	python -m pip3 install -r requirements.txt
-**Via pip**
+**Instalation of FoMpy via pip3**
 
 Run the following command in a terminal::
 
