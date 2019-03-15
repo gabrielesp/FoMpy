@@ -23,17 +23,22 @@ from setuptools import setup
 from distutils.command.install_data import install_data
 import os
 
-#class custom_install(install):
-#    def run(self):
-#        # Call parent
-#        install_data.run(self)
-        # Execute commands
-#        os.system('wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh')
-#        os.system('bash Anaconda3-5.3.1-Linux-x86_64.sh -b')
-#        os.system('rm -f Anaconda3-5.3.1-Linux-x86_64.sh')
-#    def pip_install(package_name):
-#        subprocess.call([sys.executable, '-m', 'pip', 'install', package_name])
 
+#####VERSION CONTROL#####
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+def read(*parts):
+    with codecs.open(os.path.join(here, *parts), 'r') as fp:
+        return fp.read()
+
+def find_version(*file_paths):
+    version_file = read(*file_paths)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
 
 #REQUIRES = []
 #with open('requirements.txt') as f:
@@ -51,7 +56,7 @@ import os
 setup(
     name='fompy',
     #cmdclass={'install_data': custom_install},
-    version='0.2.9',
+    version=find_version("fompy", "__init__.py"),
     description='FoMPy is an effective tool that extracts the main figures of merit (FoM) of a semiconductors IV curve',
     author='Gabriel Espineira',
     author_email='gabrielespineiradeus@gmail.com',
