@@ -342,7 +342,7 @@ def version():
 	here = os.path.abspath(os.path.dirname(__file__))
 
 	def read(*parts):
-	    with codecs.open(os.path.join(here, *parts), 'r') as fp:
+	    with open(os.path.join(here, *parts), 'r') as fp:
 		return fp.read()
 
 	def find_version(*file_paths):

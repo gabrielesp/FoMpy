@@ -1,9 +1,13 @@
-#release:
-#	@echo "Uploading files to git repo"
-#	git add ./*
-#	git commit -m "description of version"
-#	git tag -a v$(python setup.py --version) -m 'description of version'
-#	git push origin --tags
+release:
+	@echo "Uploading files to git repo"
+	git add ./*
+	echo -n'Write commit description'
+	read newdescription
+	git commit -m "$newdescription"
+	echo -n'Write a tag'
+	read newtag
+	git tag $newtag
+	git push origin $newtag
 
 pdf:	
 	@echo "Generating pdf" && cd ./docs/ && $(MAKE) latexpdf

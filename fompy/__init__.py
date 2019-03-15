@@ -8,5 +8,8 @@ from .aux import *
 from .wrappers import *
 
 name = "fompy"
+import os
+
 __version__ = '0.2.9'
+
 
