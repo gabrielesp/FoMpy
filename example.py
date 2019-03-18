@@ -106,11 +106,11 @@ import fompy
 # print(vth_array_td)
 # fompy.plot(fds, fom = 'vth',method = 'TD', save_plot='./vth_plots/td/')
 
-path_file_JCJB = './data/simulations/'
-fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
-vth_array_le = fompy.extract(fds, fom = 'vth', method = 'LE')
-print(vth_array_le)
-fompy.plot(fds, fom = 'vth',method = 'LE', save_plot='./vth_plots/le/')
+# path_file_JCJB = './data/simulations/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# vth_array_le = fompy.extract(fds, fom = 'vth', method = 'LE')
+# print(vth_array_le)
+# fompy.plot(fds, fom = 'vth',method = 'LE', save_plot='./vth_plots/le/')
 
 # ------------------------------------------------------------------------------------------#
 # IOFF EXTRACTION & PLOT FULL LIST OF ARGUMENTS
@@ -157,7 +157,7 @@ fompy.plot(fds, fom = 'vth',method = 'LE', save_plot='./vth_plots/le/')
 # path_file_JCJB = './data/sim_FinFET_vd_high/'
 # fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
 
-# ss_array = fompy.extract(fds, fom = 'ss')
+# ss_array = fompy.extract(fds, fom = 'ss', method = 'LE')
 # print(ss_array)
 
 # ss_array = fompy.extract(fds, fom = 'ss', vg_start = 0.05)
@@ -173,19 +173,19 @@ fompy.plot(fds, fom = 'vth',method = 'LE', save_plot='./vth_plots/le/')
 # ------------------------------------------------------------------------------------------#
 # DIBL EXTRACTION & PLOT FULL LIST OF ARGUMENTS
 
-# path_file_JCJB = './data/sim_FinFET_vd_high/'
-# path_file_low = './data/sim_FinFET_vd_low/'
+path_file_JCJB = './data/sim_FinFET_vd_high/'
+path_file_low = './data/sim_FinFET_vd_low/'
 
 
-# fds_hdb = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
-# fds_ldb = fompy.dataset(path_file_low, parser=fompy.JCJB)
-# fds_hdb.drain_bias_value = 0.7
-# fds_ldb.drain_bias_value = 0.05
+fds_hdb = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+fds_ldb = fompy.dataset(path_file_low, parser=fompy.JCJB)
+fds_hdb.drain_bias_value = 0.7
+fds_ldb.drain_bias_value = 0.05
 
-# dibl_array = fompy.extract(fds_hdb, fds_ldb, fom = 'dibl')
-# print(dibl_array)
+dibl_array = fompy.extract(fds_hdb, fds_ldb, fom = 'dibl', method = 'SD')
+print(dibl_array)
 
-# fompy.plot(fds_hdb, fds_ldb, fom = 'dibl')
+fompy.plot(fds_hdb, fds_ldb, fom = 'dibl', save_plot='./dibl/')
 
 
 # ------------------------------------------------------------------------------------------#

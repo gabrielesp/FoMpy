@@ -112,8 +112,31 @@ def extract(fds1, fds2 = None, fom = None, method = None, cc_criteria = None, vg
 		return parameter_ion
 	elif(str(fom) == 'ss'):
 		temp_ss = ss_ext()
-		parameter_ss, curves, _ = temp_ss.extraction(fds1, vg_start, vg_end)
-		return parameter_ss					
+		if(vg_end is None):
+			if(vg_start is None):
+				vg_start = 0.0
+			temp_vth = vth_ext()
+			if (method is not 'LE'):
+				parameter_vth, curves= temp_vth.extraction(fds1, method, cc_criteria)
+				parameter_ss, curves, _ = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+			else:
+				parameter_vth, curves, A, B= temp_vth.extraction(fds1, method, cc_criteria)
+				parameter_ss, curves, _ = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+		elif(vg_end is not None):
+			if(vg_start is None):
+				vg_start = 0.0			
+			temp_vth = vth_ext()
+			if (method is not 'LE'):
+				parameter_vth, curves= temp_vth.extraction(fds1, method, cc_criteria)
+				parameter_ss, curves, _ = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+			else:
+				parameter_vth, curves, A, B= temp_vth.extraction(fds1, method, cc_criteria)
+				parameter_ss, curves, _ = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+		else:
+			pass
+			
+
+		return parameter_ss
 	elif(fom == 'dibl'):
 		temp = dibl_ext()
 		parameter_dibl,curve_high, curve_low, vth_high, vth_low, corriente_low = temp.extraction(fds1,fds2, method, cc_criteria)

@@ -226,8 +226,8 @@ class vth_ext(_extractor):
 						print('Multiple indexes')
 
 					corriente_vt_temp =curve[vt_temp_d1,1]
-					lim1 = int(vt_temp_d1)
-					lim2 = int(vt_temp_d1*1.5)
+					lim1 = int(vt_temp_d1*0.85)
+					lim2 = int(vt_temp_d1*1.15)
 
 					A_i,B_i = curve_fit(line, curve[lim1:lim2,0],curve[lim1:lim2,1])[0]
 					fit = A_i*x_interp+B_i
@@ -547,7 +547,7 @@ class ion_ext(_extractor):
 
 class ss_ext(_extractor):
 #----------------------------------------------------------------------------------------------------------------	
-	def extraction(self, fds1, vg_start = None, vg_end = None):
+	def extraction(self, fds1, vth = None, vg_start = None, vg_end = None):
 		"""
 		Methods
 		-------
@@ -559,65 +559,42 @@ class ss_ext(_extractor):
 		fds1 : FoMpy Dataset
 			Structure of data containing the most important parameters of a semiconductor's IV curve.
 			Needed for the extraction of any FoM.
+		vth : array_like
+			Array of vth extracted values used for obtaining SS (using the vth-dependant formula).			
 		vg_start : float
 			Gate voltage defining the start of the interval in which the Subthreshold Swing is extracted.
 		vg_end : float
 			Gate voltage defining the end of the interval in which the Subthreshold Swing is extracted.
 
 		"""
-
-		length = len(fds1.dataset)
 		parameter = []
 		curves = []
-		vt_sd_medio = []		
-		for i in range(length):
+		vt_sd_medio = []
+		for i in range(len(fds1.dataset)):
 			try:
 				if(len(fds1.dataset[i][:,0][:])<2):
 					raise(ValueError)
-				x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy=fds1.interpolation, n = 1000,s = 0)
-				curve = np.column_stack((x_interp, y_interp))
-				if(fds1.drain_bias_label=='High'):
-					curve[:,1] = np.power( curve[:,1],0.5)
-				# d1 = dt.get_diff(iv_curve_data, order = 1)
-				d2 = get_diff(curve, order = 2)
-				lower_bound=find_closest(d2[:,0],10*d2[1,0])					
-				higher_bound=find_closest(d2[2:,0],0.95*d2[-1,0])
-				warning_interval_limit_low = int(np.round(lower_bound*1.5))
-				warning_interval_limit_high = int(np.round(higher_bound*0.95))
-				vth_temp = np.argmax(d2[lower_bound:higher_bound,1])
-				if (d2[vth_temp+lower_bound, 0] <= d2[warning_interval_limit_low, 0]):
-					print('Vt value outside of the confidence interval for simulation', i)
-				if (d2[vth_temp+lower_bound, 0] >= d2[warning_interval_limit_high, 0]):
-					print('Vt value outside of the confidence interval for simulation', i)
-				vth_SD = d2[vth_temp+lower_bound,0]
-				try:
-					vth_temp = np.argmax(d2[lower_bound:higher_bound+lower_bound,1])
-					vth_SD = d2[vth_temp+lower_bound,0]/2
-				except (TypeError, ValueError):
-					print('Multiple indexes in curve {}'.format(i))
-				# print(x_interp[0])
-				# print(x_interp[1])
-				# print(y_interp[0])
-				# print(np.log10(y_interp[0]))
-				# print(y_interp[index])
-				# print(np.log10(y_interp[index]))
+				curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
+
+				x_interp, y_interp = interpol(curve[:,0], curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
 				if(vg_start is None) and (type(vg_end) is float):
 					index = find_closest(x_interp,vg_end)
 					parameter.append((x_interp[0]-x_interp[index])*1000/(np.log10(y_interp[0])-np.log10(y_interp[index])))
-				elif(vg_start is not None) and (vg_end is not None) and (type(vg_end) is float) and (type(vg_start) is float):
+				elif(vg_start is not None) and (vg_end is not None) :
 					index_start = find_closest(x_interp,vg_start)
 					index_end = find_closest(x_interp,vg_end)
 					parameter.append((x_interp[index_start]-x_interp[index_end])*1000/(np.log10(y_interp[index_start])-np.log10(y_interp[index_end])))
 				elif(vg_start is not None) and (type(vg_start) is float):
 					index_start = find_closest(x_interp,vg_start)
-					index = find_closest(x_interp,vth_SD)
+					index = find_closest(x_interp,vth[i]/2)
+
 					parameter.append((x_interp[index_start]-x_interp[index])*1000/(np.log10(y_interp[index_start])-np.log10(y_interp[index])))
 				else:
-					index = find_closest(x_interp,vth_SD)
+					index = find_closest(x_interp,vth[i]/2)
 					parameter.append((x_interp[0]-x_interp[index])*1000/(np.log10(y_interp[0])-np.log10(y_interp[index])))
 				# print(parameter)
 				curves.append(curve)
-				vt_sd_medio.append(vth_SD)
+				vt_sd_medio.append(vth[i]/2)
 			except (TypeError, ValueError):
 				parameter.append(np.nan)
 				curves.append(np.nan)
@@ -714,15 +691,17 @@ class dibl_ext(_extractor):
 		if(method == None):
 			method = 'SD'
 		if(method is not 'LE'):
+			# fds1.drain_bias_label = 'High'
 			vth_high, curve_high= temp_vth.extraction(fds1, method, cc_criteria)
 			vth_low, curve_low= temp_vth.extraction(fds2, method, cc_criteria)
 		else:
+			# fds1.drain_bias_label = 'High'
 			vth_high, curve_high, _, _= temp_vth.extraction(fds1, method, cc_criteria)
-			vth_low, curve_low, _, _= temp_vth.extraction(fds2, method, cc_criteria)	
-		length = len(fds1.dataset)
+			vth_low, curve_low, _, _= temp_vth.extraction(fds2, method, cc_criteria)
+
 		dibl = []
 		corriente_low_arr = []
-		for i in range(length):
+		for i in range(len(fds1.dataset)):
 			try:
 				if(len(fds1.dataset[i][:,0][:])<2):
 					raise(ValueError)
@@ -734,8 +713,9 @@ class dibl_ext(_extractor):
 				# print(vth_low)
 				# print(fds1.drain_bias_value)
 				# print(fds2.drain_bias_value)
-				
-				dibl.append((-(vth_high[i] - vth_low[i])/(fds1.drain_bias_value-fds2.drain_bias_value)*1000))
+				# print(vth_high)
+				# print(vth_low)
+				dibl.append((-(vth_low[i] - vth_high[i])/(fds1.drain_bias_value-fds2.drain_bias_value)*1000))
 				corriente_low_arr.append(corriente_low)
 			except (TypeError, ValueError):
 				dibl.append(np.nan)
