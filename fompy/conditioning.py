@@ -194,28 +194,17 @@ class interpolator(_interpolationStrategy):
 	"""
 	def spline_interpol(self, x = None ,y = None, n = None, d = None, s = 0):
 
-		if(d is 5) or (d is None):
-			from scipy import interpolate
-			spline = interpolate.splrep(x, y, k=5)
-			xvals = np.linspace(x[0], x[-1], n)
-			yinterp = interpolate.splev(xvals, spline, der=0)
-			
-			#l, r = [(2, 0)], [(2, 0)]  # natural spline boundary conditions
-			#spl2 = interpolate.make_interp_spline(x, y, k=3, bc_type=(l, r))
-
-			#from fompy.aux import get_diff
-			#spl = interpolate.InterpolatedUnivariateSpline(x, y, k=5)
-			#arr = np.column_stack((xvals, spl(xvals)))
-			#d2 = get_diff(arr, 2, type = 'central')
-			#import matplotlib.pyplot as plt
-			#plt.plot(xvals, spl2(xvals))
-			#plt.show()
-			return (xvals, yinterp)
-		elif(d is 3):
+		if(d is 3) or (d is None):
 			from scipy.interpolate import CubicSpline
 			cs_natural = CubicSpline(x, y, bc_type='natural')
 			xvals = np.linspace(x[0], x[-1], n)
 			return (xvals, cs_natural(xvals))
+		elif(d is 5) :
+			from scipy import interpolate
+			spline = interpolate.splrep(x, y, k=5)
+			xvals = np.linspace(x[0], x[-1], n)
+			yinterp = interpolate.splev(xvals, spline, der=0)
+			return (xvals, yinterp)
 		else:
 			pass
 

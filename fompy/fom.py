@@ -94,30 +94,34 @@ class vth_ext(_extractor):
 				try:
 					if(len(fds1.dataset[i][:,0][:])<2):
 						raise(ValueError)
-					x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy = fds1.interpolation, n = 1000,s = 0)
-					curve = np.column_stack((x_interp, y_interp))
+					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
 					if(fds1.drain_bias_label=='High'):
 						curve[:,1] = np.power( curve[:,1],0.5)
-					# d1 = dt.get_diff(iv_curve_data, order = 1)
-					d2 = get_diff(curve, order = 2)
-					lower_bound=find_closest(d2[:,0],10*d2[1,0])
-					higher_bound=find_closest(d2[2:,0],0.8*d2[-1,0])						
-					warning_interval_limit_low = int(np.round(lower_bound*1.5))
-					warning_interval_limit_high = int(np.round(higher_bound*0.8))
-					vt_temp = np.argmax(d2[lower_bound:higher_bound,1])
-					if (d2[vt_temp+lower_bound, 0] <= d2[warning_interval_limit_low, 0]):
+					d2_curve = get_diff(curve, order = 2)
+					d2_interp_x, d2_interp_y = interpol(d2_curve[:,0], d2_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
+					d2_interp = np.column_stack((d2_interp_x, d2_interp_y))
+
+					lower_bound=find_closest(d2_interp[:,0],d2_interp[50,0])
+					higher_bound=find_closest(d2_interp[:,0],d2_interp[-100,0])
+					vt_temp = np.argmax(d2_interp[lower_bound:higher_bound,1])
+					if (d2_interp[vt_temp+lower_bound, 0] <= d2_interp[lower_bound, 0]):
 						print('Vt value outside of the confidence interval for simulation', i)
-					if (d2[vt_temp+lower_bound, 0] >= d2[warning_interval_limit_high, 0]):
+					if (d2_interp[vt_temp+lower_bound, 0] >= d2_interp[higher_bound, 0]):
 						print('Vt value outside of the confidence interval for simulation', i)
-					vt_SD = d2[vt_temp+lower_bound,0]
+					vt_SD = d2_interp[vt_temp+lower_bound,0]
 
 					try:
-						vt_temp = np.argmax(d2[lower_bound:higher_bound+lower_bound,1])
-						vt_SD = d2[vt_temp+lower_bound,0]
+						vt_temp = np.argmax(d2_interp[lower_bound:higher_bound+lower_bound,1])
+						vt_SD = d2_interp[vt_temp+lower_bound,0]
 					except ValueError:
 						print('Multiple indexes in curve {}'.format(i))
+
+					if(fds1.drain_bias_label=='High'):
+						curve[:,1] = np.power( curve[:,1],2)
 					parameter.append(float(("%0.3f"%vt_SD)))
+					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))		
 					curves.append(curve)
+
 				except (TypeError, ValueError):
 					parameter.append(np.nan)		
 					curves.append(np.nan)
@@ -138,6 +142,7 @@ class vth_ext(_extractor):
 						vt_index_cc=find_closest(curve[:,1],float(cc_criteria))
 						vt_CC_float =curve[vt_index_cc,0]
 						parameter.append(float(("%0.3f"%vt_CC_float)))
+						curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))		
 						curves.append(curve)
 					except (TypeError):
 						print('No CC criteria defined')
@@ -156,29 +161,29 @@ class vth_ext(_extractor):
 				try:
 					if(len(fds1.dataset[i][:,0][:])<2):
 						raise(ValueError)
-					x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy = fds1.interpolation, n = 1000,s = 0)
-					curve = np.column_stack((x_interp, y_interp))
+					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
 					if(fds1.drain_bias_label=='High'):
 						curve[:,1] = np.power( curve[:,1],0.5)
-					d3 = get_diff(curve, order = 3)
-					lower_bound=find_closest(d3[2:,0],0.1)
-					higher_bound=find_closest(d3[lower_bound:,1],0)
-					# import matplotlib.pyplot as plt
-					# plt.close()
-					# fig, ax1 = plt.subplots()
-					# ax2 = ax1.twinx()
-					# ax1.plot(x_interp,np.log10(y_interp),color='orangered',label ='Simulated Data')
-					# ax1.axvline(x = x_interp[lower_bound], color='r', linestyle='-.')
-					# ax1.axvline(x = x_interp[higher_bound], color='blue', linestyle='-.')
-					# ax2.plot(d3[lower_bound:higher_bound, 0],d3[lower_bound:higher_bound, 1], color='pink', linestyle='--')
-					# plt.show()					
-					try:
-						vt_temp = np.argmax(d3[lower_bound:higher_bound+lower_bound,1])
-						vt_TD = d3[vt_temp+lower_bound,0]
-					except ValueError:
-						print('Multiple indexes in curve {}'.format(i))
+					d3_curve = get_diff(curve, order = 3)
+					d3_interp_x, d3_interp_y = interpol(d3_curve[:,0], d3_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
+					d3_interp = np.column_stack((d3_interp_x, d3_interp_y))
+
+					lower_bound=find_closest(d3_interp[:,0],d3_interp[50,0])
+					higher_bound=find_closest(d3_interp[:,0],d3_interp[-100,0])
+					vt_temp = np.argmax(d3_interp[lower_bound:higher_bound,1])
+
+					if (d3_interp[vt_temp+lower_bound, 0] <= d3_interp[lower_bound, 0]):
+						print('Vt value outside of the confidence interval for simulation', i)
+					if (d3_interp[vt_temp+lower_bound, 0] >= d3_interp[higher_bound, 0]):
+						print('Vt value outside of the confidence interval for simulation', i)
+					vt_TD = d3_interp[vt_temp+lower_bound,0]
+
+					if(fds1.drain_bias_label=='High'):
+						curve[:,1] = np.power( curve[:,1],2)						
 					parameter.append(float(("%0.3f"%vt_TD)))
+					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))		
 					curves.append(curve)
+
 				except (TypeError, ValueError):
 					parameter.append(np.nan)		
 					curves.append(np.nan)
@@ -193,47 +198,63 @@ class vth_ext(_extractor):
 			length = len(fds1.dataset)
 			parameter = []
 			curves = []
+			A = []
+			B = []
 			for i in range(length):
 				try:
 					if(len(fds1.dataset[i][:,0][:])<2):
 						raise(ValueError)
 					x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy = fds1.interpolation, n = 1000,s = 0)
-					curve = np.column_stack((x_interp, y_interp))
+					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
+					
 					if(fds1.drain_bias_label=='High'):
 						curve[:,1] = np.power( curve[:,1],0.5)
-					d1 = get_diff(curve, order = 1)
-					d2 = get_diff(curve, order = 2)
 
-					index_lower_bound=find_closest(d1[2:,0],0.05)
-					index_higher_bound=find_closest(d1[index_lower_bound:,1],1)
+					d1_curve = get_diff(curve, order = 1)
+					d1_interp_x, d1_interp_y = interpol(d1_curve[:,0], d1_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
+					d1 = np.column_stack((d1_interp_x, d1_interp_y))
 
+					index_lower_bound=find_closest(d1[:,0],d1[50,0])
+					index_higher_bound=find_closest(d1[:,0],d1[-100,0])
+
+					x_interp, y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy = fds1.interpolation, n = 1000,s = 0)
+					curve = np.column_stack((x_interp, y_interp))
 					try:
-						vt_temp1 = np.argmax(d1[index_lower_bound:index_higher_bound,1])
-						index_d1max = vt_temp1+index_lower_bound
-						vt_temp_float = d1[index_d1max,0]
+						d1_max_index = np.argmax(d1[index_lower_bound:index_higher_bound,1])
+						vt_temp_d1 = find_closest(x_interp, d1[d1_max_index+index_lower_bound, 0])
 					except ValueError:
 						print('Multiple indexes')
 
-					vt_temp = float(("%0.3f"%vt_temp_float))
-					corriente_vt_temp =curve[index_d1max,1]
-					lim1 = int(index_d1max)
-					lim2 = int(index_d1max*1.2)
-					A,B = curve_fit(line, curve[lim1:lim2,0],curve[lim1:lim2,1])[0]
-					fit = A*curve[:,0]+B
-					vt_index_le = find_closest(fit,0)
+					corriente_vt_temp =curve[vt_temp_d1,1]
+					lim1 = int(vt_temp_d1)
+					lim2 = int(vt_temp_d1*1.5)
+
+					A_i,B_i = curve_fit(line, curve[lim1:lim2,0],curve[lim1:lim2,1])[0]
+					fit = A_i*x_interp+B_i
+					vt_index_le_fit = find_closest(fit,0)
+
 
 					if(fds1.drain_bias_label=='High'):
-						vd_high = fds1.drain_bias_value
-						vt_LE = curve[vt_index_le,0]+vd_high/2
-						# vt_LE_float = curve[vt_index_le,0]
+						try:
+							vd_high = fds1.drain_bias_value
+							vt_LE = curve[vt_index_le,0]-vd_high/2
+							curve[:,1] = np.power( curve[:,1],2)
+						except NameError:
+							print('The drain bias value has not been defined')
 					else:
-						vt_LE = curve[vt_index_le,0]
+						vt_LE = x_interp[vt_index_le_fit]
 
 					parameter.append(float(("%0.3f"%vt_LE)))
+					
+					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
 					curves.append(curve)
+					A.append(A_i)
+					B.append(B_i)
 				except (TypeError, ValueError):
 					parameter.append(np.nan)		
 					curves.append(np.nan)
+					A.append(np.nan)
+					B.append(np.nan)					
 			return parameter, curves, A, B
 
 #----------------------------------------------------------------------------------------------------------------	
@@ -261,7 +282,7 @@ class vth_ext(_extractor):
 			f.write("{0}\t{1}\n".format(i, arr))			
 		f.close()
 #----------------------------------------------------------------------------------------------------------------		
-	def plot(self, fds1, parameter = None, method = None,cc_criteria = None, curves = None, save_plot = None, A=None, B=None):
+	def plot(self, fds1, parameter = None, method = None,cc_criteria = None, curves = None,backend= None, save_plot = None, A=None, B=None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
 			Class method that plots the extracted :math:`V_{TH}` values.
@@ -279,6 +300,10 @@ class vth_ext(_extractor):
 				Current criteria used to extract vth with the CC criteria for the fomplot.
 		curves : array_like
 			Array of data containing the IV curves.
+		backend : str
+			String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+			'Agg', which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tools for visualizing the plots.
+			'TkAgg' requires the package python3-tk installed in order to run.			
 		save_plot : bool
 			If True the generated plot is save to the defined path.
 		A, B: float
@@ -290,13 +315,13 @@ class vth_ext(_extractor):
 		for i in range(len(fds1.dataset)):
 			try:
 				if (method is not 'LE'):
-					temp_plot.fomplot(i, fom = 'vth', voltages = curves[i][:,0], currents = curves[i][:,1],
-				 	parameter = parameter[i], method = method,cc_criteria = cc_criteria, save_plot = save_plot)
+					temp_plot.fomplot(i,fds1, fom = 'vth', voltages = curves[i][:,0], currents = curves[i][:,1],
+				 	parameter = parameter[i], method = method,cc_criteria = cc_criteria,backend= backend, save_plot = save_plot)
 				else:
-					temp_plot.fomplot(i, fom = 'vth', voltages = curves[i][:,0], currents = curves[i][:,1],
-				 	parameter = parameter[i], method = method,cc_criteria = cc_criteria, save_plot = save_plot, A = A, B=B)					 
+					temp_plot.fomplot(i,fds1, fom = 'vth', voltages = curves[i][:,0], currents = curves[i][:,1],
+				 	parameter = parameter[i], method = method,cc_criteria = cc_criteria,backend= backend, save_plot = save_plot, A = A[i], B=B[i])
 			except (TypeError, ValueError):
-				pass
+				i = i+i
 
 
 #----------------------------------------------------------------------------------------------------------------	
@@ -367,7 +392,7 @@ class ioff_ext(_extractor):
 			f.write("{0}\t{1}\n".format(i, arr))			
 		f.close()
 #----------------------------------------------------------------------------------------------------------------	
-	def plot(self, fds1, parameter = None,vg_ext = None, curves = None, save_plot = None):
+	def plot(self, fds1, parameter = None,vg_ext = None, curves = None,backend= None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
 			Class method that plots the extracted :math:`I_{OFF}` values.
@@ -383,6 +408,10 @@ class ioff_ext(_extractor):
 			Gate voltage value used to calculate IOFF at.
 		curves : array_like
 			Array of data containing the IV curves.
+		backend : str
+			String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+			'Agg', which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tools for visualizing the plots.
+			'TkAgg' requires the package python3-tk installed in order to run.
 		save_plot : bool
 			If True the generated plot is save to the defined path.
 
@@ -390,7 +419,7 @@ class ioff_ext(_extractor):
 		temp_plot = plotter()
 		for i in range(len(fds1.dataset)):
 			try:
-				temp_plot.fomplot(i, fom = 'ioff', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i],vg_ext = vg_ext, save_plot = save_plot)
+				temp_plot.fomplot(i,fds1, fom = 'ioff', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i],vg_ext = vg_ext,backend= backend, save_plot = save_plot)
 			except (TypeError, ValueError):
 				pass
 
@@ -480,7 +509,7 @@ class ion_ext(_extractor):
 			f.write("{0}\t{1}\n".format(i, arr))			
 		f.close()
 #----------------------------------------------------------------------------------------------------------------	
-	def plot(self, fds1 , parameter = None, curves = None, parameter_vth = None, vg_ext = None, save_plot = None):
+	def plot(self, fds1 , parameter = None, curves = None, parameter_vth = None, vg_ext = None,backend= None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
 			Class method that plots the extracted :math:`I_{ON}` values.
@@ -497,7 +526,11 @@ class ion_ext(_extractor):
 		parameter_vth : array_like
 			Array of extracted vth values, as a method to obtain ION depends on them.		
 		vg_ext : float
-			Gate voltage value used to calculate IOFF at.			
+			Gate voltage value used to calculate IOFF at.
+		backend : str
+			String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+			'Agg', which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tools for visualizing the plots.
+			'TkAgg' requires the package python3-tk installed in order to run.			
 		save_plot : bool
 			If True the generated plot is save to the defined path.
 
@@ -506,9 +539,9 @@ class ion_ext(_extractor):
 		for i in range(len(fds1.dataset)):
 			try:
 				if(vg_ext is not None) and (type(vg_ext) is float):
-					temp_plot.fomplot(i, fom = 'ion', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i], vg_ext =vg_ext, save_plot = save_plot)
+					temp_plot.fomplot(i,fds1, fom = 'ion', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i], vg_ext =vg_ext,backend= backend, save_plot = save_plot)
 				else:
-					temp_plot.fomplot(i, fom = 'ion', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i], parameter_vth = parameter_vth[i], save_plot = save_plot)
+					temp_plot.fomplot(i,fds1, fom = 'ion', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i], parameter_vth = parameter_vth[i],backend= backend, save_plot = save_plot)
 			except (TypeError, ValueError):
 				pass
 
@@ -616,7 +649,7 @@ class ss_ext(_extractor):
 			f.write("{0}\t{1}\n".format(i, arr))			
 		f.close()
 # ----------------------------------------------------------------------------------------------------------------	
-	def plot(self, fds1, parameter = None, curves = None, parameter_ss = None, vg_start = None, vg_end = None, vt_sd_medio = None, save_plot = None):
+	def plot(self, fds1, parameter = None, curves = None, parameter_ss = None, vg_start = None, vg_end = None, vt_sd_medio = None,backend= None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
 			Class method that plots the extracted :math:`SS` values.
@@ -639,6 +672,10 @@ class ss_ext(_extractor):
 		vg_sd_medio : float
 			Value in the middle of the interval between zero and vth extracted with the SD method.
 			It is used only for defining a limit in the plot.
+		backend : str
+			String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+			'Agg', which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tools for visualizing the plots.
+			'TkAgg' requires the package python3-tk installed in order to run.			
 		save_plot : bool
 			If True the generated plot is save to the defined path.
 
@@ -646,7 +683,7 @@ class ss_ext(_extractor):
 		temp_plot = plotter()
 		for i in range(len(fds1.dataset)):
 			try:
-				temp_plot.fomplot(i, fom = 'ss', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i],vg_start = vg_start, vg_end = vg_end, vt_sd_medio = vt_sd_medio[i] ,save_plot = save_plot)
+				temp_plot.fomplot(i,fds1, fom = 'ss', voltages = curves[i][:,0], currents = curves[i][:,1], parameter = parameter[i],vg_start = vg_start, vg_end = vg_end, vt_sd_medio = vt_sd_medio[i] ,backend= backend,save_plot = save_plot)
 			except (TypeError, ValueError):
 					pass
 
@@ -731,7 +768,7 @@ class dibl_ext(_extractor):
 			f.write("{0}\t{1}\n".format(i, arr))			
 		f.close()
 #----------------------------------------------------------------------------------------------------------------	
-	def plot(self,fds1 , curve_high = None,curve_low = None, parameter_vt_high = None, parameter_vt_low = None,corriente_low = None, save_plot = None):
+	def plot(self,fds1 , curve_high = None,curve_low = None, parameter_vt_high = None, parameter_vt_low = None,corriente_low = None,backend= None, save_plot = None):
 		"""
 		plot(fds1, parameter = None, method = None,cc_crit = None, curves = None, save = None, A=None, B=None)
 			Class method that plots the extracted :math:`DIBL` values.
@@ -751,6 +788,10 @@ class dibl_ext(_extractor):
 			Voltage value of low drain bias.
 		corriente_low : float
 			Current at the vth value extracted for the curve at low drain bias.
+		backend : str
+			String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+			'Agg', which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tools for visualizing the plots.
+			'TkAgg' requires the package python3-tk installed in order to run.
 		save_plot : bool
 			If True the generated plot is save to the defined path.
 
@@ -759,7 +800,7 @@ class dibl_ext(_extractor):
 		for i in range(len(fds1.dataset)):
 			try:	
 			# print(i)
-				temp_plot.fomplot(i, fom = 'dibl', curve_high = curve_high[i], curve_low = curve_low[i], vth_high = parameter_vt_high[i], vth_low = parameter_vt_low[i], corriente_low = corriente_low[i], save_plot = save_plot)
+				temp_plot.fomplot(i,fds1, fom = 'dibl', curve_high = curve_high[i], curve_low = curve_low[i], vth_high = parameter_vt_high[i], vth_low = parameter_vt_low[i], corriente_low = corriente_low[i],backend= backend, save_plot = save_plot)
 			except (TypeError, ValueError):
 				pass
 

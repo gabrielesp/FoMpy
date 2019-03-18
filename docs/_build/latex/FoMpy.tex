@@ -53,7 +53,7 @@
 
 
 \title{FoMpy Documentation}
-\date{Mar 14, 2019}
+\date{Mar 18, 2019}
 \release{0.2.0}
 \author{Gabriel Espiñeira}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -715,6 +715,32 @@ FoMpy Dataset
 
 \end{fulllineitems}
 
+\index{array() (in module fompy.fds)}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:fompy.fds.array}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{array}}}{\emph{fds}, \emph{arr}}{}
+Function that imports the simulated data from a given an array and
+stores it into a FoMpy Dataset.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{fds}} (\sphinxstyleliteralemphasis{\sphinxupquote{FoMpy Dataset}}) \textendash{} Structure of data containing the most important parameters of a semiconductor’s IV curve.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{arr}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of data containing one or more semiconductor’s IV curves.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxstylestrong{fds} \textendash{} Structure of data containing the FoMpy Dataset.
+
+\item[{Return type}] \leavevmode
+FoMpy Dataset
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 \index{daoFile (class in fompy.fds)}
 
 \begin{fulllineitems}
@@ -738,10 +764,10 @@ str
 \index{load() (fompy.fds.daoFile method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fds.daoFile.load}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{load}}}{\emph{path}, \emph{parser=None}, \emph{interval=None}, \emph{exclude=None}, \emph{skiprows=None}, \emph{comments=None}}{}~\index{load() (fompy.fds.daoFile method)}
+\phantomsection\label{\detokenize{index:fompy.fds.daoFile.load}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{load}}}{\emph{path=None}, \emph{arr=None}, \emph{parser=None}, \emph{interval=None}, \emph{exclude=None}}{}~\index{load() (fompy.fds.daoFile method)}
 
 \begin{fulllineitems}
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{load}}}{\emph{path}, \emph{filename\_user = None}, \emph{parser = None}, \emph{interval = None}, \emph{exclude = None}, \emph{skiprows = None}, \emph{comments = None}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{load}}}{\emph{path}, \emph{filename\_user = None}, \emph{parser = None}, \emph{interval = None}, \emph{exclude = None}}{}
 Class method that extracts \(V_{TH}\) of a semiconductor’s IV curve.
 
 \end{fulllineitems}
@@ -752,8 +778,11 @@ Class method that extracts \(V_{TH}\) of a semiconductor’s IV curve.
 \sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{shape}}\sphinxstyleliteralemphasis{\sphinxupquote{ (}}\sphinxstyleliteralemphasis{\sphinxupquote{n}}\sphinxstyleliteralemphasis{\sphinxupquote{,}}\sphinxstyleliteralemphasis{\sphinxupquote{)}}) \textendash{} 1-d array containing values of the independent variable.
 
 \item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{arr}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of data containing one or more semiconductor’s IV curves.
+
+\item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{parser}} (\sphinxstyleliteralemphasis{\sphinxupquote{function}}) \textendash{} Function that implements how the data is imported to a Fompy Dataset. The list of available functions includes:
-‘JCJB’ and ‘MC’.
+‘file’,’array’,’JCJB’ and ‘MC’.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{interval}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} List of two int values: start(index of the first simulation to load into the Fompy Dataset)
@@ -817,6 +846,47 @@ FoMpy Dataset
 
 \end{fulllineitems}
 
+\index{file() (in module fompy.fds)}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:fompy.fds.file}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{file}}}{\emph{fds}, \emph{path}, \emph{path\_subdirs}, \emph{path\_filenames}, \emph{interval}, \emph{exclude}}{}
+Function that imports the simulated data from a given file and
+stores it into a FoMpy Dataset. The format of this file is asummed to have comments
+starting with ‘\#’, without a header and two columns, one for the voltage and one for the currents, separated
+by ‘    ‘ delimiters.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{fds}} (\sphinxstyleliteralemphasis{\sphinxupquote{FoMpy Dataset}}) \textendash{} Structure of data containing the most important parameters of a semiconductor’s IV curve.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Parent path where the simulations are stored
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{path\_subdirs}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} List of alphabetically sorted subdirectories found inside the parent directory.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{path\_filenames}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} List of alphabetically sorted files found inside the parent directory.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{interval}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} List of two int values: start(index of the first simulation to load into the Fompy Dataset)
+and end(index of the last simulation to load into the FompyDataset)
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{exclude}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Index values of simulations to exclude.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxstylestrong{fds} \textendash{} Structure of data containing the FoMpy Dataset.
+
+\item[{Return type}] \leavevmode
+FoMpy Dataset
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 \phantomsection\label{\detokenize{index:module-fompy.fom}}\index{fompy.fom (module)}
 
 \section{fom.py}
@@ -860,7 +930,7 @@ Additionally, if the user wants to obtain the DIBL, two different FoMpy Datasets
 \phantomsection\label{\detokenize{index:fompy.fom.dibl_ext}}\pysigline{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{fompy.fom.}}\sphinxbfcode{\sphinxupquote{dibl\_ext}}}~\index{extraction() (fompy.fom.dibl\_ext method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fom.dibl_ext.extraction}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{extraction}}}{\emph{fds1}, \emph{fds2}, \emph{method=None}}{}~\index{extraction() (fompy.fom.dibl\_ext method)}
+\phantomsection\label{\detokenize{index:fompy.fom.dibl_ext.extraction}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{extraction}}}{\emph{fds1}, \emph{fds2}, \emph{method=None}, \emph{cc\_criteria=None}}{}~\index{extraction() (fompy.fom.dibl\_ext method)}
 
 \begin{fulllineitems}
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{extraction}}}{\emph{fds1}, \emph{fds2}, \emph{method = None}}{}
@@ -913,6 +983,11 @@ Needed for generating the plot of any FoM.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{corriente\_low}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Current at the vth value extracted for the curve at low drain bias.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{backend}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+‘Agg’, which only works whenever saving plots to files (non-GUI) and ‘TkAgg’ a GUI tools for visualizing the plots.
+‘TkAgg’ requires the package python3-tk installed in order to run.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{save\_plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True the generated plot is save to the defined path.
@@ -1029,6 +1104,11 @@ Needed for generating the plot of any FoM.
 \sphinxstyleliteralstrong{\sphinxupquote{curves}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of data containing the IV curves.
 
 \item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{backend}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+‘Agg’, which only works whenever saving plots to files (non-GUI) and ‘TkAgg’ a GUI tools for visualizing the plots.
+‘TkAgg’ requires the package python3-tk installed in order to run.
+
+\item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{save\_plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True the generated plot is save to the defined path.
 
 \end{itemize}
@@ -1115,6 +1195,11 @@ Needed for generating the plot of any FoM.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{vg\_ext}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Gate voltage value used to calculate IOFF at.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{backend}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+‘Agg’, which only works whenever saving plots to files (non-GUI) and ‘TkAgg’ a GUI tools for visualizing the plots.
+‘TkAgg’ requires the package python3-tk installed in order to run.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{save\_plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True the generated plot is save to the defined path.
@@ -1210,6 +1295,11 @@ Needed for generating the plot of any FoM.
 It is used only for defining a limit in the plot.
 
 \item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{backend}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+‘Agg’, which only works whenever saving plots to files (non-GUI) and ‘TkAgg’ a GUI tools for visualizing the plots.
+‘TkAgg’ requires the package python3-tk installed in order to run.
+
+\item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{save\_plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True the generated plot is save to the defined path.
 
 \end{itemize}
@@ -1297,6 +1387,11 @@ Needed for generating the plot of any FoM.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{curves}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of data containing the IV curves.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{backend}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+‘Agg’, which only works whenever saving plots to files (non-GUI) and ‘TkAgg’ a GUI tools for visualizing the plots.
+‘TkAgg’ requires the package python3-tk installed in order to run.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{save\_plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True the generated plot is save to the defined path.
@@ -1402,6 +1497,38 @@ Additionally, other types of plots can be generated. The list of available plots
 
 \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,}\PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{calib}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
+\index{interpol() (in module fompy.plots)}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:fompy.plots.interpol}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.plots.}}\sphinxbfcode{\sphinxupquote{interpol}}}{\emph{x=None}, \emph{y=None}, \emph{n=None}, \emph{strategy=None}, \emph{d=None}, \emph{s=None}}{}
+Wrapper function for interpolating imported data from a semiconductor’s IV curve.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{shape}}\sphinxstyleliteralemphasis{\sphinxupquote{ (}}\sphinxstyleliteralemphasis{\sphinxupquote{n}}\sphinxstyleliteralemphasis{\sphinxupquote{,}}\sphinxstyleliteralemphasis{\sphinxupquote{)}}) \textendash{} 1-d array containing values of the independent variable.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{y}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array containing values of the dependent variable.
+It can have arbitrary number of dimensions, but the length along axis
+must match the length of x. Values must be finite.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{strategy}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Keyword for defining the selected interpolation method: The list of available methods includes:
+‘akima’, ‘pchip’ and ‘linear’.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{d}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} Degree of the smoothing spline. Must be \textless{}= 5.
+Default is k=3, a cubic spline.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{s}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Positive smoothing factor used to choose the number of knots.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 \index{plotStrategy (class in fompy.plots)}
 
 \begin{fulllineitems}
@@ -1419,7 +1546,7 @@ For extensive documentation on how to modify this code go to \sphinxurl{https://
 \index{fomplot() (fompy.plots.plotter method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.plots.plotter.fomplot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{fomplot}}}{\emph{i}, \emph{fom=None}, \emph{currents=None}, \emph{voltages=None}, \emph{parameter=None}, \emph{method=None}, \emph{cc\_criteria=None}, \emph{parameter\_vth=None}, \emph{vg\_ext=None}, \emph{curve\_high=None}, \emph{curve\_low=None}, \emph{vth\_high=None}, \emph{vth\_low=None}, \emph{corriente\_low=None}, \emph{save\_plot=None}, \emph{A=None}, \emph{B=None}, \emph{vg\_start=None}, \emph{vg\_end=None}, \emph{vt\_sd\_medio=None}}{}~
+\phantomsection\label{\detokenize{index:fompy.plots.plotter.fomplot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{fomplot}}}{\emph{i}, \emph{fds1}, \emph{fom=None}, \emph{currents=None}, \emph{voltages=None}, \emph{parameter=None}, \emph{method=None}, \emph{cc\_criteria=None}, \emph{parameter\_vth=None}, \emph{vg\_ext=None}, \emph{curve\_high=None}, \emph{curve\_low=None}, \emph{vth\_high=None}, \emph{vth\_low=None}, \emph{corriente\_low=None}, \emph{backend=None}, \emph{save\_plot=None}, \emph{A=None}, \emph{B=None}, \emph{vg\_start=None}, \emph{vg\_end=None}, \emph{vt\_sd\_medio=None}}{}~
 
 \begin{fulllineitems}
 \pysigline{\sphinxbfcode{\sphinxupquote{fomplot(i,~fom~=~None,~~voltages~=~None,~currents~=~None,~parameter~=~None,method~=~None,~cc\_criteria~=~None,parameter\_vth~=~None,}}}
@@ -1444,6 +1571,10 @@ Plot the most common figures of merit of a semiconductor’s IV curve.
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{voltages}} (\sphinxstyleliteralemphasis{\sphinxupquote{path}}\sphinxstyleliteralemphasis{\sphinxupquote{ or }}\sphinxstyleliteralemphasis{\sphinxupquote{None}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Path indicating the folder where the user wishes to save the generated plots.
 
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{backend}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+‘Agg’, which only works whenever saving plots to files (non-GUI) and ‘TkAgg’ a GUI tools for visualizing the plots.’TkAgg’ requires the package python3-tk installed in order to run.
+
 \end{itemize}
 
 \end{description}\end{quote}
@@ -1453,7 +1584,7 @@ Plot the most common figures of merit of a semiconductor’s IV curve.
 \index{hist() (fompy.plots.plotter method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.plots.plotter.hist}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{hist}}}{\emph{bins=None}, \emph{parameter=None}, \emph{save\_plot=None}}{}~
+\phantomsection\label{\detokenize{index:fompy.plots.plotter.hist}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{hist}}}{\emph{bins=None}, \emph{parameter=None}, \emph{cont\_parameter=None}, \emph{backend=None}, \emph{save\_plot=None}}{}~
 
 \begin{fulllineitems}
 \pysigline{\sphinxbfcode{\sphinxupquote{hist(bins~=~None,~parameter~=~None,~save\_to\_file~=~None):}}}
@@ -1484,7 +1615,7 @@ which are not required to be of the same length.
 \index{iv() (fompy.plots.plotter method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.plots.plotter.iv}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{iv}}}{\emph{fds}, \emph{save\_plot=None}}{}~\index{iv() (fompy.plots.plotter method)}
+\phantomsection\label{\detokenize{index:fompy.plots.plotter.iv}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{iv}}}{\emph{fds}, \emph{backend=None}, \emph{save\_plot=None}}{}~\index{iv() (fompy.plots.plotter method)}
 
 \begin{fulllineitems}
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{iv}}}{\emph{fds}, \emph{save\_plot = None}}{}
@@ -1509,7 +1640,7 @@ Class method that filters data from a semiconductor’s IV curve using Gaussian 
 \index{qq() (fompy.plots.plotter method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.plots.plotter.qq}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{qq}}}{\emph{parameter}, \emph{save\_plot=None}}{}~
+\phantomsection\label{\detokenize{index:fompy.plots.plotter.qq}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{qq}}}{\emph{parameter}, \emph{backend=None}, \emph{save\_plot=None}}{}~
 
 \begin{fulllineitems}
 \pysigline{\sphinxbfcode{\sphinxupquote{qq(~parameter,~save\_to\_file~=~None):}}}
@@ -1536,7 +1667,7 @@ which are not required to be of the same length.
 \index{varplot() (fompy.plots.plotter method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.plots.plotter.varplot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{varplot}}}{\emph{fds}, \emph{save\_plot=None}}{}~
+\phantomsection\label{\detokenize{index:fompy.plots.plotter.varplot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{varplot}}}{\emph{fds}, \emph{backend=None}, \emph{save\_plot=None}}{}~
 
 \begin{fulllineitems}
 \pysigline{\sphinxbfcode{\sphinxupquote{varplot(self,fds,~save\_plot~=~None):}}}
@@ -1571,12 +1702,15 @@ or at the beginning of each file of the source code.
 \index{dataset() (in module fompy.wrappers)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.wrappers.dataset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{dataset}}}{\emph{path}, \emph{filename\_user=None}, \emph{parser=None}, \emph{save\_to\_file=None}, \emph{interval=None}, \emph{exclude=None}, \emph{skiprows=None}, \emph{comments=None}}{}
+\phantomsection\label{\detokenize{index:fompy.wrappers.dataset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{dataset}}}{\emph{path=None}, \emph{arr=None}, \emph{parser=None}, \emph{save\_to\_file=None}, \emph{interval=None}, \emph{exclude=None}}{}
 Wrapper function that creates a FoMpy dataset.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{globstr}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Path to the file containing the IV curves
+\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Path to the file containing the IV curves
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{arr}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of data containing one or more semiconductor’s IV curves.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{parser}} (\sphinxstyleliteralemphasis{\sphinxupquote{void}}) \textendash{} Format to read the file
@@ -1590,13 +1724,6 @@ and end(index of the last simulation to load into the FompyDataset)
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{exclude}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Index values of simulations to exclude.
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{skiprows}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} Number of rows to skip at the begining of a file. 0 rows are skipped by default.
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{comments}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} All the lines starting with this character are considered comments.
-‘\#’ is used by default.
 
 \end{itemize}
 
@@ -1663,7 +1790,7 @@ array\_like
 \index{filter() (in module fompy.wrappers)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.wrappers.filter}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{filter}}}{\emph{fds}, \emph{theta\_crit}, \emph{show\_theta=False}}{}
+\phantomsection\label{\detokenize{index:fompy.wrappers.filter}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{filter}}}{\emph{fds1}, \emph{theta\_crit}, \emph{show\_theta=False}}{}
 Wrapper class for filtering noisy data from a semiconductor’s IV curve.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -1706,7 +1833,7 @@ Wrapper function that normalizes the currents a semiconductor’s IV curve.
 \index{plot() (in module fompy.wrappers)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.wrappers.plot}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{plot}}}{\emph{fds1}, \emph{fds2=None}, \emph{plot\_type=None}, \emph{fom=None}, \emph{parameter=None}, \emph{method=None}, \emph{bins=None}, \emph{cc\_criteria=None}, \emph{vg\_ext=None}, \emph{vg\_start=None}, \emph{vg\_end=None}, \emph{save\_plot=None}}{}
+\phantomsection\label{\detokenize{index:fompy.wrappers.plot}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{plot}}}{\emph{fds1}, \emph{fds2=None}, \emph{plot\_type=None}, \emph{fom=None}, \emph{parameter=None}, \emph{method=None}, \emph{bins=None}, \emph{cc\_criteria=None}, \emph{vg\_ext=None}, \emph{vg\_start=None}, \emph{vg\_end=None}, \emph{cont\_parameter=None}, \emph{backend=None}, \emph{save\_plot=None}}{}
 Wrapper function that plots the most common figures in semiconductor simulations.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -1719,7 +1846,7 @@ Needed for generating the plot of any FoM.
 Needed for generating the plot of the calibration and the DIBL.
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{type}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Keyword indicating the type of plot to generate. The list of available plots includes:
+\sphinxstyleliteralstrong{\sphinxupquote{plot\_type}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Keyword indicating the type of plot to generate. The list of available plots includes:
 ‘iv’, ‘hist’, ‘qq’, ‘varplot’, ‘calib’ and ‘fomplot’.
 
 \item {} 
@@ -1731,7 +1858,7 @@ Needed for generating the plot of the calibration and the DIBL.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{method}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Keyword indicating the desired method of extraction of the FoMs. The list of available methods includes:
-‘SD’, ‘CC’, ‘TD’ and ‘LE’. If method is not defined the ‘SD’ is selected by default.
+‘SD’(default), ‘CC’, ‘TD’ and ‘LE’. If method is not defined the ‘SD’ is selected by default.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{bins}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} It defines the number of equal-width bins in the given range.
@@ -1747,6 +1874,11 @@ Needed for generating the plot of the calibration and the DIBL.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{vg\_end}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Gate voltage defining the end of the interval in which the Subthreshold Swing is extracted.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{backend}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+‘Agg’(default), which only works whenever saving plots to files (non-GUI) and ‘TkAgg’ a GUI tool for visualizing the plots on a pop-up window.
+‘TkAgg’ requires the package python3-tk installed in order to run.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{save\_plot}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True the generated plot is save to the defined path.
@@ -1784,7 +1916,7 @@ Wrapper function that saves to a text file the extracted FoMs.
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{index:fompy.wrappers.version}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{version}}}{}{}
-(TODO)Function that prints the current installed version of FoMpy
+(TEST)Function that prints the current installed version of FoMpy
 
 \end{fulllineitems}
 

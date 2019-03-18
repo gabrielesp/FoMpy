@@ -1,13 +1,11 @@
-release:
+git:
 	@echo "Uploading files to git repo"
+	rm -rf ./fompy/__pycache__/
 	git add ./*
 	echo -n'Write commit description'
 	read newdescription
 	git commit -m "$newdescription"
-	echo -n'Write a tag'
-	read newtag
-	git tag $newtag
-	git push origin $newtag
+	git push origin master
 
 pdf:	
 	@echo "Generating pdf" && cd ./docs/ && $(MAKE) latexpdf

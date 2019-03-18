@@ -1,12 +1,28 @@
 FoMpy: A figure of merit extraction tool for semiconductor device simulations
 ===============
 
-.. What is this?
-.. +++++++++++++
+What is this?
++++++++++++++
 
 * This is a `FoMpy <https://github.com/gabrielesp/FoMpy/>`__ tutorial introduction, where you will learn how to use the basic capabilities of the FoMpy library.
 .. * By `Gabriel Espiñeira <https://github.com/>`__.
 .. * February 20, 2019.
+
+The source code of FoMpy can be downloaded from https://github.com/gabrielesp/FoMpy and is purely intended to run as a library for Linux systems. Note that the following instalation steps work on Debian-derived distributions: e.g. for Ubuntu 16.04 or later and CentOS (tested). Also, FoMpy has been proven to work in **Python 3.5.4**.
+FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
+
+	*setuptools
+	*numpy
+	*scipy
+	*matplotlib
+	*pytest
+	*probscale
+
+Currently FoMpy can be downloaded from https://test.pypi.org/ through the following url using pip3::
+
+	pip3 install --extra-index-url https://test.pypi.org/simple/ fompy
+
+**Further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf**
 
 1. Introduction
 ---------------
@@ -28,29 +44,20 @@ After loading the data into a FoMpy Dataset, using the various tools implemented
 2. Installation
 ---------------
 
-The source code of FoMpy can be downloaded from https://github.com/gabrielesp/FoMpy and is purely intended to run as a library for Linux systems.Note that the following instalation steps work on Debian-derived distributions like for Ubuntu 16.04 or later (refer to your package manager and package list on other distributions). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
-
-``setuptools>=21.0.0, numpy>=1.10.0, scipy>=0.8.0 and matplotlib>=3.0.2``
-
-
-First you need to have installed pip3 on your system. Open up a terminal and type::
+First you need to have installed **pip3** on your system. For Ubuntu, open up a terminal and type::
 
 	sudo apt update
 
 	sudo apt install python3-pip
 
-Once the installation of pip3 is complete, verify the installation by checking the pip version::
-
-	pip3 --version
-
-The use of virtual enviroments is highly encouraged. In order to use them run the following commands in a terminal::
+The use of virtual enviroments is highly encouraged. The main purpose of Python virtual environments is to create an isolated environment for Python projects so that no dependency issues with other projects can appear. In order to use them run the following commands in a terminal::
 
 
 	sudo apt install python3-venv #Install virtual enviroments
 	python3 -m venv .venv #Create and name the enviroment "venv"
 	source .venv/bin/activate #Activate the venv
 
-Note that as of this moment you're inside a virtual enviroment (Notice (.venv) $ in the terminal) with a limited version of python and therefore you will have to install all the packages you need (including the ones mentioned above because they are installed in the system, not the virtual enviroment).
+Note that as of this moment you're inside a virtual enviroment (Notice (.venv) $ in the terminal) with a limited/isolated version of python and therefore you will have to install all the packages you need for that particular project (including the ones you may have installed in the system as they may not be installed in the virtual enviroment).
 
 **Instalation of FoMpy via pip3**
 
@@ -65,7 +72,7 @@ and check the library is installed by importing it from a **python3 terminal**::
 Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 
 
-**Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install them yourself, just by typing in a terminal**::
+**Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install the needed modules them yourself, just by typing in a terminal**::
 	
 	pip3 install setuptools
 	pip3 install pytest
@@ -73,35 +80,7 @@ Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 	pip3 install scipy
 	pip3 install probscale
 	pip3 install matplotlib
-	sudo apt-get install python3-tk
-
-**depending on the file that is missing.**
-
-.. Run in a terminal again::
-
-.. 	pip install <library>
-..	sudo apt install python3-tk
-
-
-.. Via pip (recommended)
-
-
-.. Via conda (not working)
- 
-.. Run the following command in a terminal::
- 
-.. 	conda search fompy
-
-.. 	conda install fompy
- 
-.. Via source code (not working)
- 
-.. Go to https://github.com/ and download the project. Go to the parent folder and run::
- 
-..	make
-	
-.. make install
-
+	sudo apt-get install python3-tk #optional
 
 3. Quickstart 
 -------------
@@ -141,16 +120,11 @@ For example if the user wishes to import IV curves stored in a general way (with
 One approach to create a FoMpy Dataset is::
 
 	import fompy
-	import numpy as np
 
 	path = './path_to_file'
-	fds = fompy.FompyDataset() #Here we instantiate a Fompy Dataset
-	voltages, currents = np.loadtxt(path, delimiter='\t',  unpack=True, skiprows=1, comments='#') #The data from the file is loaded
-	fds.dataset = np.column_stack((voltages, currents)) #The two columns are saved into an Fompy Dataset as an array
+	fds = fompy.dataset(path, parser=fompy.file)
 
 	print(fds.dataset) 
-
-.. **Note that os.walk will find all files and subdirectories in that path, not only the ones containing the IV curves.**
 	
 **2.Import from an array**
 
@@ -183,15 +157,15 @@ Additionally if the user already has the IV curves loaded in an array the proces
 		       [9.00e-01, 6.15e-05],
 		       [1.00e+00, 6.57e-05]])
 
-	fds = fompy.FompyDataset() #Here we instantiate a Fompy Dataset
-	fds.dataset = ((arr1, arr2)) #The arrays are included into a Fompy Dataset
+	arrays = np.stack((arr1, arr2)) #Here the arrays are put together
+	fds = fompy.dataset(arr = arrays, parser=fompy.array)
 
 	print(fds.dataset)
 
 Note that all the operations of FoMpy are dependant on how the Dataset is created, therefore try to concatenate several arrays according to the previous example.
 
 
-**3.Import from an JCJB**
+**3.Import from an JCJB used in VENDES simulator [#]_**
 
 Finally, FoMpy has predefined a parser thath reads an in-house format called 'JCJB'. In order to load the dada from these files, FoMpy has a importing tool with an input parameter for the parser. Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
 
@@ -242,7 +216,8 @@ of the threshold voltage with the 'SD' method and the second derivative of the c
 
 	fompy.plot(fds, fom = 'vth', save_plot='./vth_plots/sd/')
 
-Note that the plots have been saved to the path './vth_plots/sd/', keeping the indexing of the curves as stored in the Fompy Dataset.
+Two common backends are available when using FoMpy:'Agg'(default), which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tool for visualizing the plots on a pop-up window.
+Note that 'TkAgg' requires the package python3-tk installed in order to run. Also the plots have been saved to the path './vth_plots/sd/', keeping the indexing of the curves as stored in the Fompy Dataset.
 
 
 
@@ -262,7 +237,6 @@ In order to test it comment and uncomment the lines that you want to run inside 
 
 	python3 example.py
 
-**Further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf**
 
 Citing FoMpy
 +++++++++++++++++++
@@ -284,6 +258,7 @@ Please cite FoMpy in your publications if it helps your research::
 References
 +++++++++++++++++++
 
+.. [#] VENDES. Paper Natalia y Antonio 2011
 .. [#] G.Espiñeira, N.Seoane, D.Nagy, G.Indalecio and A.J.García Loureiro, “FoMPy: A figure of merit extraction tool for semiconductor device simulations” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
 .. [#] G.Espiñeira, D.Nagy, G.Indalecio, A.J.García Loureiro and N.Seoane, “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
 

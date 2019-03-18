@@ -17,16 +17,18 @@ from fompy.conditioning import normalizer, filter_tool
 from fompy.plots import plotter
 from fompy.aux import checkPath
 from glob import glob
-import os
+import os, re
 
-def dataset(path,filename_user = None, parser = None, save_to_file = None, interval = None, exclude = None, skiprows = None,  comments = None):
+def dataset(path = None,arr = None,  parser = None, save_to_file = None, interval = None, exclude = None):
 	"""
 	Wrapper function that creates a FoMpy dataset.
 
 	Parameters
 	----------
-	globstr : str
+	path : str
 		Path to the file containing the IV curves
+	arr : array_like
+		Array of data containing one or more semiconductor's IV curves.
 	parser : void
 		Format to read the file
 	save_to_file : str
@@ -36,11 +38,6 @@ def dataset(path,filename_user = None, parser = None, save_to_file = None, inter
 		and end(index of the last simulation to load into the FompyDataset)
 	exclude : array_like
 		Index values of simulations to exclude.
-	skiprows : int
-		Number of rows to skip at the begining of a file. 0 rows are skipped by default.
-	comments : str
-		All the lines starting with this character are considered comments.
-		'#' is used by default.
 
 	Returns
 	-------
@@ -49,7 +46,7 @@ def dataset(path,filename_user = None, parser = None, save_to_file = None, inter
 
 	"""
 	dao_dataset = daoFile()
-	fds = dao_dataset.load(path, parser, interval, exclude, skiprows,  comments)
+	fds = dao_dataset.load(path,arr, parser, interval, exclude)
 	if(save_to_file != None):
 		dao_dataset.save(fds, save_to_file)
 	return fds
@@ -181,7 +178,7 @@ def extract(fds1, fds2 = None, fom = None, method = None, cc_criteria = None, vg
 	else:
 		raise Exception('The figure of merit hasn\'t been defined!')
 #----------------------------------------------------------------------------------------------------------------
-def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  method = None,bins = None, cc_criteria = None, vg_ext = None, vg_start = None, vg_end = None, save_plot = None):
+def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  method = None,bins = None, cc_criteria = None, vg_ext = None, vg_start = None, vg_end = None,cont_parameter = None,  backend = None, save_plot = None):
 	"""
 	Wrapper function that plots the most common figures in semiconductor simulations.
 
@@ -203,7 +200,7 @@ def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  metho
 		Array of extracted FoM values to be plotted.
 	method : str
 		Keyword indicating the desired method of extraction of the FoMs. The list of available methods includes:
-		'SD', 'CC', 'TD' and 'LE'. If method is not defined the 'SD' is selected by default.
+		'SD'(default), 'CC', 'TD' and 'LE'. If method is not defined the 'SD' is selected by default.
 	bins : int
 		It defines the number of equal-width bins in the given range.
 	cc_criteria : float
@@ -214,41 +211,46 @@ def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  metho
 		Gate voltage defining the start of the interval in which the Subthreshold Swing is extracted.
 	vg_end : float
 		Gate voltage defining the end of the interval in which the Subthreshold Swing is extracted.
+	backend : str
+		String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+		'Agg'(default), which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tool for visualizing the plots on a pop-up window.
+		'TkAgg' requires the package python3-tk installed in order to run.
 	save_plot : bool
 		If True the generated plot is save to the defined path.
 
 	""" 
+
 	plot = plotter()
 	if(str(plot_type) is 'iv'):
-		plot.iv(fds1, save_plot=save_plot)
+		plot.iv(fds1,backend = backend, save_plot=save_plot)
 	elif(str(plot_type) is 'hist'):
-		plot.hist(parameter=parameter,bins=bins, save_plot=save_plot)			
+		plot.hist(parameter=parameter,bins=bins,backend = backend,cont_parameter=cont_parameter, save_plot=save_plot)			
 	elif(str(plot_type) is 'qq'):
-		plot.qq(parameter=parameter, save_plot=save_plot)	
+		plot.qq(parameter=parameter,backend = backend, save_plot=save_plot)	
 	elif(str(plot_type) is 'varplot'):
-		plot.varplot(fds1, save_plot=save_plot)	
+		plot.varplot(fds1,backend = backend, save_plot=save_plot)	
 	elif(str(plot_type) == 'calib'):
 		plot = plotter()
-		plot.calib(fds1,fds2, save_plot=save_plot)	
+		plot.calib(fds1,fds2,backend = backend, save_plot=save_plot)	
 	elif(plot_type is None):
 		if(str(fom) == 'vth'):
 			temp_vth = vth_ext()
 			if (method is not 'LE'):
 				parameter_vth, curves= temp_vth.extraction(fds1, method, cc_criteria)
-				temp_vth.plot(fds1 = fds1, parameter = parameter_vth,method=method,cc_criteria=cc_criteria, curves = curves, save_plot = save_plot)
+				temp_vth.plot(fds1 = fds1, parameter = parameter_vth,method=method,cc_criteria=cc_criteria, curves = curves,backend = backend, save_plot = save_plot)
 			else:
 				parameter_vth, curves, A, B= temp_vth.extraction(fds1, method, cc_criteria)
-				temp_vth.plot(fds1 = fds1, parameter = parameter_vth,method=method,cc_criteria=cc_criteria, curves = curves, save_plot = save_plot, A =A, B=B)
+				temp_vth.plot(fds1 = fds1, parameter = parameter_vth,method=method,cc_criteria=cc_criteria, curves = curves,backend = backend, save_plot = save_plot, A =A, B=B)
 		elif(str(fom) == 'ioff'):
 			temp_ioff = ioff_ext()
 			parameter_ioff, curves= temp_ioff.extraction(fds1,vg_ext)
-			temp_ioff.plot(fds1 = fds1, parameter = parameter_ioff, curves = curves,vg_ext = vg_ext, save_plot = save_plot)
+			temp_ioff.plot(fds1 = fds1, parameter = parameter_ioff, curves = curves,vg_ext = vg_ext,backend = backend, save_plot = save_plot)
 		elif(str(fom) == 'ion'):
 			temp_ion = ion_ext()
 			if(vg_ext is not None) and (type(vg_ext) is float):
 				parameter_ion, curves= temp_ion.extraction(fds1,vg_ext = vg_ext)
 				print(parameter_ion)
-				temp_ion.plot(fds1 = fds1, parameter = parameter_ion, curves = curves,vg_ext = vg_ext, save_plot = save_plot)
+				temp_ion.plot(fds1 = fds1, parameter = parameter_ion, curves = curves,vg_ext = vg_ext,backend = backend, save_plot = save_plot)
 			else:
 				temp_vth = vth_ext()
 				if (method is not 'LE'):
@@ -256,15 +258,15 @@ def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  metho
 				else:
 					parameter_vth, curves, A, B= temp_vth.extraction(fds1, method, cc_criteria)	
 				parameter_ion, curves= temp_ion.extraction(fds1,vth = parameter_vth)
-				temp_ion.plot(fds1 = fds1, parameter = parameter_ion, curves = curves,parameter_vth=parameter_vth, save_plot = save_plot)
+				temp_ion.plot(fds1 = fds1, parameter = parameter_ion, curves = curves,parameter_vth=parameter_vth,backend = backend, save_plot = save_plot)
 		elif(str(fom) == 'ss'):
 			temp_ss = ss_ext()
 			parameter_ss, curves, vt_sd_medio= temp_ss.extraction(fds1, vg_start, vg_end)
-			temp_ss.plot(fds1 = fds1, parameter = parameter_ss, curves = curves, vg_start = vg_start, vg_end = vg_end, vt_sd_medio = vt_sd_medio, save_plot = save_plot)
+			temp_ss.plot(fds1 = fds1, parameter = parameter_ss, curves = curves, vg_start = vg_start, vg_end = vg_end, vt_sd_medio = vt_sd_medio,backend = backend, save_plot = save_plot)
 		elif(str(fom) == 'dibl'):
 			temp = dibl_ext()
 			parameter_dibl,curve_high, curve_low, vth_high, vth_low, corriente_low  = temp.extraction(fds1,fds2, method)
-			temp.plot(fds1, curve_high, curve_low, vth_high, vth_low, corriente_low, save_plot)
+			temp.plot(fds1, curve_high, curve_low, vth_high, vth_low, corriente_low,backend = backend,  save_plot = save_plot)
 #----------------------------------------------------------------------------------------------------------------
 def savetotxt(path,fom,parameter):
 	"""
@@ -313,7 +315,7 @@ def normalize(fds, norm):
 	temp_norm = normalizer()
 	temp_norm.normalize(fds, norm)
 #----------------------------------------------------------------------------------------------------------------
-def filter(fds, theta_crit, show_theta = False):
+def filter(fds1, theta_crit, show_theta = False):
 	"""
 	Wrapper class for filtering noisy data from a semiconductor's IV curve.
 
@@ -331,27 +333,26 @@ def filter(fds, theta_crit, show_theta = False):
 	"""
 
 	temp_filter = filter_tool()
-	fds.dataset = temp_filter.polar_filter(fds, theta_crit=theta_crit, show_theta=show_theta)
+	fds1.dataset = temp_filter.polar_filter(fds1, theta_crit=theta_crit, show_theta=show_theta)
 #----------------------------------------------------------------------------------------------------------------		
 def version():
 	"""
-	(TODO)Function that prints the current installed version of FoMpy
+	(TEST)Function that prints the current installed version of FoMpy
 
 	"""
 
 	here = os.path.abspath(os.path.dirname(__file__))
 
 	def read(*parts):
-	    with open(os.path.join(here, *parts), 'r') as fp:
-		return fp.read()
+		with open(os.path.join(here, *parts), 'r') as fp:
+			return fp.read()
 
 	def find_version(*file_paths):
-	    version_file = read(*file_paths)
-	    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-		                      version_file, re.M)
-	    if version_match:
-		return version_match.group(1)
-	    raise RuntimeError("Unable to find version string.")
+		version_file = read(*file_paths)
+		version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",version_file, re.M)
+		if version_match:
+			return version_match.group(1)
+		raise RuntimeError("Unable to find version string.")
 	version=find_version("fompy", "__init__.py")
 
 	print('FoMpy version: '+version)

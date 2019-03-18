@@ -73,9 +73,7 @@ from enum import Enum
 import os
 import probscale
 from fompy.aux import find_closest, get_diff, checkPath
-# import matplotlib
-# print(matplotlib.get_backend())
-# matplotlib.use('TkAgg')
+from fompy.conditioning import interpolator
 import matplotlib.pyplot as plt
 
 
@@ -110,15 +108,14 @@ class plotStrategy(metaclass=ABCMeta):
 
 	@abstractmethod
 	def fomplot(self):
-		pass						
-
+		pass	
 class plotter(plotStrategy):
 	"""
 	Class used for generating common plots in semiconductor simulations.
 	For extensive documentation on how to modify this code go to https://matplotlib.org/tutorials/index.html
 	"""
 
-	def iv(self,fds, save_plot = None):
+	def iv(self,fds,backend = None, save_plot = None):
 		"""
 		Methods
 		-------
@@ -133,6 +130,15 @@ class plotter(plotStrategy):
 			Path indicating the folder where the user wishes to save the generated plots.
 
 		"""
+
+		import matplotlib
+		if(backend is None) or (backend is 'Agg'):
+			matplotlib.use('Agg')
+		elif(backend is 'TkAgg'):
+			matplotlib.use('TkAgg')
+		else:
+			pass
+
 		for i in range(len(fds.dataset)):
 			try:
 				plt.close()
@@ -153,18 +159,22 @@ class plotter(plotStrategy):
 				labels, ids = np.unique(labels, return_index=True)
 				ax2.legend(handles, labels, loc='lower right')
 				plt.tight_layout()
-				if(save_plot == None):
-					plt.show()
+				if(save_plot is not None):
+					try:
+						checkPath(save_plot)
+						plt.savefig(save_plot+'iv_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+					except NameError:
+						print('No path to save the plots has been chosen')
 				else:
-					checkPath(save_plot)
-					plt.savefig(save_plot+'/iv_curve_%03d.pdf'% str(i), bbox_inches='tight', format='pdf', dpi=1200 )
+					print('No path has been defined\nTrying to use GUI backend...')
+					plt.show()
 				plt.close()
 			except(TypeError, ValueError):
 				pass
 		return
 
 
-	def hist(self, bins = None, parameter = None, save_plot = None):
+	def hist(self, bins = None, parameter = None,cont_parameter = None, backend = None, save_plot = None):
 		"""
 		Methods
 		-------
@@ -183,6 +193,15 @@ class plotter(plotStrategy):
 		save_plot : path or None, optional
 			Path indicating the folder where the user wishes to save the generated plots.
 		"""
+
+		import matplotlib
+		if(backend is None) or (backend is 'Agg'):
+			matplotlib.use('Agg')
+		elif(backend is 'TkAgg'):
+			matplotlib.use('TkAgg')
+		else:
+			pass
+
 		if(len(parameter)<2):
 			raise Exception('Not enough data to plot a histogram')
 
@@ -190,34 +209,40 @@ class plotter(plotStrategy):
 		plt.close()
 		xmin = np.min(parameter)
 		xmax = np.max(parameter)
-		x_range = np.linspace(xmin, xmax, len(parameter))
+		x_range = np.linspace(xmin*0.8, xmax*1.2, len(parameter))
 		m, s = stats.norm.fit(parameter) # get mean and standard deviation
 		pdf_g = stats.norm.pdf(x_range, m, s) # now get theoretical probability density function in our interval
 		max_pdf = np.max(pdf_g)
 		pdf_g = pdf_g/max_pdf
 		weights = np.ones_like(parameter)/float(len(parameter))
-		plt.plot(x_range, pdf_g, color = 'r', label='Normal Fit') # plot it
 		if(s==0):
 			print('The normal fit has not been plotted as sigma is zero')
 		if(bins==None):
 			bins = 5 # default number of bines if parameter not defined
+		if(cont_parameter is not None):
+			plt.axvline(cont_parameter, color='blue', linestyle='dashed', linewidth=2, label='Ideal case') # plot the extracter parameter value for the ideal case
 		w, bins, patches = plt.hist(parameter,bins,weights=weights, facecolor='green')
+		plt.plot(x_range, np.max(w)*pdf_g, color = 'r', label='Normal Fit') # plot the normal distribution fit
 		plt.axvline(np.mean(parameter), color='r', linestyle='dashed', linewidth=2)
 		plt.title('Distribution parameters: '+r'$\mu='+str(("%0.3f"%m))+r', \sigma$='+str(("%0.3f"%s))+'\n'  )
 		plt.xlabel('Parameter')
 		plt.ylabel('Frecuency')
 		plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 		plt.tight_layout()
-		if(save_plot == None):
-			plt.show()
+		if(save_plot is not None):
+			try:
+				checkPath(save_plot)
+				plt.savefig(save_plot+'hist.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+			except NameError:
+				print('No path to save the plots has been chosen')
 		else:
-			checkPath(save_plot)
-			plt.savefig(save_plot+'/hist.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+			print('No path has been defined\nTrying to use GUI backend...')
+			plt.show()
 		plt.close()
 
 		return
 
-	def qq(self, parameter, save_plot = None):
+	def qq(self, parameter,backend = None, save_plot = None):
 		"""
 		Methods
 		-------
@@ -235,6 +260,15 @@ class plotter(plotStrategy):
 			Path indicating the folder where the user wishes to save the generated plots.		
 
 		"""
+
+		import matplotlib
+		if(backend is None) or (backend is 'Agg'):
+			matplotlib.use('Agg')
+		elif(backend is 'TkAgg'):
+			matplotlib.use('TkAgg')
+		else:
+			pass
+
 		if(len(parameter)<2):
 			raise Exception('Not enough data for a QQ-plot')
 			
@@ -248,16 +282,20 @@ class plotter(plotStrategy):
 		# plt.text(1.5,max(r['y']), "$R^2_{"+str(method)+"}=%1.2f$" % rcoef**2)
 		# plt.legend(loc='lower right', fontsize='medium')
 		plt.title('QQ-plot')
-		if(save_plot == None):
-			plt.show()
+		if(save_plot is not None):
+			try:
+				checkPath(save_plot)
+				plt.savefig(save_plot+'qqplot.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+			except NameError:
+				print('No path to save the plots has been chosen')
 		else:
-			checkPath(save_plot)
-			plt.savefig(save_plot+'/qq.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+			print('No path has been defined\nTrying to use GUI backend...')
+			plt.show()
 		plt.close()
 
 		return
 
-	def varplot(self,fds, save_plot = None):
+	def varplot(self,fds,backend = None, save_plot = None):
 		"""
 		Methods
 		-------
@@ -272,6 +310,14 @@ class plotter(plotStrategy):
 			Path indicating the folder where the user wishes to save the generated plots.
 
 		"""
+		import matplotlib
+		if(backend is None) or (backend is 'Agg'):
+			matplotlib.use('Agg')
+		elif(backend is 'TkAgg'):
+			matplotlib.use('TkAgg')
+		else:
+			pass
+
 		plt.close()
 		fig, ax1 = plt.subplots()	
 		ax2 = ax1.twinx()		
@@ -287,16 +333,28 @@ class plotter(plotStrategy):
 				plt.tight_layout() 	
 			except(TypeError, ValueError):
 				pass					
-		if(save_plot == None):
-			plt.show()
+		if(save_plot is not None):
+			try:
+				checkPath(save_plot)
+				plt.savefig(save_plot+'varplot.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+			except NameError:
+				print('No path to save the plots has been chosen')
 		else:
-			checkPath(save_plot)
-			plt.savefig(save_plot+'/varplot.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+			print('No path has been defined\nTrying to use GUI backend...')
+			plt.show()
 		plt.close()
 		return
 
-	def calib(self,fds1,fds2, save_plot = None):
-		
+	def calib(self,fds1,fds2,backend = None, save_plot = None):
+
+		import matplotlib
+		if(backend is None) or (backend is 'Agg'):
+			matplotlib.use('Agg')
+		elif(backend is 'TkAgg'):
+			matplotlib.use('TkAgg')
+		else:
+			pass
+
 		for i in range(len(fds1.dataset)):
 			try:
 				plt.close()
@@ -314,15 +372,19 @@ class plotter(plotStrategy):
 				plt.tight_layout()
 			except(TypeError, ValueError):
 				plt.close()	
-			if(save_plot == None):
-				plt.show()
-			else:
+		if(save_plot is not None):
+			try:
 				checkPath(save_plot)
-				plt.savefig(save_plot+'/varplot.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
-			plt.close()
+				plt.savefig(save_plot+'calibration.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+			except NameError:
+				print('No path to save the plots has been chosen')
+		else:
+			print('No path has been defined\nTrying to use GUI backend...')
+			plt.show()
+		plt.close()
 		return
 
-	def fomplot(self,i, fom = None,  currents = None, voltages = None, parameter = None,method = None, cc_criteria = None,parameter_vth = None, vg_ext = None, curve_high = None, curve_low = None, vth_high = None, vth_low = None, corriente_low = None, save_plot = None, A=None, B=None, vg_start = None, vg_end = None, vt_sd_medio = None):
+	def fomplot(self,i,fds1, fom = None,  currents = None, voltages = None, parameter = None,method = None, cc_criteria = None,parameter_vth = None, vg_ext = None, curve_high = None, curve_low = None, vth_high = None, vth_low = None, corriente_low = None,backend = None, save_plot = None, A=None, B=None, vg_start = None, vg_end = None, vt_sd_medio = None):
 		"""
 		Methods
 		-------
@@ -339,8 +401,18 @@ class plotter(plotStrategy):
 			Path indicating the folder where the user wishes to save the generated plots.
 		voltages : path or None, optional
 			Path indicating the folder where the user wishes to save the generated plots.			
-			
+		backend : str
+			String containing the name of the backend chosen to either plot or save the plots. The backends available are:
+			'Agg', which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tools for visualizing the plots.'TkAgg' requires the package python3-tk installed in order to run.
 		"""
+		import matplotlib
+		if(backend is None) or (backend is 'Agg'):
+			matplotlib.use('Agg')
+		elif(backend is 'TkAgg'):
+			matplotlib.use('TkAgg')
+		else:
+			pass
+
 		if(currents is not None):
 			if(len(currents)<2):
 				raise Exception('Not enough data for a variability curve')
@@ -365,6 +437,7 @@ class plotter(plotStrategy):
 		if(fom == 'vth'):
 
 			if(method == 'SD') or(method == None):
+
 				title=r'$\mathrm{V_{TH}} $ SD extraction method ->Curve %s' % str(i) #Title of the plot
 				SD_color = 'pink' #Color of the Second Derivative curve
 				SD_linestyle = '--' #Line Style of the Second Derivative curve
@@ -372,7 +445,6 @@ class plotter(plotStrategy):
 				line_color = 'blue'
 				line_style = '-.'
 				line_label = r'$\mathrm{V_{TH}}$' #Label of the FoM vertical line	
-				path_to_save = str(save_plot) + 'vth_SD'+'%03d'%i+'.pdf' #Path to save to plot to
 
 				plt.close()
 				fig, ax1 = plt.subplots()
@@ -385,17 +457,23 @@ class plotter(plotStrategy):
 				props = dict(boxstyle="square,pad=0.1", fc='w', alpha=1,ec='k', lw =2)
 				ax1.text(0.05, 0.95, textstr, transform=ax1.transAxes, fontsize=txt_fontsize,  va='top', bbox=props,family = txt_family, style = txt_style)
 				curve = np.column_stack((voltages,currents))
-				d2 = get_diff(curve, order = 2) #Here we calculate the second derivative for plotting
-				ax2.plot(d2[:, 0],d2[:, 1], color=SD_color, linestyle= SD_linestyle ,label = SD_label)
+				d2_curve = get_diff(curve, order = 2)
+				d2_interp_x, d2_interp_y = interpol(d2_curve[:,0], d2_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
+				d2_interp = np.column_stack((d2_interp_x, d2_interp_y))
+				ax2.plot(d2_interp[:, 0],d2_interp[:, 1], color=SD_color, linestyle= SD_linestyle ,label = SD_label)
 				ax2.yaxis.set_visible(False) #The scale of the second derivative is removed
 				ax1.axvline(x = parameter,color=line_color,label = line_label) #The value of the vth is represented with a vertical line
 				ax1.legend(loc='best',fontsize = txt_fontsize)
 				plt.title(title)
 				plt.tight_layout()
 				if(save_plot is not None):
-					checkPath(save_plot)
-					plt.savefig(path_to_save, bbox_inches='tight', format='pdf', dpi=1200 )
+					try:
+						checkPath(save_plot)
+						plt.savefig(save_plot+'vth_SD_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+					except NameError:
+						print('No path to save the plots has been chosen')
 				else:
+					print('No path has been defined\nTrying to use GUI backend...')
 					plt.show()
 				plt.close()
 
@@ -407,7 +485,6 @@ class plotter(plotStrategy):
 				line_color = 'blue'
 				line_style = '-.'
 				line_label = r'$\mathrm{V_{TH}}$' #Label of the FoM vertical line					
-				path_to_save = str(save_plot) + 'vth_CC'+'%03d'%i+'.pdf' #Path to save to plot to
 
 				plt.close()
 				fig, ax1 = plt.subplots()			
@@ -423,9 +500,13 @@ class plotter(plotStrategy):
 				plt.title(title)
 				plt.tight_layout()				
 				if(save_plot is not None):
-					checkPath(save_plot)
-					plt.savefig(path_to_save, bbox_inches='tight', format='pdf', dpi=1200 )
+					try:
+						checkPath(save_plot)
+						plt.savefig(save_plot+'vth_CC_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+					except NameError:
+						print('No path to save the plots has been chosen')
 				else:
+					print('No path has been defined\nTrying to use GUI backend...')
 					plt.show()
 				plt.close()
 
@@ -433,7 +514,7 @@ class plotter(plotStrategy):
 				title=r'$\mathrm{V_{TH}} $ TD extraction method ->Curve %s' % str(i) #Title of the plot
 				TD_color = 'pink' #Color of the TD curve
 				TD_linestyle = '--' #Line Style of the TD curve
-				TD_label = 'TD criteria' #Label of the TD curve
+				TD_label = 'SD ($d^{3}I_{D}/dV_{G}^{3}$)' #Label of the TD curve
 				line_color = 'blue'
 				line_style = '-.'
 				line_label = r'$\mathrm{V_{TH}}$' #Label of the FoM vertical line	
@@ -450,17 +531,22 @@ class plotter(plotStrategy):
 				props = dict(boxstyle="square,pad=0.1", fc='w', alpha=1,ec='k', lw =2)
 				ax2.text(0.05, 0.95, textstr, transform=ax1.transAxes, fontsize=14,  va='top', bbox=props,family = txt_family, style = txt_style)
 				curve = np.column_stack((voltages,currents))
-				d3 = get_diff(curve, order = 3)
-				ax2.plot(d3[:,0],d3[:,1], color=TD_color, linestyle= TD_linestyle ,label = TD_label)
+				d3_curve = get_diff(curve, order = 3)
+				d3_interp_x, d3_interp_y = interpol(d3_curve[:,0], d3_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
+				ax2.plot(d3_interp_x, d3_interp_y, color=TD_color, linestyle= TD_linestyle ,label = TD_label)
 				ax2.yaxis.set_visible(False) #The scale of the second derivative is removed
 				ax1.axvline(x = parameter,color=line_color, linestyle = line_style, label = line_label) #The value of the vth is represented with a vertical line
 				ax1.legend(loc='best',fontsize = txt_fontsize)
 				plt.title(title)
 				plt.tight_layout()			
 				if(save_plot is not None):
-					checkPath(save_plot)
-					plt.savefig(path_to_save, bbox_inches='tight', format='pdf', dpi=1200 )
+					try:
+						checkPath(save_plot)
+						plt.savefig(save_plot+'vth_TD_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+					except NameError:
+						print('No path to save the plots has been chosen')
 				else:
+					print('No path has been defined\nTrying to use GUI backend...')
 					plt.show()
 				plt.close()
 
@@ -469,16 +555,23 @@ class plotter(plotStrategy):
 				LE_color = 'pink' #Color of the LE curve
 				LE_linestyle = '--' #Line Style of the LE curve
 				LE_label = 'LE criteria' #Label of the LE curve
+				LE_deriv_label ='1rst deriv' #Label of the first derivative
 				line_color = 'blue'
 				line_style = '-.'
 				line_label = r'$\mathrm{V_{TH}}$' #Label of the FoM vertical line				
-				path_to_save = str(save_plot) + 'vth_LE'+'%03d'%i+'.pdf' #Path to save to plot to
 
 				plt.close()
 				fig, ax1 = plt.subplots()
 				ax2 = ax1.twinx()
+				curve = np.column_stack((voltages, currents))
+				d1_curve = get_diff(curve, order = 1)
+				d1_interp_x, d1_interp_y = interpol(d1_curve[:,0], d1_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
+				x_interp, y_interp = interpol(voltages, currents,strategy = fds1.interpolation, n = 1000,s = 0)				
 				ax1.plot(voltages,currents,color = curve_color,label = curve_label)
-				ax1.plot(voltages, A*voltages+B,color=LE_color,linestyle =LE_linestyle, label=LE_label)
+				fit = A*x_interp+B
+				vt_index_le_fit = find_closest(fit,0)
+				ax1.plot(x_interp, A*x_interp+B,color=LE_color,linestyle =LE_linestyle, label=LE_label)
+				ax2.plot(d1_interp_x, d1_interp_y,color=LE_color,linestyle =LE_linestyle, label=LE_deriv_label)
 				ax1.set_xlabel(x_label,labelpad=label_pad)
 				ax1.set_ylabel(y_label,labelpad=label_pad)
 				textstr = '$V_{T}=%.3f$'%(parameter)
@@ -486,13 +579,19 @@ class plotter(plotStrategy):
 				ax2.text(0.05, 0.95, textstr, transform=ax1.transAxes, fontsize=14,  va='top', bbox=props,family = txt_family, style = txt_style)
 				ax1.legend(loc='best')
 				ax2.yaxis.set_visible(False)
+				print(parameter)
 				ax1.axvline(x = parameter,color=line_color, linestyle = line_style, label = line_label) #The value of the vth is represented with a vertical line
+				ax1.axhline(y = 0,color=line_color, linestyle = line_style, label = line_label) #The value of the vth is represented with a vertical line				
 				plt.title(title)
 				plt.tight_layout()
 				if(save_plot is not None):
-					checkPath(save_plot)
-					plt.savefig(path_to_save, bbox_inches='tight', format='pdf', dpi=1200 )
+					try:
+						checkPath(save_plot)
+						plt.savefig(save_plot+'vth_LE_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+					except NameError:
+						print('No path to save the plots has been chosen')
 				else:
+					print('No path has been defined\nTrying to use GUI backend...')
 					plt.show()
 				plt.close()
 
@@ -504,8 +603,7 @@ class plotter(plotStrategy):
 			line_color = 'blue'
 			line_style = '-.'
 			line_label = r'$\mathrm{I_{OFF}}$' #Label of the FoM vertical line
-			path_to_save = str(save_plot) + 'IOFF_'+"%03d"%i+'.pdf' #Path to save to plot to
-
+				
 			plt.close()
 			fig, ax1 = plt.subplots()
 			ax1.set_yscale(yscale)	
@@ -522,9 +620,13 @@ class plotter(plotStrategy):
 			plt.tight_layout()
 
 			if(save_plot is not None):
-				checkPath(save_plot)
-				plt.savefig(save_plot + 'ioff_'+"%03d"%i+'.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+				try:
+					checkPath(save_plot)
+					plt.savefig(save_plot+'IOFF_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+				except NameError:
+					print('No path to save the plots has been chosen')
 			else:
+				print('No path has been defined\nTrying to use GUI backend...')
 				plt.show()
 			plt.close()
 
@@ -545,9 +647,13 @@ class plotter(plotStrategy):
 			plt.tight_layout()
 
 			if(save_plot is not None):
-				checkPath(save_plot)
-				plt.savefig(save_plot + 'ion_'+"%03d"%i+'.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+				try:
+					checkPath(save_plot)
+					plt.savefig(save_plot+'ION_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+				except NameError:
+					print('No path to save the plots has been chosen')
 			else:
+				print('No path has been defined\nTrying to use GUI backend...')
 				plt.show()
 			plt.close()
 
@@ -583,16 +689,15 @@ class plotter(plotStrategy):
 			plt.tight_layout()
 
 			if(save_plot is not None):
-				checkPath('./plots/ss_output/')
-				plt.savefig(save_plot + 'ss_'+"%03d"%i+'.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+				try:
+					checkPath(save_plot)
+					plt.savefig(save_plot+'SS_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+				except NameError:
+					print('No path to save the plots has been chosen')
 			else:
+				print('No path has been defined\nTrying to use GUI backend...')
 				plt.show()
 			plt.close()
-
-		if(fom == 'ratio'):
-			pass
-		if(fom == 'power'):
-			pass
 
 		if(fom == 'dibl'):
 
@@ -616,8 +721,55 @@ class plotter(plotStrategy):
 			plt.tight_layout()
 
 			if(save_plot is not None):
-				checkPath('./plots/dibl_output/')
-				plt.savefig(save_plot + 'dibl_'+"%03d"%i+'.pdf', bbox_inches='tight', format='pdf', dpi=1200 )
+				try:
+					checkPath(save_plot)
+					plt.savefig(save_plot+'DIBL_{0}.pdf'.format(str(i)), bbox_inches='tight', format='pdf', dpi=1200 )
+				except NameError:
+					print('No path to save the plots has been chosen')
 			else:
+				print('No path has been defined\nTrying to use GUI backend...')
 				plt.show()
 			plt.close()
+
+#----------------------------------------------------------------------------------------------------------------	
+
+def interpol(x = None ,y = None, n = None, strategy = None, d = None, s = None):
+	"""
+	Wrapper function for interpolating imported data from a semiconductor's IV curve.
+
+	Parameters
+	----------
+	x : array_like, shape (n,)
+		1-d array containing values of the independent variable.
+	y : array_like
+		Array containing values of the dependent variable.
+		It can have arbitrary number of dimensions, but the length along axis
+		must match the length of x. Values must be finite.
+	strategy : str
+		Keyword for defining the selected interpolation method: The list of available methods includes:
+		'akima', 'pchip' and 'linear'.
+	d : int
+		Degree of the smoothing spline. Must be <= 5.
+		Default is k=3, a cubic spline.
+	s : float
+		Positive smoothing factor used to choose the number of knots. 
+	
+	"""
+
+	if(strategy is None) or (strategy is 'cubic_spline'):
+		temp_interp = interpolator()
+		x_interp, y_interp = temp_interp.spline_interpol(x, y, n, d, s)
+
+	elif(strategy is 'akima'):
+		temp_interp = interpolator()
+		x_interp, y_interp = temp_interp.akima_interpol(x, y, n)
+
+	elif(strategy is 'pchip'):
+		temp_interp = interpolator()
+		x_interp, y_interp = temp_interp.pchip_interpol(x, y, n)
+
+	elif(strategy is 'linear'):
+		temp_interp = interpolator()
+		x_interp, y_interp = temp_interp.lin_interpol(x, y, n)
+
+	return x_interp, y_interp

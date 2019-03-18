@@ -151,20 +151,22 @@ class daoFile(dataDAO, FompyDataset):
 	def __init__(self, parser = None):
 		self.parser = parser
 
-	def load(self, path, parser = None, interval = None, exclude = None, skiprows = None, comments = None):
+	def load(self, path = None,arr = None, parser = None, interval = None, exclude = None):
 		"""
 		Methods
 		-------
-		load(path,filename_user = None, parser = None, interval = None, exclude = None, skiprows = None, comments = None)
+		load(path,filename_user = None, parser = None, interval = None, exclude = None)
 			Class method that extracts :math:`V_{TH}` of a semiconductor's IV curve.
 
 		Parameters
 		----------
 		path : array_like, shape (n,)
 			1-d array containing values of the independent variable.
+		arr : array_like
+			Array of data containing one or more semiconductor's IV curves.
 		parser : function
 			Function that implements how the data is imported to a Fompy Dataset. The list of available functions includes:
-			'JCJB' and 'MC'.
+			'file','array','JCJB' and 'MC'.
 		interval : array_like
 			List of two int values: start(index of the first simulation to load into the Fompy Dataset)
 			and end(index of the last simulation to load into the FompyDataset)
@@ -178,39 +180,46 @@ class daoFile(dataDAO, FompyDataset):
 
 		"""
 		fds = FompyDataset()
-		path_subdirs = []
-		path_filenames = []
-		for dirname, dirnames, filenames in os.walk(path):
-			# print path to all subdirectories.
-			for subdirname in dirnames:
-				path_subdirs.append(os.path.join(dirname, subdirname))
-			# print path to all filenames.
-			for filename in filenames:
-				path_filenames.append(os.path.join(dirname, filename))
+		if(path is not None):
+			path_subdirs = []
+			path_filenames = []
+			for dirname, dirnames, filenames in os.walk(path):
+				# print path to all subdirectories.
+				for subdirname in dirnames:
+					path_subdirs.append(os.path.join(dirname, subdirname))
+				# print path to all filenames.
+				for filename in filenames:
+					path_filenames.append(os.path.join(dirname, filename))
 
-		path_subdirs = sorted(path_subdirs)
-		path_filenames = sorted(path_filenames)
-		# print(path_filenames)
-		# print(path_subdirs)
+			path_subdirs = sorted(path_subdirs)
+			path_filenames = sorted(path_filenames)
+			# print(path_filenames)
+			# print(path_subdirs)
 
-		for i in range(len(path_subdirs)):
-			try:
-				if(path_subdirs[i] in str(path_filenames)):
-					fds.sanity_array.append(1)
-				else:
+			for i in range(len(path_subdirs)):
+				try:
+					if(path_subdirs[i] in str(path_filenames)):
+						fds.sanity_array.append(1)
+					else:
+						fds.sanity_array.append(-1)
+				except IndexError:
 					fds.sanity_array.append(-1)
-			except IndexError:
-				fds.sanity_array.append(-1)
 		
 		# print(fds.sanity_array)
 
-		if(parser==None):
-			print('No parsers have been defined')
-		else:
+		if(parser is file):
 			parser(fds, path, path_subdirs, path_filenames, interval, exclude)
+		elif(parser is JCJB):
+			parser(fds, path, path_subdirs, path_filenames, interval, exclude)
+		elif(parser is array):
+			parser(fds, arr)
+		else:
+			print('No parser has been defined')
+
 		
 		# print(fds.dataset)
-		fds = exclude_indexes(fds,interval, exclude)
+		if(path is not None):
+			fds = exclude_indexes(fds,interval, exclude)
 
 		return fds
 
@@ -230,70 +239,76 @@ class daoFile(dataDAO, FompyDataset):
 
 
 #--------------------------------------------------------------------------------------------------------------
-# def default(fds, path, path_subdirs, path_filenames, interval, exclude, skiprows, comments):
-# 	"""Function that imports the simulated data from a given file and
-# 	stores it into a FoMpy Dataset. The format of this file is asummed to have comments
-# 	starting with '#', without a header and two columns, one for the voltage and one for the currents, separated
-# 	by '\t' delimiters.
+def file(fds, path, path_subdirs, path_filenames, interval, exclude):
+	"""Function that imports the simulated data from a given file and
+	stores it into a FoMpy Dataset. The format of this file is asummed to have comments
+	starting with '#', without a header and two columns, one for the voltage and one for the currents, separated
+	by '\t' delimiters.
 
-# 	Parameters
-# 	----------
-# 	fds : FoMpy Dataset
-# 		Structure of data containing the most important parameters of a semiconductor's IV curve.
-# 	path : str
-# 		Parent path where the simulations are stored
-# 	path_subdirs : str
-# 		List of alphabetically sorted subdirectories found inside the parent directory.
-# 	path_filenames : str
-# 		List of alphabetically sorted files found inside the parent directory.
-# 	interval : array_like
-# 		List of two int values: start(index of the first simulation to load into the Fompy Dataset)
-# 		and end(index of the last simulation to load into the FompyDataset)
-# 	exclude : array_like
-# 		Index values of simulations to exclude.
-# 	skiprows : int
-# 		Number of rows to skip at the begining of a file. 0 rows are skipped by default.
-# 	comments : str
-# 		All the lines starting with this character are considered comments.
-# 		'#' is used by default.
+	Parameters
+	----------
+	fds : FoMpy Dataset
+		Structure of data containing the most important parameters of a semiconductor's IV curve.
+	path : str
+		Parent path where the simulations are stored
+	path_subdirs : str
+		List of alphabetically sorted subdirectories found inside the parent directory.
+	path_filenames : str
+		List of alphabetically sorted files found inside the parent directory.
+	interval : array_like
+		List of two int values: start(index of the first simulation to load into the Fompy Dataset)
+		and end(index of the last simulation to load into the FompyDataset)
+	exclude : array_like
+		Index values of simulations to exclude.
 		
-# 	Returns
-# 	-------
-# 	fds : FoMpy Dataset
-# 		Structure of data containing the FoMpy Dataset.
+	Returns
+	-------
+	fds : FoMpy Dataset
+		Structure of data containing the FoMpy Dataset.
 
-# 	"""
-# 	extension = [".txt", ".dat", ".out", ".csv"]
+	"""
+	extension = [".txt", ".dat", ".out", ".csv"]
 	
-# 	print(path_filenames)
-# 	for item in path_filenames:
-# 		# print(item)
-# 		file_name = os.path.basename(item)
-# 		for ext in extension:
-# 			if(file_name.endswith(ext) is True):
-# 				print('Reading data from %s file -> %s' % (ext ,file_name))
-# 		# print(file_name)
-# 		if(filename_user is not None):
-# 			if(str(filename_user) in file_name):
-# 				if(skiprows != None) & (comments != None):
-# 					data_temp = np.loadtxt(item,comments=comments, skiprows=skiprows, unpack=True, delimiter='\t')
-# 				else:
-# 					data_temp = np.loadtxt(item)
-# 				a, b = data_temp[0], data_temp[1]
-# 				arr = np.column_stack((a, b))
-# 				fds.dataset.append(arr)
-# 		else:
-# 			if(skiprows != None) & (comments != None):
-# 				data_temp = np.loadtxt(item,comments=comments, skiprows=skiprows, unpack=True, delimiter='\t')
-# 			else:
-# 				data_temp = np.loadtxt(item)
-# 			a, b = data_temp[0], data_temp[1]
-# 			arr = np.column_stack((a, b))
-# 			fds.dataset.append(arr)
-			
-# 		# print(fds.dataset)
+	print(path_filenames)
+	for item in path_filenames:
+		# print(item)
+		file_name = os.path.basename(item)
+		for ext in extension:
+			if(file_name.endswith(ext) is True):
+				print('Reading data from %s file -> %s' % (ext ,file_name))
+				data_temp = np.loadtxt(item, skiprows=1, unpack=True, delimiter='\t', comments='#')
+				a, b = data_temp[0], data_temp[1]
+				arr = np.column_stack((a, b))
+				fds.dataset.append(arr)
 
-# 	return fds
+	fds.n_sims = len(fds.dataset)
+
+	return fds
+
+#--------------------------------------------------------------------------------------------------------------
+def array(fds, arr):
+	"""Function that imports the simulated data from a given an array and
+	stores it into a FoMpy Dataset.
+
+	Parameters
+	----------
+	fds : FoMpy Dataset
+		Structure of data containing the most important parameters of a semiconductor's IV curve.
+	arr : array_like
+		Array of data containing one or more semiconductor's IV curves.
+
+	Returns
+	-------
+	fds : FoMpy Dataset
+		Structure of data containing the FoMpy Dataset.
+
+	"""
+	for i in range(len(arr)):
+		fds.dataset.append(arr[i])
+
+	fds.n_sims = len(fds.dataset)
+
+	return fds
 
 #--------------------------------------------------------------------------------------------------------------
 def JCJB(fds, path, path_subdirs, path_filenames, interval, exclude):
