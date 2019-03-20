@@ -239,6 +239,18 @@ An example of how to load the curves to a FoMpy Dataset can be seen below::
 .. Conditioning your data(TODO)
 .. =================================
 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Interpolation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+VERY IMPORTANT TO EXPLAIN THAT FIRST WE HAVE TO DIFFERENTIATE THE DISCRETE SIMULATED CURVE AND THEN INTERPOLATE, NEVER 
+IN THE OTHER ORDER.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Differentiation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EXPLAIN THE GRADIENT
+
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. norm
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
