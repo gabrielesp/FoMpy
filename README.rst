@@ -11,12 +11,12 @@ What is this?
 The source code of FoMpy can be downloaded from https://github.com/gabrielesp/FoMpy and is purely intended to run as a library for Linux systems. Note that the following instalation steps work on Debian-derived distributions: e.g. for Ubuntu 16.04 or later and CentOS (tested). Also, FoMpy has been proven to work in **Python 3.5.4**.
 FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries can be seen below:
 
-	*setuptools
-	*numpy
-	*scipy
-	*matplotlib
-	*pytest
-	*probscale
+	* setuptools
+	* numpy
+	* scipy
+	* matplotlib
+	* pytest
+	* probscale
 
 Currently FoMpy can be downloaded from https://test.pypi.org/ through the following url using pip3::
 
