@@ -18,11 +18,11 @@ FoMpy uses several external libraries that need to be installed in order to be a
 	* pytest
 	* probscale
 
-Currently FoMpy can be downloaded from https://test.pypi.org/ through the following url using pip3::
+Currently FoMpy can be downloaded from https://test.pypi.org/project/fompy/ through the following url using pip3::
 
 	pip3 install --extra-index-url https://test.pypi.org/simple/ fompy
 
-**Further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf**
+Detailed instalation steps can be found futher down this tutorial and further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf .
 
 1. Introduction
 ---------------
@@ -50,12 +50,16 @@ First you need to have installed **pip3** on your system. For Ubuntu, open up a 
 
 	sudo apt install python3-pip
 
-The use of virtual enviroments is highly encouraged. The main purpose of Python virtual environments is to create an isolated environment for Python projects so that no dependency issues with other projects can appear. In order to use them run the following commands in a terminal::
+The use of virtual enviroments is highly encouraged. The main purpose of Python virtual environments is to create an isolated environment for Python projects so that no modular dependency issues with other projects can appear. In order to use them run the following commands in a terminal::
 
+	#Install virtual enviroments
+	sudo apt install python3-venv 
 
-	sudo apt install python3-venv #Install virtual enviroments
-	python3 -m venv .venv #Create and name the enviroment "venv"
-	source .venv/bin/activate #Activate the venv
+	#Create and name the enviroment "venv"
+	python3 -m venv .venv
+
+	#Activate the venv
+	source .venv/bin/activate
 
 Note that as of this moment you're inside a virtual enviroment (Notice (.venv) $ in the terminal) with a limited/isolated version of python and therefore you will have to install all the packages you need for that particular project (including the ones you may have installed in the system as they may not be installed in the virtual enviroment).
 
@@ -72,7 +76,7 @@ and check the library is installed by importing it from a **python3 terminal**::
 Unless an error comes up, FoMpy is now installed on your virtual enviroment.
 
 
-**Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install the needed modules them yourself, just by typing in a terminal**::
+**Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install the needed modules them yourself by typing in a terminal**::
 	
 	pip3 install setuptools
 	pip3 install pytest
@@ -165,7 +169,7 @@ Additionally if the user already has the IV curves loaded in an array the proces
 Note that all the operations of FoMpy are dependant on how the Dataset is created, therefore try to concatenate several arrays according to the previous example.
 
 
-**3.Import from an JCJB used in VENDES simulator [#]_**
+**3.Import from an JCJB used in VENDES simulator**[#]_
 
 Finally, FoMpy has predefined a parser thath reads an in-house format called 'JCJB'. In order to load the dada from these files, FoMpy has a importing tool with an input parameter for the parser. Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
 
