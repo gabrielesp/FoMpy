@@ -284,7 +284,29 @@ def plot(fds1, fds2 = None, plot_type = None, fom = None, parameter=None,  metho
 				temp_ion.plot(fds1 = fds1, parameter = parameter_ion, curves = curves,parameter_vth=parameter_vth,backend = backend, save_plot = save_plot)
 		elif(str(fom) == 'ss'):
 			temp_ss = ss_ext()
-			parameter_ss, curves, vt_sd_medio= temp_ss.extraction(fds1, vg_start, vg_end)
+
+			if(vg_end is None):
+				if(vg_start is None):
+					vg_start = 0.0
+				temp_vth = vth_ext()
+				if (method is not 'LE'):
+					parameter_vth, curves= temp_vth.extraction(fds1, method, cc_criteria)
+					parameter_ss, curves, vt_sd_medio = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+				else:
+					parameter_vth, curves, A, B= temp_vth.extraction(fds1, method, cc_criteria)
+					parameter_ss, curves, vt_sd_medio = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+			elif(vg_end is not None):
+				if(vg_start is None):
+					vg_start = 0.0			
+				temp_vth = vth_ext()
+				if (method is not 'LE'):
+					parameter_vth, curves= temp_vth.extraction(fds1, method, cc_criteria)
+					parameter_ss, curves, vt_sd_medio = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+				else:
+					parameter_vth, curves, A, B= temp_vth.extraction(fds1, method, cc_criteria)
+					parameter_ss, curves, vt_sd_medio = temp_ss.extraction(fds1,parameter_vth, vg_start = vg_start, vg_end = vg_end)
+			else:
+				pass
 			temp_ss.plot(fds1 = fds1, parameter = parameter_ss, curves = curves, vg_start = vg_start, vg_end = vg_end, vt_sd_medio = vt_sd_medio,backend = backend, save_plot = save_plot)
 		elif(str(fom) == 'dibl'):
 			temp = dibl_ext()

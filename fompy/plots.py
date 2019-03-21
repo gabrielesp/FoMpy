@@ -406,6 +406,7 @@ class plotter(plotStrategy):
 			'Agg', which only works whenever saving plots to files (non-GUI) and 'TkAgg' a GUI tools for visualizing the plots.'TkAgg' requires the package python3-tk installed in order to run.
 		"""
 		import matplotlib
+
 		if(backend is None) or (backend is 'Agg'):
 			matplotlib.use('Agg')
 		elif(backend is 'TkAgg'):
@@ -579,7 +580,6 @@ class plotter(plotStrategy):
 				ax2.text(0.05, 0.95, textstr, transform=ax1.transAxes, fontsize=14,  va='top', bbox=props,family = txt_family, style = txt_style)
 				ax1.legend(loc='best')
 				ax2.yaxis.set_visible(False)
-				print(parameter)
 				ax1.axvline(x = parameter,color=line_color, linestyle = line_style, label = line_label) #The value of the vth is represented with a vertical line
 				ax1.axhline(y = 0,color=line_color, linestyle = line_style, label = line_label) #The value of the vth is represented with a vertical line				
 				plt.title(title)
@@ -658,11 +658,10 @@ class plotter(plotStrategy):
 			plt.close()
 
 		if(fom == 'ss'):
-
 			plt.close()
 			fig, ax1 = plt.subplots()
-			ax1.set_yscale("log")
-			plt.plot(voltages, currents, 'o')
+			#ax1.set_yscale("log")
+			plt.plot(voltages, np.log10(currents), 'o')
 			center = find_closest(voltages,(voltages[0]+voltages[-1])/2)
 			if(vg_start is None) and (type(vg_end) is float):
 				index = find_closest(voltages,vg_end)

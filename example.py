@@ -3,8 +3,8 @@ import fompy
 # ------------------------------------------------------------------------------------------#
 # BASIC COMMANDS (Example: Vth extraction)
 
-#path_file_JCJB = './data/sim_FinFET_vd_high/'
-#fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# path_file_JCJB = './data/sim_FinFET_vd_high/'
+# fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
 #fds.print_parameters()
 
 # vth_array = fompy.extract(fds, fom = 'vth')
@@ -159,33 +159,36 @@ import fompy
 
 # ss_array = fompy.extract(fds, fom = 'ss', method = 'LE')
 # print(ss_array)
+# fompy.plot(fds, fom = 'ss', method='LE')
 
 # ss_array = fompy.extract(fds, fom = 'ss', vg_start = 0.05)
 # print(ss_array)
+# fompy.plot(fds, fom = 'ss', vg_start = 0.05)
 
 # ss_array = fompy.extract(fds, fom = 'ss', vg_start = 0.05, vg_end = 0.2)
 # print(ss_array)
+# fompy.plot(fds, fom = 'ss', vg_start = 0.05, vg_end = 0.2)
 
 # ss_array = fompy.extract(fds, fom = 'ss', vg_end = 0.2)
 # print(ss_array)
-
+# fompy.plot(fds, fom = 'ss',vg_end = 0.2, save_plot='./ss/')
 
 # ------------------------------------------------------------------------------------------#
 # DIBL EXTRACTION & PLOT FULL LIST OF ARGUMENTS
 
-path_file_JCJB = './data/sim_FinFET_vd_high/'
-path_file_low = './data/sim_FinFET_vd_low/'
+#path_file_JCJB = './data/sim_FinFET_vd_high/'
+#path_file_low = './data/sim_FinFET_vd_low/'
 
 
-fds_hdb = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
-fds_ldb = fompy.dataset(path_file_low, parser=fompy.JCJB)
-fds_hdb.drain_bias_value = 0.7
-fds_ldb.drain_bias_value = 0.05
+#fds_hdb = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+#fds_ldb = fompy.dataset(path_file_low, parser=fompy.JCJB)
+#fds_hdb.drain_bias_value = 0.7
+#fds_ldb.drain_bias_value = 0.05
 
-dibl_array = fompy.extract(fds_hdb, fds_ldb, fom = 'dibl', method = 'SD')
-print(dibl_array)
+#dibl_array = fompy.extract(fds_hdb, fds_ldb, fom = 'dibl', method = 'SD')
+#print(dibl_array)
 
-fompy.plot(fds_hdb, fds_ldb, fom = 'dibl', save_plot='./dibl/')
+#fompy.plot(fds_hdb, fds_ldb, fom = 'dibl', save_plot='./dibl/')
 
 
 # ------------------------------------------------------------------------------------------#
