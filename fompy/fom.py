@@ -219,20 +219,21 @@ class vth_ext(_extractor):
 
 					x_interp, y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy = fds1.interpolation, n = 1000,s = 0)
 					curve = np.column_stack((x_interp, y_interp))
+
 					try:
-						d1_max_index = np.argmax(d1[index_lower_bound:index_higher_bound,1])
-						vt_temp_d1 = find_closest(x_interp, d1[d1_max_index+index_lower_bound, 0])
+						d1_init = find_closest(x_interp,d1[0,0])
+						d1_max_index = np.argmax(d1[index_lower_bound:index_higher_bound,1])+index_lower_bound+d1_init
+						vt_temp_d1 = find_closest(x_interp,d1[d1_max_index,0])
 					except ValueError:
 						print('Multiple indexes')
 
 					corriente_vt_temp =curve[vt_temp_d1,1]
-					lim1 = int(vt_temp_d1*0.85)
-					lim2 = int(vt_temp_d1*1.15)
+					lim1 = int(vt_temp_d1*0.9)
+					lim2 = int(vt_temp_d1*1.1)
 
 					A_i,B_i = curve_fit(line, curve[lim1:lim2,0],curve[lim1:lim2,1])[0]
 					fit = A_i*x_interp+B_i
 					vt_index_le_fit = find_closest(fit,0)
-
 
 					if(fds1.drain_bias_label=='High'):
 						try:
@@ -242,8 +243,8 @@ class vth_ext(_extractor):
 							print('The drain bias value has not been defined')
 					else:
 						vd_low = fds1.drain_bias_value
-						vt_LE = curve[vt_index_le,0]+vd_low/2
-
+						vt_LE = curve[vt_index_le_fit,0]+vd_low/2
+				
 					parameter.append(float(("%0.3f"%vt_LE)))
 					
 					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))

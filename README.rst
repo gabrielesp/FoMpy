@@ -169,7 +169,7 @@ Additionally if the user already has the IV curves loaded in an array the proces
 Note that all the operations of FoMpy are dependant on how the Dataset is created, therefore try to concatenate several arrays according to the previous example.
 
 
-**3.Import from an JCJB used in VENDES simulator**[#]_
+**3.Import from an JCJB used in VENDES simulator[#]_**
 
 Finally, FoMpy has predefined a parser thath reads an in-house format called 'JCJB'. In order to load the dada from these files, FoMpy has a importing tool with an input parameter for the parser. Inside the folder './data/' the user has to store all simulations in individual folders (i.e. './data/sim_1/current_file_1.txt', './data/sim_2/current_file_2.txt', etc)::
 

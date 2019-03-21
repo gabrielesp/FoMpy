@@ -450,14 +450,16 @@ class plotter(plotStrategy):
 				plt.close()
 				fig, ax1 = plt.subplots()
 				ax2 = ax1.twinx()
-				ax1.plot(voltages,currents,color = curve_color,label = curve_label)
+				curve = np.column_stack((voltages,currents))
+				if(fds1.drain_bias_label=='High'):
+					curve[:,1] = np.power( curve[:,1],0.5)
+				ax1.plot(curve[:,0], curve[:,1],color = curve_color,label = curve_label)
 				ax1.set_yscale(yscale)
 				ax1.set_xlabel(x_label,labelpad=label_pad)
 				ax1.set_ylabel(y_label,labelpad=label_pad)
 				textstr = '$V_{T}=%.3f$'%(parameter)
 				props = dict(boxstyle="square,pad=0.1", fc='w', alpha=1,ec='k', lw =2)
 				ax1.text(0.05, 0.95, textstr, transform=ax1.transAxes, fontsize=txt_fontsize,  va='top', bbox=props,family = txt_family, style = txt_style)
-				curve = np.column_stack((voltages,currents))
 				d2_curve = get_diff(curve, order = 2)
 				d2_interp_x, d2_interp_y = interpol(d2_curve[:,0], d2_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
 				d2_interp = np.column_stack((d2_interp_x, d2_interp_y))
@@ -467,6 +469,7 @@ class plotter(plotStrategy):
 				ax1.legend(loc='best',fontsize = txt_fontsize)
 				plt.title(title)
 				plt.tight_layout()
+				plt.show()
 				if(save_plot is not None):
 					try:
 						checkPath(save_plot)
@@ -524,14 +527,17 @@ class plotter(plotStrategy):
 				plt.close()
 				fig, ax1 = plt.subplots()
 				ax2 = ax1.twinx()
-				ax1.plot(voltages,currents,color = curve_color,label = curve_label)
+				curve = np.column_stack((voltages,currents))
+				if(fds1.drain_bias_label=='High'):
+					curve[:,1] = np.power( curve[:,1],0.5)
+				ax1.plot(curve[:,0], curve[:,1],color = curve_color,label = curve_label)
 				ax1.set_yscale(yscale)					
 				ax1.set_xlabel(x_label,labelpad=label_pad)
 				ax1.set_ylabel(y_label,labelpad=label_pad)
 				textstr = '$V_{T}=%.3f$'%(parameter)
 				props = dict(boxstyle="square,pad=0.1", fc='w', alpha=1,ec='k', lw =2)
 				ax2.text(0.05, 0.95, textstr, transform=ax1.transAxes, fontsize=14,  va='top', bbox=props,family = txt_family, style = txt_style)
-				curve = np.column_stack((voltages,currents))
+
 				d3_curve = get_diff(curve, order = 3)
 				d3_interp_x, d3_interp_y = interpol(d3_curve[:,0], d3_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
 				ax2.plot(d3_interp_x, d3_interp_y, color=TD_color, linestyle= TD_linestyle ,label = TD_label)
@@ -554,6 +560,7 @@ class plotter(plotStrategy):
 			if(method == 'LE'):
 				title=r'$\mathrm{V_{TH}} $ LE extraction method ->Curve %s' % str(i) #Title of the plot
 				LE_color = 'pink' #Color of the LE curve
+				LE_deriv_color = 'red' #Color of the LE curve
 				LE_linestyle = '--' #Line Style of the LE curve
 				LE_label = 'LE criteria' #Label of the LE curve
 				LE_deriv_label ='1rst deriv' #Label of the first derivative
@@ -565,6 +572,8 @@ class plotter(plotStrategy):
 				fig, ax1 = plt.subplots()
 				ax2 = ax1.twinx()
 				curve = np.column_stack((voltages, currents))
+				if(fds1.drain_bias_label=='High'):
+					curve[:,1] = np.power( curve[:,1],0.5)
 				d1_curve = get_diff(curve, order = 1)
 				d1_interp_x, d1_interp_y = interpol(d1_curve[:,0], d1_curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
 				x_interp, y_interp = interpol(voltages, currents,strategy = fds1.interpolation, n = 1000,s = 0)				
@@ -572,7 +581,7 @@ class plotter(plotStrategy):
 				fit = A*x_interp+B
 				vt_index_le_fit = find_closest(fit,0)
 				ax1.plot(x_interp, A*x_interp+B,color=LE_color,linestyle =LE_linestyle, label=LE_label)
-				ax2.plot(d1_interp_x, d1_interp_y,color=LE_color,linestyle =LE_linestyle, label=LE_deriv_label)
+				ax2.plot(d1_interp_x, d1_interp_y,color=LE_deriv_color,linestyle =LE_linestyle, label=LE_deriv_label)
 				ax1.set_xlabel(x_label,labelpad=label_pad)
 				ax1.set_ylabel(y_label,labelpad=label_pad)
 				textstr = '$V_{T}=%.3f$'%(parameter)
