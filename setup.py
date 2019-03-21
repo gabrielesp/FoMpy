@@ -62,8 +62,8 @@ setup(
     author_email='gabrielespineiradeus@gmail.com',
     license='MIT',
     url='https://gitlab.citius.usc.es/gabriel.espineira/FoMPy',
-    setup_requires=['setuptools','pytest','numpy'],
-    install_requires=['scipy','probscale', 'matplotlib'],
+    setup_requires=['setuptools','numpy'],
+    install_requires=['scipy','pytest','probscale', 'matplotlib'],
     packages=['fompy'],
     classifiers=[
         'Topic :: Utilities',

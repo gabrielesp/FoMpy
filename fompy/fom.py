@@ -236,13 +236,13 @@ class vth_ext(_extractor):
 
 					if(fds1.drain_bias_label=='High'):
 						try:
-							vd_high = fds1.drain_bias_value
-							vt_LE = curve[vt_index_le,0]-vd_high/2
+							vt_LE = x_interp[vt_index_le_fit]
 							curve[:,1] = np.power( curve[:,1],2)
 						except NameError:
 							print('The drain bias value has not been defined')
 					else:
-						vt_LE = x_interp[vt_index_le_fit]
+						vd_low = fds1.drain_bias_value
+						vt_LE = curve[vt_index_le,0]+vd_low/2
 
 					parameter.append(float(("%0.3f"%vt_LE)))
 					
