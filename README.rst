@@ -18,6 +18,8 @@ FoMpy uses several external libraries that need to be installed in order to be a
 	* pytest
 	* probscale
 
+Most of these modules will be installed automatically when installing FoMpy. The pytest module is not listed as a hard dependency so you will have to install it beforehand.
+
 Currently FoMpy can be downloaded from https://test.pypi.org/project/fompy/ through the following url using pip3::
 
 	pip3 install --extra-index-url https://test.pypi.org/simple/ fompy

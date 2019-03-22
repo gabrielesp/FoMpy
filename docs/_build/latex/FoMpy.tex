@@ -53,7 +53,7 @@
 
 
 \title{FoMpy Documentation}
-\date{Mar 18, 2019}
+\date{Mar 22, 2019}
 \release{0.2.0}
 \author{Gabriel Espiñeira}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -80,7 +80,7 @@ In the figure below the used can see the basic workflow behind the FoMpy library
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=600\sphinxpxdimen,height=400\sphinxpxdimen]{{simplified_diagram}.jpg}
+\noindent\sphinxincludegraphics[width=600\sphinxpxdimen,height=300\sphinxpxdimen]{{simplified_diagram}.jpg}
 \caption{Diagram showing the basic methodology of the FoMpy library. After loading the data into a FoMpy Dataset, using the various tools implemented in the library, the user is able to process and extract important parameters from a given dataset.}\label{\detokenize{index:id1}}\end{figure}
 
 Next, a full list of all the components of the FoMpy library will be presented.
@@ -453,26 +453,28 @@ This module includes the routines used to import data into a FoMpy Dataset. Some
 examples showing how to import the data using these functions can be seen below:
 \subsubsection*{Example}
 
-If the parser is not defined, the default parser is used, where a simple voltage-current file
-is assumed to be defined as input:
+If the file parser is defined a simple voltage-current file is defined as input:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{fompy}
 \PYG{n}{path\PYGZus{}file} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/default/}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file}\PYG{p}{)}
+\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{file}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-or:
+or if an array is passed as input:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{fompy}
-\PYG{n}{path\PYGZus{}file} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/default/}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{data*}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}  \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{default}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{}Here the arrays are defined}
+\PYG{n}{arr1} \PYG{o}{=}\PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mf}{0.00e+00}\PYG{p}{,} \PYG{l+m+mf}{1.00e\PYGZhy{}09}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.20e\PYGZhy{}08}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{2.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.20e\PYGZhy{}07}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{3.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.74e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{4.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{9.90e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{5.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.20e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{6.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.22e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{7.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{4.16e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{8.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{5.23e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{9.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{6.04e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e+00}\PYG{p}{,} \PYG{l+m+mf}{6.60e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{arr2} \PYG{o}{=}\PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mf}{0.00e+00}\PYG{p}{,} \PYG{l+m+mf}{1.00e\PYGZhy{}09}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.15e\PYGZhy{}08}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{2.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.18e\PYGZhy{}07}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{3.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.72e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{4.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{9.85e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{5.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.12e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{6.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.16e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{7.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{4.10e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{8.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{5.46e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{9.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{6.15e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e+00}\PYG{p}{,} \PYG{l+m+mf}{6.57e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{arrays} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{(}\PYG{n}{arr1}\PYG{p}{,} \PYG{n}{arr2}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}Here the arrays are put together}
+\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{arr} \PYG{o}{=} \PYG{n}{arrays}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{array}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-Moreover, another types of parsers can be selected:
+Moreover, when parsers for another file-types are be selected:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -905,10 +907,12 @@ in a python3 command line:
 \PYG{k+kn}{import} \PYG{n+nn}{fompy}
 \PYG{n}{path\PYGZus{}file\PYGZus{}high} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}high/}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}JCJB}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
+\PYG{n}{fds}\PYG{o}{.}\PYG{n}{drain\PYGZus{}bias\PYGZus{}label} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{High}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{vth\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-If a different FoM is needed, the user has to change the keyword fom, from ‘vth’ to another one contained in the list shown before.
+If you are not using a JCJB file, the attribute of drain\_bias\_label has to be defined when using the data of a FoMpy dataset at high drain bias, otherwise low drain bias formulas will be used.
+Also if a different FoM is needed, the user has to change the keyword fom, from ‘vth’ to another one contained in the list shown before.
 
 Additionally, if the user wants to obtain the DIBL, two different FoMpy Datasets have to be imported:
 
@@ -1238,7 +1242,7 @@ Class method that saves the extracted \(I_{ON}\) values.
 \phantomsection\label{\detokenize{index:fompy.fom.ss_ext}}\pysigline{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{fompy.fom.}}\sphinxbfcode{\sphinxupquote{ss\_ext}}}~\index{extraction() (fompy.fom.ss\_ext method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fom.ss_ext.extraction}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{extraction}}}{\emph{fds1}, \emph{vg\_start=None}, \emph{vg\_end=None}}{}~\index{extraction() (fompy.fom.ss\_ext method)}
+\phantomsection\label{\detokenize{index:fompy.fom.ss_ext.extraction}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{extraction}}}{\emph{fds1}, \emph{vth=None}, \emph{vg\_start=None}, \emph{vg\_end=None}}{}~\index{extraction() (fompy.fom.ss\_ext method)}
 
 \begin{fulllineitems}
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{extraction}}}{\emph{fds1}, \emph{vg\_start = None}, \emph{vg\_end = None}}{}
@@ -1251,6 +1255,9 @@ Class method that extracts \(SS\) of a semiconductor’s IV curve.
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{fds1}} (\sphinxstyleliteralemphasis{\sphinxupquote{FoMpy Dataset}}) \textendash{} Structure of data containing the most important parameters of a semiconductor’s IV curve.
 Needed for the extraction of any FoM.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{vth}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of vth extracted values used for obtaining SS (using the vth-dependant formula).
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{vg\_start}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} Gate voltage defining the start of the interval in which the Subthreshold Swing is extracted.
@@ -1446,7 +1453,7 @@ In order to generate a plot of the FoMs (fomplot):
 \PYG{n}{path\PYGZus{}file\PYGZus{}high} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}high/}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}JCJB}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
 \PYG{n}{vth\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./vth\PYGZus{}plots/sd/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 and FoMpy will generate a single graph for each simulation showing the IV curve with its correspondent FoM extraction criteria and the extracted FoM.
@@ -1465,7 +1472,7 @@ two FoMpy Datasets are needed:
 \PYG{n}{fds\PYGZus{}hdb}\PYG{o}{.}\PYG{n}{drain\PYGZus{}bias\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mf}{0.7}
 \PYG{n}{fds\PYGZus{}ldb}\PYG{o}{.}\PYG{n}{drain\PYGZus{}bias\PYGZus{}value} \PYG{o}{=} \PYG{l+m+mf}{0.05}
 
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,} \PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dibl}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,} \PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dibl}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./dibl/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 Additionally, other types of plots can be generated. The list of available plots includes: ‘iv’, ‘hist’, ‘qq’, ‘varplot’, ‘calib’ and ‘fomplot’. These are some examples:
@@ -1476,12 +1483,12 @@ Additionally, other types of plots can be generated. The list of available plots
 \PYG{n}{fds\PYGZus{}var} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}var}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
 \PYG{n}{vth\PYGZus{}array} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{extract}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hist}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{,} \PYG{n}{bins}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{qq}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{plot\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hist}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{,} \PYG{n}{bins}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{cont\PYGZus{}parameter}\PYG{o}{=} \PYG{l+m+mf}{0.38}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./variability/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{plot\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{qq}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{parameter}\PYG{o}{=}\PYG{n}{vth\PYGZus{}array}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./variability/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
 \PYG{n}{path\PYGZus{}file\PYGZus{}var} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/simulations/}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{fds\PYGZus{}var} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{path\PYGZus{}file\PYGZus{}var}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{JCJB}\PYG{p}{)}
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}var}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{varplot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{plot\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{varplot}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./variability/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
 \PYG{n}{path\PYGZus{}file\PYGZus{}JCJB} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}high/}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{n}{path\PYGZus{}file\PYGZus{}low} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./data/sim\PYGZus{}FinFET\PYGZus{}vd\PYGZus{}low/}\PYG{l+s+s1}{\PYGZsq{}}
@@ -1495,7 +1502,7 @@ Additionally, other types of plots can be generated. The list of available plots
 \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{normalize}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,} \PYG{n}{norm\PYGZus{}value}\PYG{p}{)}
 \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{normalize}\PYG{p}{(}\PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n}{norm\PYGZus{}value}\PYG{p}{)}
 
-\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,}\PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{calib}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds\PYGZus{}hdb}\PYG{p}{,}\PYG{n}{fds\PYGZus{}ldb}\PYG{p}{,} \PYG{n}{plot\PYGZus{}type}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{calib}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./calibration/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 \index{interpol() (in module fompy.plots)}
 

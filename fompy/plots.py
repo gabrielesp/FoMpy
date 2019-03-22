@@ -19,7 +19,7 @@ In order to generate a plot of the FoMs (fomplot)::
 	path_file_high = './data/sim_FinFET_vd_high/'
 	fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
 	vth_array = fompy.extract(fds, fom = 'vth')
-	fompy.plot(fds, fom = 'vth')
+	fompy.plot(fds, fom = 'vth', save_plot='./vth_plots/sd/')
 
 and FoMpy will generate a single graph for each simulation showing the IV curve with its correspondent FoM extraction criteria and the extracted FoM.
 
@@ -35,7 +35,7 @@ two FoMpy Datasets are needed::
 	fds_hdb.drain_bias_value = 0.7
 	fds_ldb.drain_bias_value = 0.05
 
-	fompy.plot(fds_hdb, fds_ldb, fom = 'dibl')
+	fompy.plot(fds_hdb, fds_ldb, fom = 'dibl', save_plot='./dibl/')
 
 Additionally, other types of plots can be generated. The list of available plots includes: 'iv', 'hist', 'qq', 'varplot', 'calib' and 'fomplot'. These are some examples::
 
@@ -43,12 +43,12 @@ Additionally, other types of plots can be generated. The list of available plots
 	fds_var = fompy.dataset(path_file_var, parser=fompy.JCJB)
 	vth_array = fompy.extract(fds_var, fom = 'vth')
 
-	fompy.plot(fds_var, type='hist', parameter=vth_array, bins=5)
-	fompy.plot(fds_var, type='qq', parameter=vth_array)
+	fompy.plot(fds, plot_type='hist', parameter=vth_array, bins=10,cont_parameter= 0.38, save_plot='./variability/')
+	fompy.plot(fds, plot_type='qq', parameter=vth_array, save_plot='./variability/')
 
 	path_file_var = './data/simulations/'
 	fds_var = fompy.dataset(path_file_var, parser=fompy.JCJB)
-	fompy.plot(fds_var, type='varplot')
+	fompy.plot(fds, plot_type='varplot', save_plot='./variability/')
 
 
 	path_file_JCJB = './data/sim_FinFET_vd_high/'
@@ -63,7 +63,7 @@ Additionally, other types of plots can be generated. The list of available plots
 	fompy.normalize(fds_hdb, norm_value)
 	fompy.normalize(fds_ldb, norm_value)
 
-	fompy.plot(fds_hdb,fds_ldb, type='calib')
+	fompy.plot(fds_hdb,fds_ldb, plot_type='calib', save_plot='./calibration/')
 """
 
 from abc import ABCMeta, abstractmethod

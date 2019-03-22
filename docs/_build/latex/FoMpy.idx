@@ -19,8 +19,8 @@
 \indexentry{n\_sims (fompy.fds.FompyDataset attribute)|hyperpage}{6}
 \indexentry{sanity\_array (fompy.fds.FompyDataset attribute)|hyperpage}{6}
 \indexentry{norm (fompy.fds.FompyDataset attribute)|hyperpage}{6}
-\indexentry{ext\_method (fompy.fds.FompyDataset attribute)|hyperpage}{6}
-\indexentry{drain\_bias\_label (fompy.fds.FompyDataset attribute)|hyperpage}{6}
+\indexentry{ext\_method (fompy.fds.FompyDataset attribute)|hyperpage}{7}
+\indexentry{drain\_bias\_label (fompy.fds.FompyDataset attribute)|hyperpage}{7}
 \indexentry{drain\_bias\_value (fompy.fds.FompyDataset attribute)|hyperpage}{7}
 \indexentry{interpolation (fompy.fds.FompyDataset attribute)|hyperpage}{7}
 \indexentry{filter (fompy.fds.FompyDataset attribute)|hyperpage}{7}
@@ -56,26 +56,26 @@
 \indexentry{extraction() (fompy.fom.ss\_ext method)|hyperpage}{13}
 \indexentry{extraction() (fompy.fom.ss\_ext method)|hyperpage}{13}
 \indexentry{plot() (fompy.fom.ss\_ext method)|hyperpage}{13}
-\indexentry{save\_results\_to\_file() (fompy.fom.ss\_ext method)|hyperpage}{13}
+\indexentry{save\_results\_to\_file() (fompy.fom.ss\_ext method)|hyperpage}{14}
 \indexentry{vth\_ext (class in fompy.fom)|hyperpage}{14}
 \indexentry{extraction() (fompy.fom.vth\_ext method)|hyperpage}{14}
 \indexentry{extraction() (fompy.fom.vth\_ext method)|hyperpage}{14}
 \indexentry{plot() (fompy.fom.vth\_ext method)|hyperpage}{14}
-\indexentry{save\_results\_to\_file() (fompy.fom.vth\_ext method)|hyperpage}{14}
+\indexentry{save\_results\_to\_file() (fompy.fom.vth\_ext method)|hyperpage}{15}
 \indexentry{fompy.plots (module)|hyperpage}{15}
 \indexentry{interpol() (in module fompy.plots)|hyperpage}{16}
 \indexentry{plotStrategy (class in fompy.plots)|hyperpage}{16}
 \indexentry{plotter (class in fompy.plots)|hyperpage}{16}
 \indexentry{fomplot() (fompy.plots.plotter method)|hyperpage}{16}
-\indexentry{hist() (fompy.plots.plotter method)|hyperpage}{16}
+\indexentry{hist() (fompy.plots.plotter method)|hyperpage}{17}
 \indexentry{iv() (fompy.plots.plotter method)|hyperpage}{17}
 \indexentry{iv() (fompy.plots.plotter method)|hyperpage}{17}
 \indexentry{qq() (fompy.plots.plotter method)|hyperpage}{17}
 \indexentry{varplot() (fompy.plots.plotter method)|hyperpage}{17}
-\indexentry{fompy.wrappers (module)|hyperpage}{17}
+\indexentry{fompy.wrappers (module)|hyperpage}{18}
 \indexentry{dataset() (in module fompy.wrappers)|hyperpage}{18}
 \indexentry{extract() (in module fompy.wrappers)|hyperpage}{18}
-\indexentry{filter() (in module fompy.wrappers)|hyperpage}{18}
+\indexentry{filter() (in module fompy.wrappers)|hyperpage}{19}
 \indexentry{normalize() (in module fompy.wrappers)|hyperpage}{19}
 \indexentry{plot() (in module fompy.wrappers)|hyperpage}{19}
 \indexentry{savetotxt() (in module fompy.wrappers)|hyperpage}{20}

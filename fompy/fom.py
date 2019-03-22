@@ -18,9 +18,11 @@ in a python3 command line::
 	import fompy
 	path_file_high = './data/sim_FinFET_vd_high/'
 	fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+	fds.drain_bias_label = 'High'
 	vth_array = fompy.extract(fds, fom = 'vth')
 
-If a different FoM is needed, the user has to change the keyword fom, from 'vth' to another one contained in the list shown before.
+If you are not using a JCJB file, the attribute of drain_bias_label has to be defined when using the data of a FoMpy dataset at high drain bias, otherwise low drain bias formulas will be used.
+Also if a different FoM is needed, the user has to change the keyword fom, from 'vth' to another one contained in the list shown before.
 
 Additionally, if the user wants to obtain the DIBL, two different FoMpy Datasets have to be imported::
 

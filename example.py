@@ -1,4 +1,6 @@
-import fompy
+import fompy as fp
+
+print(fp.__version__)
 
 # ------------------------------------------------------------------------------------------#
 # BASIC COMMANDS (Example: Vth extraction)
@@ -38,7 +40,6 @@ import fompy
 # ------------------------------------------------------------------------------------------#
 # DIFFERENT EXTRACTION PARSERS 
 
-# import os
 # path = './data/default'
 # fds = fompy.dataset(path, parser=fompy.file)
 # print(fds.dataset)
@@ -83,8 +84,8 @@ import fompy
 # vth_array = fompy.extract(fds, fom = 'vth')
 # print(vth_array)
 # fompy.plot(fds, fom = 'vth', save_plot='./vth_plots/sd/')
-# fompy.plot(fds, fom = 'vth', backend='TkAgg')
-# fompy.plot(fds, fom = 'vth')
+# fompy.plot(fds, fom = 'vth', backend='TkAgg') #If python3-tk is not installed it will not work
+# fompy.plot(fds, fom = 'vth') #If python3-tk is not installed and selected as backend it will not work
 
 # path_file_var = './data/simulations/'
 # fds_var = fompy.dataset(path_file_var, parser=fompy.JCJB)
@@ -159,15 +160,15 @@ import fompy
 
 # ss_array = fompy.extract(fds, fom = 'ss', method = 'LE')
 # print(ss_array)
-# fompy.plot(fds, fom = 'ss', method='LE')
+# fompy.plot(fds, fom = 'ss', method='LE', save_plot='./ss/')
 
 # ss_array = fompy.extract(fds, fom = 'ss', vg_start = 0.05)
 # print(ss_array)
-# fompy.plot(fds, fom = 'ss', vg_start = 0.05)
+# fompy.plot(fds, fom = 'ss', vg_start = 0.05, save_plot='./ss/')
 
 # ss_array = fompy.extract(fds, fom = 'ss', vg_start = 0.05, vg_end = 0.2)
 # print(ss_array)
-# fompy.plot(fds, fom = 'ss', vg_start = 0.05, vg_end = 0.2)
+# fompy.plot(fds, fom = 'ss', vg_start = 0.05, vg_end = 0.2, save_plot='./ss/')
 
 # ss_array = fompy.extract(fds, fom = 'ss', vg_end = 0.2)
 # print(ss_array)
@@ -234,4 +235,4 @@ import fompy
 # fompy.normalize(fds_hdb, norm_value)
 # fompy.normalize(fds_ldb, norm_value)
 
-# fompy.plot(fds_hdb,fds_ldb, plot_type='calib')
+# fompy.plot(fds_hdb,fds_ldb, plot_type='calib', save_plot='./calibration/')

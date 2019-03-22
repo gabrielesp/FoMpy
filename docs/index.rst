@@ -24,7 +24,7 @@ In the figure below the used can see the basic workflow behind the FoMpy library
 .. figure:: ./figs/simplified_diagram.jpg
     :width: 600px
     :align: center
-    :height: 400px
+    :height: 300px
     :alt: alternate text
     :figclass: align-center
 

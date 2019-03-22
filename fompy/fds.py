@@ -11,20 +11,22 @@ examples showing how to import the data using these functions can be seen below:
 Example
 -------
 
-If the parser is not defined, the default parser is used, where a simple voltage-current file
-is assumed to be defined as input::
+If the file parser is defined a simple voltage-current file is defined as input::
 
 	import fompy
 	path_file = './data/default/'
-	fds = fompy.dataset(path_file)
+	fds = fompy.dataset(path, parser=fompy.file)
 
-or::
+or if an array is passed as input::
 
 	import fompy
-	path_file = './data/default/'
-	fds = fompy.dataset(path_file,'data*',  parser=fompy.default)
+	#Here the arrays are defined
+	arr1 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.20e-08],[2.00e-01, 3.20e-07],[3.00e-01, 2.74e-06],[4.00e-01, 9.90e-06],[5.00e-01, 2.20e-05],[6.00e-01, 3.22e-05],[7.00e-01, 4.16e-05],[8.00e-01, 5.23e-05],[9.00e-01, 6.04e-05],[1.00e+00, 6.60e-05]])
+	arr2 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.15e-08],[2.00e-01, 3.18e-07],[3.00e-01, 2.72e-06],[4.00e-01, 9.85e-06],[5.00e-01, 2.12e-05],[6.00e-01, 3.16e-05],[7.00e-01, 4.10e-05],[8.00e-01, 5.46e-05],[9.00e-01, 6.15e-05],[1.00e+00, 6.57e-05]])
+	arrays = np.stack((arr1, arr2)) #Here the arrays are put together
+	fds = fompy.dataset(arr = arrays, parser=fompy.array)
 
-Moreover, another types of parsers can be selected::
+Moreover, when parsers for another file-types are be selected::
 
 	import fompy
 	path_file_JCJB = './data/sim_FinFET_vd_high/'
