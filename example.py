@@ -1,6 +1,6 @@
-import fompy as fp
+import fompy
 
-print(fp.__version__)
+print(fompy.__version__)
 
 # ------------------------------------------------------------------------------------------#
 # BASIC COMMANDS (Example: Vth extraction)
@@ -81,6 +81,14 @@ print(fp.__version__)
 
 # path_file_JCJB = './data/simulations/'
 # fds = fompy.dataset(path_file_JCJB, parser=fompy.JCJB)
+# When using a JCJB file, the high drain bias value and label will be set automatically
+# to its value but in the other parsers it will not. This will be very important as
+# depending on the drain bias value the formula to extract it will change
+
+# fds.drain_bias_label = 'High' 
+# fds.drain_bias_value = 0.7
+
+
 # vth_array = fompy.extract(fds, fom = 'vth')
 # print(vth_array)
 # fompy.plot(fds, fom = 'vth', save_plot='./vth_plots/sd/')

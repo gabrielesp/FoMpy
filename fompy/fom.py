@@ -94,8 +94,6 @@ class vth_ext(_extractor):
 			curves = []
 			for i in range(length):
 				try:
-					if(len(fds1.dataset[i][:,0][:])<2):
-						raise(ValueError)
 					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
 					if(fds1.drain_bias_label=='High'):
 						curve[:,1] = np.power( curve[:,1],0.5)
@@ -135,9 +133,7 @@ class vth_ext(_extractor):
 			parameter = []
 			curves = []
 			for i in range(length):
-				try:	
-					if(len(fds1.dataset[i][:,0][:])<2):	
-						raise(ValueError)			
+				try:		
 					x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy = fds1.interpolation, n = 1000,s = 0)
 					curve = np.column_stack((x_interp, y_interp))
 					try:
@@ -161,8 +157,6 @@ class vth_ext(_extractor):
 			curves = []
 			for i in range(length):
 				try:
-					if(len(fds1.dataset[i][:,0][:])<2):
-						raise(ValueError)
 					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
 					if(fds1.drain_bias_label=='High'):
 						curve[:,1] = np.power( curve[:,1],0.5)
@@ -204,8 +198,6 @@ class vth_ext(_extractor):
 			B = []
 			for i in range(length):
 				try:
-					if(len(fds1.dataset[i][:,0][:])<2):
-						raise(ValueError)
 					x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy = fds1.interpolation, n = 1000,s = 0)
 					curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
 					
@@ -354,8 +346,6 @@ class ioff_ext(_extractor):
 		curves = []
 		for i in range(len(fds1.dataset)):
 			try:
-				if(len(fds1.dataset[i][:,0][:])<2):
-					raise(ValueError)
 				x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy=fds1.interpolation, n = 1000,s = 0)
 				single_curve = np.column_stack((x_interp, y_interp))
 				if(vg_ext is not 0) and (vg_ext is not None) :
@@ -457,8 +447,6 @@ class ion_ext(_extractor):
 			curves = []
 			for i in range(length):
 				try:
-					if(len(fds1.dataset[i][:,0][:])<2):
-						raise(ValueError)
 					x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy=fds1.interpolation, n = 1000,s = 0)
 					single_curve = np.column_stack((x_interp, y_interp))				
 					ion_index=find_closest(x_interp, vth[i]+fds1.drain_bias_value)	
@@ -473,8 +461,6 @@ class ion_ext(_extractor):
 			curves = []
 			for i in range(length):
 				try:
-					if(len(fds1.dataset[i][:,0][:])<2):
-						raise(ValueError)
 					x_interp,y_interp = interpol(fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:],strategy=fds1.interpolation, n = 1000,s = 0)
 					single_curve = np.column_stack((x_interp, y_interp))				
 					ion_index=find_closest(x_interp, vg_ext)	
@@ -575,8 +561,6 @@ class ss_ext(_extractor):
 		vt_sd_medio = []
 		for i in range(len(fds1.dataset)):
 			try:
-				if(len(fds1.dataset[i][:,0][:])<2):
-					raise(ValueError)
 				curve = np.column_stack((fds1.dataset[i][:,0][:], fds1.dataset[i][:,1][:]))
 
 				x_interp, y_interp = interpol(curve[:,0], curve[:,1],strategy = fds1.interpolation, n = 1000,s = 0)
@@ -706,9 +690,6 @@ class dibl_ext(_extractor):
 		corriente_low_arr = []
 		for i in range(len(fds1.dataset)):
 			try:
-				if(len(fds1.dataset[i][:,0][:])<2):
-					raise(ValueError)
-
 				vth_index_low = find_closest(curve_low[i][:,0],vth_low[i])
 				corriente_low = curve_low[i][vth_index_low,1]
 
