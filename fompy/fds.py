@@ -182,6 +182,8 @@ class daoFile(dataDAO, FompyDataset):
 
 		"""
 		fds = FompyDataset()
+		fds.drain_bias_label = 'High' 
+		fds.drain_bias_value = 0.7
 		if(path is not None):
 			path_subdirs = []
 			path_filenames = []

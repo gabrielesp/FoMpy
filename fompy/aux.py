@@ -86,15 +86,15 @@ def get_diff(arr, order, type = 'central'):
 	d3 = d3y/dx
 
 	if order == 1:
-		gm_c = np.column_stack((x[2:], d1[2:]))
+		gm_c = np.column_stack((x, d1))
 		return(gm_c)
 
 	if order == 2:
-		gm2_c = np.column_stack((x[2:], d2[2:]))
+		gm2_c = np.column_stack((x, d2))
 		return(gm2_c)
 
 	if order == 3:
-		gm3_c = np.column_stack((x[2:], d3[2:]))
+		gm3_c = np.column_stack((x, d3))
 		return(gm3_c)
 #----------------------------------------------------------------------------------------------------------------
 def checkPath(cwd):

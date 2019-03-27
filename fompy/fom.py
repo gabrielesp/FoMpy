@@ -245,7 +245,7 @@ class vth_ext(_extractor):
 					curves.append(curve)
 					A.append(A_i)
 					B.append(B_i)
-				except (TypeError, ValueError):
+				except (TypeError, ValueError, IndexError):
 					parameter.append(np.nan)		
 					curves.append(np.nan)
 					A.append(np.nan)
