@@ -290,7 +290,7 @@ def file(fds, path, path_subdirs, path_filenames, interval, exclude):
 	return fds
 
 #--------------------------------------------------------------------------------------------------------------
-def array(fds, arr):
+def array(fds, arr= None, iv = None):
 	"""Function that imports the simulated data from a given an array and
 	stores it into a FoMpy Dataset.
 
@@ -300,7 +300,8 @@ def array(fds, arr):
 		Structure of data containing the most important parameters of a semiconductor's IV curve.
 	arr : array_like
 		Array of data containing one or more semiconductor's IV curves.
-
+	iv : array_like
+		Single IV curve.
 	Returns
 	-------
 	fds : FoMpy Dataset
