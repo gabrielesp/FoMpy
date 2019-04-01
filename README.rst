@@ -168,6 +168,15 @@ Additionally if the user already has the IV curves loaded in an array the proces
 
 	print(fds.dataset)
 
+Also for a single IV curve::
+
+	import fompy
+	import numpy as np
+	x = ([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+	y = ([1.00e-09, 2.20e-08, 3.20e-07, 2.74e-06, 9.90e-06, 2.20e-05, 3.22e-05, 4.16e-05, 5.23e-05, 6.04e-05, 6.60e-05])
+	fds = fompy.iv(arr = (x,y), parser=fompy.curve)
+	print(fds.dataset)
+
 Note that all the operations of FoMpy are dependant on how the Dataset is created, therefore try to concatenate several arrays according to the previous example.
 
 

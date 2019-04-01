@@ -53,7 +53,7 @@
 
 
 \title{FoMpy Documentation}
-\date{Mar 22, 2019}
+\date{Apr 01, 2019}
 \release{0.2.0}
 \author{Gabriel Espiñeira}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -467,11 +467,16 @@ or if an array is passed as input:
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{import} \PYG{n+nn}{fompy}
-\PYG{c+c1}{\PYGZsh{}Here the arrays are defined}
+\PYG{c+c1}{\PYGZsh{}Here several arrays are defined}
 \PYG{n}{arr1} \PYG{o}{=}\PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mf}{0.00e+00}\PYG{p}{,} \PYG{l+m+mf}{1.00e\PYGZhy{}09}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.20e\PYGZhy{}08}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{2.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.20e\PYGZhy{}07}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{3.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.74e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{4.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{9.90e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{5.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.20e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{6.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.22e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{7.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{4.16e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{8.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{5.23e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{9.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{6.04e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e+00}\PYG{p}{,} \PYG{l+m+mf}{6.60e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \PYG{n}{arr2} \PYG{o}{=}\PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{p}{[}\PYG{p}{[}\PYG{l+m+mf}{0.00e+00}\PYG{p}{,} \PYG{l+m+mf}{1.00e\PYGZhy{}09}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.15e\PYGZhy{}08}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{2.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.18e\PYGZhy{}07}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{3.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.72e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{4.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{9.85e\PYGZhy{}06}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{5.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{2.12e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{6.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{3.16e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{7.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{4.10e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{8.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{5.46e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{9.00e\PYGZhy{}01}\PYG{p}{,} \PYG{l+m+mf}{6.15e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{,}\PYG{p}{[}\PYG{l+m+mf}{1.00e+00}\PYG{p}{,} \PYG{l+m+mf}{6.57e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{]}\PYG{p}{)}
 \PYG{n}{arrays} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{(}\PYG{n}{arr1}\PYG{p}{,} \PYG{n}{arr2}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{}Here the arrays are put together}
 \PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{dataset}\PYG{p}{(}\PYG{n}{arr} \PYG{o}{=} \PYG{n}{arrays}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{array}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}Also for a single IV curve}
+\PYG{n}{x} \PYG{o}{=} \PYG{p}{(}\PYG{p}{[}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{,} \PYG{l+m+mf}{0.2}\PYG{p}{,} \PYG{l+m+mf}{0.3}\PYG{p}{,} \PYG{l+m+mf}{0.4}\PYG{p}{,} \PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{l+m+mf}{0.6}\PYG{p}{,} \PYG{l+m+mf}{0.7}\PYG{p}{,} \PYG{l+m+mf}{0.8}\PYG{p}{,} \PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{l+m+mf}{1.0}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{y} \PYG{o}{=} \PYG{p}{(}\PYG{p}{[}\PYG{l+m+mf}{1.00e\PYGZhy{}09}\PYG{p}{,} \PYG{l+m+mf}{2.20e\PYGZhy{}08}\PYG{p}{,} \PYG{l+m+mf}{3.20e\PYGZhy{}07}\PYG{p}{,} \PYG{l+m+mf}{2.74e\PYGZhy{}06}\PYG{p}{,} \PYG{l+m+mf}{9.90e\PYGZhy{}06}\PYG{p}{,} \PYG{l+m+mf}{2.20e\PYGZhy{}05}\PYG{p}{,} \PYG{l+m+mf}{3.22e\PYGZhy{}05}\PYG{p}{,} \PYG{l+m+mf}{4.16e\PYGZhy{}05}\PYG{p}{,} \PYG{l+m+mf}{5.23e\PYGZhy{}05}\PYG{p}{,} \PYG{l+m+mf}{6.04e\PYGZhy{}05}\PYG{p}{,} \PYG{l+m+mf}{6.60e\PYGZhy{}05}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{fds} \PYG{o}{=} \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{iv}\PYG{p}{(}\PYG{n}{arr} \PYG{o}{=} \PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{)}\PYG{p}{,} \PYG{n}{parser}\PYG{o}{=}\PYG{n}{fompy}\PYG{o}{.}\PYG{n}{curve}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 Moreover, when parsers for another file-types are be selected:
@@ -720,7 +725,7 @@ FoMpy Dataset
 \index{array() (in module fompy.fds)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fds.array}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{array}}}{\emph{fds}, \emph{arr}}{}
+\phantomsection\label{\detokenize{index:fompy.fds.array}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{array}}}{\emph{fds}, \emph{arr=None}}{}
 Function that imports the simulated data from a given an array and
 stores it into a FoMpy Dataset.
 \begin{quote}\begin{description}
@@ -730,6 +735,32 @@ stores it into a FoMpy Dataset.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{arr}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of data containing one or more semiconductor’s IV curves.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxstylestrong{fds} \textendash{} Structure of data containing the FoMpy Dataset.
+
+\item[{Return type}] \leavevmode
+FoMpy Dataset
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{curve() (in module fompy.fds)}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:fompy.fds.curve}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.fds.}}\sphinxbfcode{\sphinxupquote{curve}}}{\emph{fds}, \emph{iv=None}}{}
+Function that imports the simulated data from a single array and
+stores it into a FoMpy Dataset.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{fds}} (\sphinxstyleliteralemphasis{\sphinxupquote{FoMpy Dataset}}) \textendash{} Structure of data containing the most important parameters of a semiconductor’s IV curve.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{iv}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Single IV curve.
 
 \end{itemize}
 
@@ -766,7 +797,7 @@ str
 \index{load() (fompy.fds.daoFile method)}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:fompy.fds.daoFile.load}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{load}}}{\emph{path=None}, \emph{arr=None}, \emph{parser=None}, \emph{interval=None}, \emph{exclude=None}}{}~\index{load() (fompy.fds.daoFile method)}
+\phantomsection\label{\detokenize{index:fompy.fds.daoFile.load}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{load}}}{\emph{path=None}, \emph{arr=None}, \emph{iv=None}, \emph{parser=None}, \emph{interval=None}, \emph{exclude=None}}{}~\index{load() (fompy.fds.daoFile method)}
 
 \begin{fulllineitems}
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{load}}}{\emph{path}, \emph{filename\_user = None}, \emph{parser = None}, \emph{interval = None}, \emph{exclude = None}}{}
@@ -781,6 +812,9 @@ Class method that extracts \(V_{TH}\) of a semiconductor’s IV curve.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{arr}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Array of data containing one or more semiconductor’s IV curves.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{iv}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Single IV curve.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{parser}} (\sphinxstyleliteralemphasis{\sphinxupquote{function}}) \textendash{} Function that implements how the data is imported to a Fompy Dataset. The list of available functions includes:
@@ -1813,6 +1847,37 @@ of an IV curve.
 choose a suitable theta crit.
 
 \end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{iv() (in module fompy.wrappers)}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:fompy.wrappers.iv}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{iv}}}{\emph{path=None}, \emph{arr=None}, \emph{parser=None}, \emph{save\_to\_file=None}}{}
+Wrapper function that creates a FoMpy dataset from a single IV curve.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Path to the file containing the IV curves
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{arr}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\_like}}) \textendash{} Single IV curve.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{parser}} (\sphinxstyleliteralemphasis{\sphinxupquote{void}}) \textendash{} Format to read the file
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{save\_to\_file}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Path of the file to store all the FoMpy dataset
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+Class containing the most important parameters of a semiconductor IV curve
+
+\item[{Return type}] \leavevmode
+FompyDataset
 
 \end{description}\end{quote}
 

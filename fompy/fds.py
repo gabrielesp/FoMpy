@@ -20,11 +20,18 @@ If the file parser is defined a simple voltage-current file is defined as input:
 or if an array is passed as input::
 
 	import fompy
-	#Here the arrays are defined
+	#Here several arrays are defined
 	arr1 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.20e-08],[2.00e-01, 3.20e-07],[3.00e-01, 2.74e-06],[4.00e-01, 9.90e-06],[5.00e-01, 2.20e-05],[6.00e-01, 3.22e-05],[7.00e-01, 4.16e-05],[8.00e-01, 5.23e-05],[9.00e-01, 6.04e-05],[1.00e+00, 6.60e-05]])
 	arr2 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.15e-08],[2.00e-01, 3.18e-07],[3.00e-01, 2.72e-06],[4.00e-01, 9.85e-06],[5.00e-01, 2.12e-05],[6.00e-01, 3.16e-05],[7.00e-01, 4.10e-05],[8.00e-01, 5.46e-05],[9.00e-01, 6.15e-05],[1.00e+00, 6.57e-05]])
 	arrays = np.stack((arr1, arr2)) #Here the arrays are put together
 	fds = fompy.dataset(arr = arrays, parser=fompy.array)
+
+	#Also for a single IV curve
+	x = ([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+	y = ([1.00e-09, 2.20e-08, 3.20e-07, 2.74e-06, 9.90e-06, 2.20e-05, 3.22e-05, 4.16e-05, 5.23e-05, 6.04e-05, 6.60e-05])
+	fds = fompy.iv(arr = (x,y), parser=fompy.curve)
+
+
 
 Moreover, when parsers for another file-types are be selected::
 
@@ -153,7 +160,7 @@ class daoFile(dataDAO, FompyDataset):
 	def __init__(self, parser = None):
 		self.parser = parser
 
-	def load(self, path = None,arr = None, parser = None, interval = None, exclude = None):
+	def load(self, path = None,arr = None,iv = None, parser = None, interval = None, exclude = None):
 		"""
 		Methods
 		-------
@@ -166,6 +173,8 @@ class daoFile(dataDAO, FompyDataset):
 			1-d array containing values of the independent variable.
 		arr : array_like
 			Array of data containing one or more semiconductor's IV curves.
+		iv : array_like
+			Single IV curve.
 		parser : function
 			Function that implements how the data is imported to a Fompy Dataset. The list of available functions includes:
 			'file','array','JCJB' and 'MC'.
@@ -210,13 +219,15 @@ class daoFile(dataDAO, FompyDataset):
 					fds.sanity_array.append(-1)
 		
 		# print(fds.sanity_array)
-
+	
 		if(parser is file):
 			parser(fds, path, path_subdirs, path_filenames, interval, exclude)
 		elif(parser is JCJB):
 			parser(fds, path, path_subdirs, path_filenames, interval, exclude)
 		elif(parser is array):
 			parser(fds, arr)
+		elif(parser is curve):
+			parser(fds, iv)
 		else:
 			print('No parser has been defined')
 
@@ -290,7 +301,7 @@ def file(fds, path, path_subdirs, path_filenames, interval, exclude):
 	return fds
 
 #--------------------------------------------------------------------------------------------------------------
-def array(fds, arr= None, iv = None):
+def array(fds, arr= None):
 	"""Function that imports the simulated data from a given an array and
 	stores it into a FoMpy Dataset.
 
@@ -300,6 +311,29 @@ def array(fds, arr= None, iv = None):
 		Structure of data containing the most important parameters of a semiconductor's IV curve.
 	arr : array_like
 		Array of data containing one or more semiconductor's IV curves.
+	Returns
+	-------
+	fds : FoMpy Dataset
+		Structure of data containing the FoMpy Dataset.
+
+	"""
+	if(arr is not None):
+		for i in range(len(arr)):
+			fds.dataset.append(arr[i])
+		fds.n_sims = len(fds.dataset)
+	else:
+		print('No dataset has been defined!')
+
+	return fds
+
+def curve(fds, iv = None):
+	"""Function that imports the simulated data from a single array and
+	stores it into a FoMpy Dataset.
+
+	Parameters
+	----------
+	fds : FoMpy Dataset
+		Structure of data containing the most important parameters of a semiconductor's IV curve.
 	iv : array_like
 		Single IV curve.
 	Returns
@@ -308,10 +342,12 @@ def array(fds, arr= None, iv = None):
 		Structure of data containing the FoMpy Dataset.
 
 	"""
-	for i in range(len(arr)):
-		fds.dataset.append(arr[i])
-
-	fds.n_sims = len(fds.dataset)
+	if(iv is not None):
+		for i in range(len(iv[0])):
+			fds.dataset.append((iv[0][i], iv[1][i]))
+		fds.n_sims = 1
+	else:
+		print('No dataset has been defined!')
 
 	return fds
 

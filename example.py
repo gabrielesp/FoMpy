@@ -45,14 +45,21 @@ print(fompy.__version__)
 # print(fds.dataset)
 # print('Number of simulations loaded into the dataset',fds.n_sims)
 
-# import numpy as np
+#import numpy as np
 # #Here the arrays are defined
+
+#x = ([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+#y = ([1.00e-09, 2.20e-08, 3.20e-07, 2.74e-06, 9.90e-06, 2.20e-05, 3.22e-05, 4.16e-05, 5.23e-05, 6.04e-05, 6.60e-05])
+#fds = fompy.iv(arr = (x,y), parser=fompy.curve)
+#print(fds.dataset)
+#print('Number of simulations loaded into the dataset',fds.n_sims)
+
 # arr1 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.20e-08],[2.00e-01, 3.20e-07],[3.00e-01, 2.74e-06],[4.00e-01, 9.90e-06],[5.00e-01, 2.20e-05],[6.00e-01, 3.22e-05],[7.00e-01, 4.16e-05],[8.00e-01, 5.23e-05],[9.00e-01, 6.04e-05],[1.00e+00, 6.60e-05]])
 # arr2 =np.array([[0.00e+00, 1.00e-09],[1.00e-01, 2.15e-08],[2.00e-01, 3.18e-07],[3.00e-01, 2.72e-06],[4.00e-01, 9.85e-06],[5.00e-01, 2.12e-05],[6.00e-01, 3.16e-05],[7.00e-01, 4.10e-05],[8.00e-01, 5.46e-05],[9.00e-01, 6.15e-05],[1.00e+00, 6.57e-05]])
 # arrays = np.stack((arr1, arr2)) #Here the arrays are put together
-# fds = fompy.dataset(arr = arrays, parser=fompy.array)
-# print(fds.dataset)
-# print('Number of simulations loaded into the dataset',fds.n_sims)
+#fds = fompy.dataset(arr = arrays, parser=fompy.array)
+#print(fds.dataset)
+#print('Number of simulations loaded into the dataset',fds.n_sims)
 
 
 #path_file_JCJB = './data/sim_FinFET_vd_high/'

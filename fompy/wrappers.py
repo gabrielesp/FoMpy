@@ -46,7 +46,34 @@ def dataset(path = None,arr = None,  parser = None, save_to_file = None, interva
 
 	"""
 	dao_dataset = daoFile()
-	fds = dao_dataset.load(path,arr, parser, interval, exclude)
+	fds = dao_dataset.load(path = path,arr = arr , parser = parser , interval = include, exclude = exclude)
+	if(save_to_file != None):
+		dao_dataset.save(fds, save_to_file)
+	return fds
+def iv(path = None,arr = None,  parser = None, save_to_file = None):
+	"""
+	Wrapper function that creates a FoMpy dataset from a single IV curve.
+
+	Parameters
+	----------
+	path : str
+		Path to the file containing the IV curves
+	arr : array_like
+		Single IV curve.
+	parser : void
+		Format to read the file
+	save_to_file : str
+		Path of the file to store all the FoMpy dataset
+
+	Returns
+	-------
+	FompyDataset
+		Class containing the most important parameters of a semiconductor IV curve
+
+	"""
+	dao_dataset = daoFile()
+	iv = arr
+	fds = dao_dataset.load(path = path, parser = parser, iv = iv)
 	if(save_to_file != None):
 		dao_dataset.save(fds, save_to_file)
 	return fds
