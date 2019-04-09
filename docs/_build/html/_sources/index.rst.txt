@@ -1,0 +1,78 @@
+.. FoMpy documentation master file, created by
+   sphinx-quickstart on Fri Feb  8 16:55:44 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to FoMpy's documentation!
+=================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+	
+
+=================================
+Getting Started
+=================================
+
+
+
+FoMPy is an effective tool that extracts the main figures of merit (FoM) of a semiconductor's IV curve and provides useful statistical parameters for variability studies. It includes several methods to extract the threshold voltage. 
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installing FoMpy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The source code of FoMpy can be downloaded from https://github.com/ and is purely intended to run as a library for Linux systems (Debian, Ubuntu, FreeBSD, ...). FoMpy uses several external libraries that need to be installed in order to be able to use the full functionality of the tool. A list of these libraries is lited below:
+
+
+After these packages have been installed your system is ready to setup FoMpy. In order to do so run the following command in a terminal::
+
+	sudo pip install fompy
+
+and check the version running::
+
+	fompy._version
+
+ 
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Quick Start
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+=================================
+Importing your data
+=================================
+
+=================================
+Importing your data
+=================================
+
+=================================
+Conditioning your data
+=================================
+
+=================================
+Extracting the FoM
+=================================
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Threshold voltage extraction methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+=================================
+Plotting figures
+=================================
+
+=================================
+Test examples
+=================================
+
+=================================
+Modules
+=================================
+
+.. automodule:: fompy.wrappers
+    :members:
+

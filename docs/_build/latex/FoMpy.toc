@@ -1,0 +1,10 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Getting Started}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Modules}{2}{chapter.2}
+\contentsline {section}{\numberline {2.1}aux.py}{2}{section.2.1}
+\contentsline {section}{\numberline {2.2}conditioning.py}{3}{section.2.2}
+\contentsline {section}{\numberline {2.3}fds.py}{5}{section.2.3}
+\contentsline {section}{\numberline {2.4}fom.py}{10}{section.2.4}
+\contentsline {section}{\numberline {2.5}plots.py}{15}{section.2.5}
+\contentsline {section}{\numberline {2.6}wrappers.py}{18}{section.2.6}
+\contentsline {chapter}{Index}{22}{section*.79}
