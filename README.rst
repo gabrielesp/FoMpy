@@ -275,5 +275,5 @@ References
 
 .. [#] VENDES. A.J.Garcia-Loureiro, N.Seoane, M.Aldegunde, R.Valin, A.Asenov, A.Martinez and K.Kalna “Implementation of the Density Gradient Quantum Corrections for 3-D Simulations of Multigate Nanoscaled Transistors”, IEEE Trans. Comput.-Aided Des. Integr. Circuits Syst, doi=10.1109/TCAD.2011.2107990 
 .. [#] G.Espiñeira, N.Seoane, D.Nagy, G.Indalecio and A.J.García Loureiro, “FoMPy: A figure of merit extraction tool for semiconductor device simulations” in 2018 Joint International EUROSOI Workshop and International Conference on Ultimate Integration on Silicon (EUROSOI-ULIS) doi :10.1109/ULIS.2018.8354752
-.. [#] G.Espiñeira, D.Nagy, G.Indalecio, A.J.García Loureiro and N.Seoane, “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, ISSN: 0038-1101
+.. [#] G.Espiñeira, D.Nagy, G.Indalecio, A.J.García Loureiro and N.Seoane, “Impact of threshold voltage extraction methods on semiconductor device variability” in Solid-State Electron, https://doi.org/10.1016/j.sse.2019.03.055
 
