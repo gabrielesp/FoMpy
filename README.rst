@@ -24,7 +24,7 @@ Currently FoMpy can be downloaded from https://test.pypi.org/project/fompy/ thro
 
 	pip3 install --extra-index-url https://test.pypi.org/simple/ fompy
 
-Detailed instalation steps can be found futher down this tutorial and further documentation on the FoMpy library can be found inside ./docs/_build/latex/FoMpy.pdf .
+Detailed instalation steps can be found futher down this tutorial and further documentation on the FoMpy library can be found inside FoMpy.pdf .
 
 1. Introduction
 ---------------
@@ -52,18 +52,18 @@ First you need to have installed **pip3** on your system. For Ubuntu, open up a 
 
 	sudo apt install python3-pip
 
-The use of virtual enviroments is highly encouraged. The main purpose of Python virtual environments is to create an isolated environment for Python projects so that no modular dependency issues with other projects can appear. In order to use them run the following commands in a terminal::
+The use of virtual environments is highly encouraged. The main purpose of Python virtual environments is to create an isolated environment for Python projects so that no modular dependency issues with other projects can appear. In order to use them run the following commands in a terminal::
 
-	#Install virtual enviroments
+	#Install virtual environments
 	sudo apt install python3-venv 
 
-	#Create and name the enviroment "venv"
+	#Create and name the environment "venv"
 	python3 -m venv .venv
 
 	#Activate the venv
 	source .venv/bin/activate
 
-Note that as of this moment you're inside a virtual enviroment (Notice (.venv) $ in the terminal) with a limited/isolated version of python and therefore you will have to install all the packages you need for that particular project (including the ones you may have installed in the system as they may not be installed in the virtual enviroment).
+Note that as of this moment you're inside a virtual environment (Notice (.venv) $ in the terminal) with a limited/isolated version of python and therefore you will have to install all the packages you need for that particular project (including the ones you may have installed in the system as they may not be installed in the virtual environment).
 
 **Instalation of FoMpy via pip3**
 
@@ -75,7 +75,7 @@ and check the library is installed by importing it from a **python3 terminal**::
 
  	import fompy
 
-Unless an error comes up, FoMpy is now installed on your virtual enviroment.
+Unless an error comes up, FoMpy is now installed on your virtual environment.
 
 
 **Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install the needed modules them yourself by typing in a terminal**::
