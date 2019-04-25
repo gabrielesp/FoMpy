@@ -46,7 +46,7 @@ def dataset(path = None,arr = None,  parser = None, save_to_file = None, interva
 
 	"""
 	dao_dataset = daoFile()
-	fds = dao_dataset.load(path = path,arr = arr , parser = parser , interval = include, exclude = exclude)
+	fds = dao_dataset.load(path = path,arr = arr , parser = parser , interval = interval, exclude = exclude)
 	if(save_to_file != None):
 		dao_dataset.save(fds, save_to_file)
 	return fds
