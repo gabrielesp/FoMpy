@@ -5,7 +5,7 @@ conditioning.py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This module includes the routines used to precondition the input data
-before any extraction is done. It includes routines for interpolating the
+before any extraction is done like interpolating the
 data points, normalizing the data and filtering points that are too noisy.
 
 Example
@@ -30,9 +30,7 @@ python3 terminal::
 Additionally, by default FoMpy uses the cubic spline interpolation in order to 
 extract accurately the FoMs. If the user wishes to change the interpolation methods, 
 there are several implemented and tested methods that can be selected. 
-The list of available methods includes: 'akima','pchip' or 'linear'.
-In order to change the interpolation method the following steps have to be executed either in a script or
-python3 terminal::
+The list of available methods includes: 'akima','pchip' or 'linear'::
 
 	import fompy
 	path_file_JCJB = './data/sim_FinFET_vd_high/'

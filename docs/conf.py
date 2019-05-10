@@ -27,7 +27,7 @@ author = 'Gabriel Espiñeira'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.2.0'
+release = '0.3.5'
 
 
 # -- General configuration ---------------------------------------------------
@@ -121,7 +121,7 @@ latex_elements = {
 
     # The font size ('10pt', '11pt' or '12pt').
     #
-    # 'pointsize': '10pt',
+     'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
     #

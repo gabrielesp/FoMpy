@@ -10,6 +10,6 @@ from .wrappers import *
 name = "fompy"
 import os
 
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 
 

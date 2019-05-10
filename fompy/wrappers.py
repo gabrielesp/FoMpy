@@ -409,7 +409,7 @@ def filter(fds1, theta_crit, show_theta = False):
 #----------------------------------------------------------------------------------------------------------------		
 def version():
 	"""
-	(TEST)Function that prints the current installed version of FoMpy
+	Function that prints the current installed version of FoMpy
 
 	"""
 

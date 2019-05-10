@@ -53,8 +53,8 @@
 
 
 \title{FoMpy Documentation}
-\date{Apr 09, 2019}
-\release{0.2.0}
+\date{Apr 29, 2019}
+\release{0.3.5}
 \author{Gabriel Espiñeira}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
@@ -74,14 +74,90 @@
 \label{\detokenize{index:getting-started}}
 FoMPy is an effective tool that extracts the main figures of merit (FoM) of a semiconductor’s IV curve and provides useful statistical parameters for variability studies. It includes several methods to extract the threshold voltage.
 
+The source code of FoMpy can be downloaded from \sphinxurl{https://github.com/gabrielesp/FoMpy} and is purely intended to run as a library for Linux systems. Note that the following instalation steps work on Debian-derived distributions: e.g. for Ubuntu 16.04 or later and CentOS (tested). Also, FoMpy has been proven to work in Python 3.5.4.
+
 In the figure below the used can see the basic workflow behind the FoMpy library:
 
 \begin{figure}[htbp]
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=600\sphinxpxdimen,height=300\sphinxpxdimen]{{simplified_diagram}.jpg}
+\noindent\sphinxincludegraphics[width=450\sphinxpxdimen,height=220\sphinxpxdimen]{{simplified_diagram}.jpg}
 \caption{Diagram showing the basic methodology of the FoMpy library. After loading the data into a FoMpy Dataset, using the various tools implemented in the library, the user is able to process and extract important parameters from a given dataset.}\label{\detokenize{index:id1}}\end{figure}
+
+Before using FoMpy you need to have installed \sphinxstylestrong{pip3} on your system. For Ubuntu, open up a terminal and type:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sudo} \PYG{n}{apt} \PYG{n}{update}
+
+\PYG{n}{sudo} \PYG{n}{apt} \PYG{n}{install} \PYG{n}{python3}\PYG{o}{\PYGZhy{}}\PYG{n}{pip}
+\end{sphinxVerbatim}
+
+The use of virtual environments is highly encouraged. The main purpose of Python virtual environments is to create an isolated environment for Python projects so that no modular dependency issues with other projects can appear. In order to use them run the following commands in a terminal:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}Install virtual environments}
+\PYG{n}{sudo} \PYG{n}{apt} \PYG{n}{install} \PYG{n}{python3}\PYG{o}{\PYGZhy{}}\PYG{n}{venv}
+
+\PYG{c+c1}{\PYGZsh{}Create and name the environment \PYGZdq{}venv\PYGZdq{}}
+\PYG{n}{python3} \PYG{o}{\PYGZhy{}}\PYG{n}{m} \PYG{n}{venv} \PYG{o}{.}\PYG{n}{venv}
+
+\PYG{c+c1}{\PYGZsh{}Activate the venv}
+\PYG{n}{source} \PYG{o}{.}\PYG{n}{venv}\PYG{o}{/}\PYG{n+nb}{bin}\PYG{o}{/}\PYG{n}{activate}
+\end{sphinxVerbatim}
+
+Note that as of this moment you’re inside a virtual environment (Notice (.venv) \$ in the terminal) with a limited/isolated version of python and therefore you will have to install all the packages you need for that particular project (including the ones you may have installed in the system as they may not be installed in the virtual environment).
+
+\sphinxstylestrong{Instalation of FoMpy via pip3}
+
+Run the following command in a terminal:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pip3} \PYG{n}{install} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{extra}\PYG{o}{\PYGZhy{}}\PYG{n}{index}\PYG{o}{\PYGZhy{}}\PYG{n}{url} \PYG{n}{https}\PYG{p}{:}\PYG{o}{/}\PYG{o}{/}\PYG{n}{test}\PYG{o}{.}\PYG{n}{pypi}\PYG{o}{.}\PYG{n}{org}\PYG{o}{/}\PYG{n}{simple}\PYG{o}{/} \PYG{n}{fompy}
+\end{sphinxVerbatim}
+
+and check the library is installed by importing it from a \sphinxstylestrong{python3 terminal}:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{fompy}
+\end{sphinxVerbatim}
+
+Unless an error comes up, FoMpy is now installed on your virtual environment.
+
+\sphinxstylestrong{Note: Most of the packages will be installed automatically during the FoMpy instalation. If you experience some issue, you can try to install the needed modules them yourself by typing in a terminal}:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pip3} \PYG{n}{install} \PYG{n}{setuptools}
+\PYG{n}{pip3} \PYG{n}{install} \PYG{n}{pytest}
+\PYG{n}{pip3} \PYG{n}{install} \PYG{n}{numpy}
+\PYG{n}{pip3} \PYG{n}{install} \PYG{n}{scipy}
+\PYG{n}{pip3} \PYG{n}{install} \PYG{n}{probscale}
+\PYG{n}{pip3} \PYG{n}{install} \PYG{n}{matplotlib}
+\PYG{n}{sudo} \PYG{n}{apt}\PYG{o}{\PYGZhy{}}\PYG{n}{get} \PYG{n}{install} \PYG{n}{python3}\PYG{o}{\PYGZhy{}}\PYG{n}{tk} \PYG{c+c1}{\PYGZsh{}optional}
+\end{sphinxVerbatim}
+
+A simple example is included with the code so the user can test some basic commands and check the library
+works as intended in their systems. After grabbing this repostiroty:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{git} \PYG{n}{clone} \PYG{n}{https}\PYG{p}{:}\PYG{o}{/}\PYG{o}{/}\PYG{n}{gitlab}\PYG{o}{.}\PYG{n}{citius}\PYG{o}{.}\PYG{n}{usc}\PYG{o}{.}\PYG{n}{es}\PYG{o}{/}\PYG{n}{gabriel}\PYG{o}{.}\PYG{n}{espineira}\PYG{o}{/}\PYG{n}{FoMPy}\PYG{o}{/}
+\PYG{n}{cd} \PYG{n}{FoMPy}\PYG{o}{\PYGZhy{}}\PYG{n}{master}
+\end{sphinxVerbatim}
+
+in the directory FoMpy-master, a file called \sphinxcode{\sphinxupquote{example.py}} with command examples and a folder containing ensembles of simulated IV curves are included inside the path ‘./data’.
+
+In order to test it comment and uncomment the lines that you want to run inside example.py and in a \sphinxstylestrong{python3 terminal} type:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{python3} \PYG{n}{example}\PYG{o}{.}\PYG{n}{py}
+\end{sphinxVerbatim}
 
 Next, a full list of all the components of the FoMpy library will be presented.
 
@@ -119,8 +195,7 @@ extraction):
 where these the maximum value of the second derivative is found leaving out values outside a defined interval where the derivatives
 can be too noisy.
 
-Finally, the function checkPath is used mostly in FoMpy to check if a directory exists and if it does not it creates it when saving
-either a plot or extracted results.
+Finally, the function checkPath is used in FoMpy to check if a directory exists and if it does not it creates it when saving a plot or results.
 \index{checkPath() (in module fompy.aux)}
 
 \begin{fulllineitems}
@@ -187,7 +262,7 @@ of the derivative function (see \sphinxurl{https://en.wikipedia.org/wiki/Finite\
 \section{conditioning.py}
 \label{\detokenize{index:conditioning-py}}
 This module includes the routines used to precondition the input data
-before any extraction is done. It includes routines for interpolating the
+before any extraction is done like interpolating the
 data points, normalizing the data and filtering points that are too noisy.
 \subsubsection*{Example}
 
@@ -217,9 +292,7 @@ python3 terminal:
 Additionally, by default FoMpy uses the cubic spline interpolation in order to
 extract accurately the FoMs. If the user wishes to change the interpolation methods,
 there are several implemented and tested methods that can be selected.
-The list of available methods includes: ‘akima’,’pchip’ or ‘linear’.
-In order to change the interpolation method the following steps have to be executed either in a script or
-python3 terminal:
+The list of available methods includes: ‘akima’,’pchip’ or ‘linear’:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -1490,9 +1563,7 @@ In order to generate a plot of the FoMs (fomplot):
 \PYG{n}{fompy}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{fds}\PYG{p}{,} \PYG{n}{fom} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{vth}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{save\PYGZus{}plot}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{./vth\PYGZus{}plots/sd/}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-and FoMpy will generate a single graph for each simulation showing the IV curve with its correspondent FoM extraction criteria and the extracted FoM.
-
-Most of the FoMs are plotted the same way, except for the DIBL. This is because, if we want to calculate the DIBL
+and FoMpy will generate a single graph for each simulation showing the IV curve with its correspondent FoM extraction criteria and the extracted FoM. Most of the FoMs are plotted the same way, except for the DIBL. This is because, if we want to calculate the DIBL
 two FoMpy Datasets are needed:
 
 \fvset{hllines={, ,}}%
@@ -1772,7 +1843,7 @@ and end(index of the last simulation to load into the FompyDataset)
 Class containing the most important parameters of a semiconductor IV curve
 
 \item[{Return type}] \leavevmode
-FompyDataset
+{\hyperref[\detokenize{index:fompy.fds.FompyDataset}]{\sphinxcrossref{FompyDataset}}}
 
 \end{description}\end{quote}
 
@@ -1877,7 +1948,7 @@ Wrapper function that creates a FoMpy dataset from a single IV curve.
 Class containing the most important parameters of a semiconductor IV curve
 
 \item[{Return type}] \leavevmode
-FompyDataset
+{\hyperref[\detokenize{index:fompy.fds.FompyDataset}]{\sphinxcrossref{FompyDataset}}}
 
 \end{description}\end{quote}
 
@@ -1988,12 +2059,23 @@ Wrapper function that saves to a text file the extracted FoMs.
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{index:fompy.wrappers.version}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{fompy.wrappers.}}\sphinxbfcode{\sphinxupquote{version}}}{}{}
-(TEST)Function that prints the current installed version of FoMpy
+Function that prints the current installed version of FoMpy
 
 \end{fulllineitems}
 
 
 
+\renewcommand{\indexname}{Python Module Index}
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\bigletter{f}
+\item\relax\sphinxstyleindexentry{fompy.aux}\sphinxstyleindexpageref{index:\detokenize{module-fompy.aux}}
+\item\relax\sphinxstyleindexentry{fompy.conditioning}\sphinxstyleindexpageref{index:\detokenize{module-fompy.conditioning}}
+\item\relax\sphinxstyleindexentry{fompy.fds}\sphinxstyleindexpageref{index:\detokenize{module-fompy.fds}}
+\item\relax\sphinxstyleindexentry{fompy.fom}\sphinxstyleindexpageref{index:\detokenize{module-fompy.fom}}
+\item\relax\sphinxstyleindexentry{fompy.plots}\sphinxstyleindexpageref{index:\detokenize{module-fompy.plots}}
+\item\relax\sphinxstyleindexentry{fompy.wrappers}\sphinxstyleindexpageref{index:\detokenize{module-fompy.wrappers}}
+\end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}
 \printindex

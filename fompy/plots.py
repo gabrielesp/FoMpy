@@ -21,9 +21,7 @@ In order to generate a plot of the FoMs (fomplot)::
 	vth_array = fompy.extract(fds, fom = 'vth')
 	fompy.plot(fds, fom = 'vth', save_plot='./vth_plots/sd/')
 
-and FoMpy will generate a single graph for each simulation showing the IV curve with its correspondent FoM extraction criteria and the extracted FoM.
-
-Most of the FoMs are plotted the same way, except for the DIBL. This is because, if we want to calculate the DIBL
+and FoMpy will generate a single graph for each simulation showing the IV curve with its correspondent FoM extraction criteria and the extracted FoM. Most of the FoMs are plotted the same way, except for the DIBL. This is because, if we want to calculate the DIBL
 two FoMpy Datasets are needed::
 
 	import fompy

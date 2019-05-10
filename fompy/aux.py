@@ -27,8 +27,7 @@ extraction)::
 where these the maximum value of the second derivative is found leaving out values outside a defined interval where the derivatives
 can be too noisy.
 
-Finally, the function checkPath is used mostly in FoMpy to check if a directory exists and if it does not it creates it when saving
-either a plot or extracted results.
+Finally, the function checkPath is used in FoMpy to check if a directory exists and if it does not it creates it when saving a plot or results.
 
 """
 
