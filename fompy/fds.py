@@ -228,6 +228,8 @@ class daoFile(dataDAO, FompyDataset):
 			parser(fds, arr)
 		elif(parser is curve):
 			parser(fds, iv)
+		elif(parser is Silvaco):
+			parser(fds, path)			
 		else:
 			print('No parser has been defined')
 
@@ -488,7 +490,39 @@ def MC(fds, path, path_subdirs, path_filenames, interval, exclude):
 	fds.dataset.append(arr_f)
 
 	return fds
+#--------------------------------------------------------------------------------------------------------------
+def Silvaco(fds, path_to_file):
+	"""Function that imports the simulated data from a given Silvaco file and
+	stores it into a FoMpy Dataset.
 
+	Parameters
+	----------
+	fds : FoMpy Dataset
+		Structure of data containing the most important parameters of a semiconductor's IV curve.
+	path : str
+		Parent path where the simulations are stored
+		
+	Returns
+	-------
+	fds : FoMpy Dataset
+		Structure of data containing the FoMpy Dataset.
+
+	"""
+	import csv
+	print('Reading data from file -> %s' % (path_to_file))
+	with open(path_to_file, 'r') as f:
+    		temp = list(csv.reader(f, delimiter=","))
+
+	import numpy as np
+	
+	vg = [float(temp[i+1][0]) for i in range(len(temp)-1)]
+	i_drain = [float(temp[i+1][1]) for i in range(len(temp)-1)]
+
+	arr = np.column_stack((vg, i_drain))
+	fds.dataset.append(arr)
+	fds.n_sims = len(fds.dataset)
+
+	return fds
 #--------------------------------------------------------------------------------------------------------------
 def exclude_indexes(fds,interval, exclude):
 	"""Function that generates an array of zeros and ones. If the simulation

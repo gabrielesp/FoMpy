@@ -67,6 +67,11 @@ print(fompy.__version__)
 #fds.print_parameters()
 #print(fds.dataset)
 
+#path_file_silvaco = './data/silvaco/DatosVgId_Vd005_Nd5e19.csv'
+#fds = fompy.dataset(path_file_silvaco, parser=fompy.Silvaco)
+#fds.print_parameters()
+#print(fds.dataset)
+
 # path_file_mc = './data/mc_data/'
 # fds1 = fompy.dataset(path_file_mc, parser=fompy.MC)
 # fds1.print_parameters()
