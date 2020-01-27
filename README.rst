@@ -22,7 +22,7 @@ Most of these modules will be installed automatically when installing FoMpy. The
 
 Currently FoMpy can be downloaded from https://test.pypi.org/project/fompy/ through the following url using pip3::
 
-	pip3 install --extra-index-url https://test.pypi.org/simple/ fompy
+	pip install fompy
 
 Detailed instalation steps can be found futher down this tutorial and further documentation on the FoMpy library can be found inside FoMpy.pdf .
 
@@ -69,7 +69,7 @@ Note that as of this moment you're inside a virtual environment (Notice (.venv) 
 
 Run the following command in a terminal::
 
-	pip3 install --extra-index-url https://test.pypi.org/simple/ fompy
+	pip install fompy
 
 and check the library is installed by importing it from a **python3 terminal**::
 
