@@ -22,7 +22,7 @@ Most of these modules will be installed automatically when installing FoMpy. The
 
 Currently FoMpy can be downloaded from https://pypi.org/project/fompy/ through the following url using pip3::
 
-	pip install fompy
+	pip3 install fompy
 
 Detailed instalation steps can be found futher down this tutorial and further documentation on the FoMpy library can be found inside FoMpy.pdf .
 
